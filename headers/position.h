@@ -47,7 +47,14 @@ namespace GPS
       metres  ele;
   };
 
+  /* Convert a DDM (degrees and decimal minutes) string representation of an angle to a
+     DD (decimal degrees) value.
+   */
   degrees ddmTodd(const string &);
+
+  /* Computes an approximation of the distance between two Positions on the Earth's surface.
+   * Does not take into account elevation.
+   */
   metres distanceBetween(const Position &, const Position &);
 }
 

@@ -4,6 +4,7 @@
 
 #include <stdexcept>
 
+#include "logs.h"
 #include "parseNMEA.h"
 
 using namespace GPS;
@@ -273,16 +274,16 @@ BOOST_AUTO_TEST_CASE( MissingFieldsGLL )
 
 BOOST_AUTO_TEST_CASE( MissingFieldsRMC )
 {
-    NMEAPair missingN = { "GPGLL", {"115856.000","A","3722.6710","00559.3014","E","0.000","0.00","150914","","A"} };
+    NMEAPair missingN = { "GPRMC", {"115856.000","A","3722.6710","00559.3014","E","0.000","0.00","150914","","A"} };
     BOOST_CHECK_THROW( extractPosition(missingN) , std::invalid_argument );
 
-    NMEAPair missingE = { "GPGLL", {"115856.000","A","3722.6710","S","00559.3014","0.000","0.00","150914","","A"} };
+    NMEAPair missingE = { "GPRMC", {"115856.000","A","3722.6710","S","00559.3014","0.000","0.00","150914","","A"} };
     BOOST_CHECK_THROW( extractPosition(missingE) , std::invalid_argument );
 
-    NMEAPair missingLat = { "GPGLL", {"115856.000","A","S","00559.3014","E","0.000","0.00","150914","","A"} };
+    NMEAPair missingLat = { "GPRMC", {"115856.000","A","S","00559.3014","E","0.000","0.00","150914","","A"} };
     BOOST_CHECK_THROW( extractPosition(missingLat) , std::invalid_argument );
 
-    NMEAPair missingLon = { "GPGLL", {"115856.000","A","3722.6710","S","E","0.000","0.00","150914","","A"} };
+    NMEAPair missingLon = { "GPRMC", {"115856.000","A","3722.6710","S","E","0.000","0.00","150914","","A"} };
     BOOST_CHECK_THROW( extractPosition(missingLon) , std::invalid_argument );
 }
 
@@ -316,11 +317,9 @@ BOOST_AUTO_TEST_SUITE_END()
 
 BOOST_AUTO_TEST_SUITE( RouteFromNMEALog )
 
-string logDir = "../logs/NMEA/";
-
 BOOST_AUTO_TEST_CASE( ValidLog_GLL )
 {
-    vector<Position> route = routeFromNMEALog(logDir + "gll.log");
+    vector<Position> route = routeFromNMEALog(LogFiles::NMEALogsDir + "gll.log");
 
     BOOST_CHECK_EQUAL( route.size() , 1091 );
 
@@ -335,7 +334,7 @@ BOOST_AUTO_TEST_CASE( ValidLog_GLL )
 
 BOOST_AUTO_TEST_CASE( CleanLog_GGA_RMC )
 {
-    vector<Position> route = routeFromNMEALog(logDir + "gga_rmc.log");
+    vector<Position> route = routeFromNMEALog(LogFiles::NMEALogsDir + "gga_rmc.log");
 
     BOOST_CHECK_EQUAL( route.size() , 632 );
 
@@ -350,7 +349,7 @@ BOOST_AUTO_TEST_CASE( CleanLog_GGA_RMC )
 
 BOOST_AUTO_TEST_CASE( AnnotatedLog_GGA_RMC )
 {
-    vector<Position> route = routeFromNMEALog(logDir + "gga_rmc-annotated.log");
+    vector<Position> route = routeFromNMEALog(LogFiles::NMEALogsDir + "gga_rmc-annotated.log");
 
     BOOST_CHECK_EQUAL( route.size() , 1826 );
 

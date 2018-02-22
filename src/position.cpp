@@ -2,8 +2,9 @@
 #include <cmath>
 #include <sstream>
 
+#include "geometry.h"
+#include "earth.h"
 #include "position.h"
-#include "utilities.h"
 
 namespace GPS
 {
@@ -70,9 +71,6 @@ namespace GPS
       return oss.str();
   }
 
-  /* Convert a DDM (degrees and decimal minutes) string representation of an angle to a
-     DD (decimal degrees) value.
-   */
   degrees ddmTodd(const string & ddmStr)
   {
       double ddm  = std::stod(ddmStr);
@@ -81,20 +79,17 @@ namespace GPS
       return degs + mins / 60.0; // converts minutes (1/60th) to decimal fractions of a degree
   }
 
-  /* Computes an approximation of the distance between two Positions.
-   *
+  metres distanceBetween(const Position & p1, const Position & p2)
+  /*
    * See: http://en.wikipedia.org/wiki/Law_of_haversines
    */
-  metres distanceBetween(const Position & p1, const Position & p2)
   {
-      const metres earth_mean_radius = 6371008.8;
-
       const radians lat1 = degToRad(p1.latitude());
       const radians lat2 = degToRad(p2.latitude());
       const radians lon1 = degToRad(p1.longitude());
       const radians lon2 = degToRad(p2.longitude());
 
       double h = sinSqr((lat2-lat1)/2) + cos(lat1)*cos(lat2)*sinSqr((lon2-lon1)/2);
-      return 2 * earth_mean_radius * asin(sqrt(h));
+      return 2 * Earth::meanRadius * asin(sqrt(h));
   }
 }
