@@ -20,7 +20,7 @@ namespace GPS
   // Sine squared function: sin^2(x)
   double sinSqr(radians);
 
-  // Ensure degrees are in in [-180,180) range.
+  // Ensure degrees are in (-180,180] range.
   degrees normaliseDeg(degrees);
 }
 
