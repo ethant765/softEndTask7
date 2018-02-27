@@ -172,6 +172,12 @@ Track::Track(std::string source, bool isFileName, metres granularity)
     report = oss.str();
 }
 
+void Track::setGranularity(metres granularity)
+{
+    bool implemented = false;
+    assert(implemented);
+}
+
 seconds Track::stringToTime(const std::string & timeStr)
 {
     return stoull(timeStr);
