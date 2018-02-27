@@ -1,6 +1,7 @@
 #ifndef TRACK_H_211217
 #define TRACK_H_211217
 
+#include <string>
 #include <vector>
 
 #include "types.h"
@@ -18,6 +19,11 @@ namespace GPS
       Track(std::string source,
             bool isFileName, // Is the first parameter a file name or a string containing GPX data?
             metres granularity = 10); // The minimum distance between successive track points.
+
+      /* Update the granularity of the stored Track.  Any position in the Track that differs in distance
+       * from its predecessor by less than the updated granularity is discarded.
+       */
+      void setGranularity(metres) override;
 
       // Total elapsed time between start and finish of track.
       seconds totalTime() const;
@@ -45,7 +51,7 @@ namespace GPS
       // Returns 0 if the entire track is uphill or stationary.
       speed maxRateOfDescent() const;
 
-    private:
+    protected:
       /* These vectors store the arrival time and departure time at each
        * Position in the Track.  These times are relative to the start of
        * the Track; thus arrived[0] is always 0.

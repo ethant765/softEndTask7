@@ -3,7 +3,6 @@
 
 #include <string>
 #include <vector>
-#include <sstream>
 
 #include "types.h"
 #include "position.h"
@@ -26,13 +25,7 @@ namespace GPS
       /* Update the granularity of the stored Route.  Any position in the Route that differs in distance
        * from its predecessor by less than the updated granularity is discarded.
        */
-      void setGranularity(metres);
-
-      /*  Append the position to the end of the "positions" vector, unless
-       *  it is close enough to the last Position to be considered the same
-       *  location (see "areSameLocation()").
-       */
-      bool append(const Position & pos, const std::string & name = "");
+      virtual void setGranularity(metres);
 
       // Returns the name of the Route, or "Unnamed Route" if nameless.
       std::string name() const;

@@ -156,7 +156,8 @@ Track::Track(std::string source, bool isFileName, metres granularity)
             timeElapsed = currentTime - startTime;
             arrived.push_back(timeElapsed);
             departed.push_back(timeElapsed);
-            oss << "Position added: " << nextPos.toString() << " at time " << to_string(timeElapsed) << endl;
+            oss << "Position added: " << nextPos.toString() << endl;
+            oss << " at time: " << to_string(timeElapsed) << endl;
             ++num;
             prevPos = nextPos;
         }

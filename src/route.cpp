@@ -235,29 +235,6 @@ void Route::setGranularity(metres granularity)
     assert(implemented);
 }
 
-bool Route::append(const Position & pos, const std::string & name)
-{
-    /*  Append the position to the end of the "positions" vector, unless
-     *  it is close enough to the last Position to be considered the same
-     *  location (see "areSameLocation()").  The routeLength is updated
-     *  accordingly.
-     */
-    Position prevPos = positions.back();
-    if (areSameLocation(pos, prevPos))
-    {
-        return false;
-    }
-    else
-    {
-        metres deltaH = distanceBetween(pos,prevPos);
-        metres deltaV = pos.elevation() - prevPos.elevation();
-        positions.push_back(pos);
-        positionNames.push_back(name);
-        routeLength += std::sqrt(std::pow(deltaH,2) + std::pow(deltaV,2));
-        return true;
-    }
-}
-
 bool Route::areSameLocation(const Position & p1, const Position & p2) const
 {
     return (distanceBetween(p1,p2) < granularity);
