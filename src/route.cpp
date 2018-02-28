@@ -32,8 +32,10 @@ metres Route::totalLength() const
 
 metres Route::netLength() const
 {
-    const bool implemented = false;
-    assert(implemented);
+    Position first, last;
+    first = *(positions.begin());
+    last = *(positions.end() - 1);
+    return distanceBetween(first, last);
 }
 
 metres Route::totalHeightGain() const
