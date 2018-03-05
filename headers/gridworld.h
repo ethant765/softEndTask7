@@ -39,16 +39,15 @@ namespace GPS
     private:
       std::map<Point,Position> grid;
 
-      // Ensure lat/lon are within range after modifications during GridWorld construction.
-      // TODO: This should be incorporated into the Position constructor.
-      static Position normalisePosition(const Position & pos);
-
       /* The first parameter is the grid Point.
        * The second parameter is the elevation of Point M.
        * The third parameter is the vertical distance between grid points.
        */
       static metres calcElevationFor(Point point, metres eleM, metres verticalGridUnit);
   };
+
+  // Ensure lat/lon are within range after local modifications.
+  std::pair<degrees,degrees> normaliseLatLon(degrees lat, degrees lon);
 }
 
 #endif

@@ -34,7 +34,7 @@ std::string GridWorldRoute::toGPX(bool embedName, const std::string& routeName) 
     {
         const Position& pos = gridworld[point];
         gpx.openElement("rtept", pos.toString(includeElevation));
-        gpx.element("name","",string(1,point));
+        gpx.element("name","",std::string(1,point));
         gpx.element("ele", "",std::to_string(pos.elevation()));
         gpx.closeElement(); // "rtept"
     }
@@ -47,7 +47,7 @@ std::string GridWorldRoute::toString() const
     return routeString;
 }
 
-bool GridWorldRoute::isValidRouteString(const string & routeStr)
+bool GridWorldRoute::isValidRouteString(const std::string & routeStr)
 {
     // To be valid, all chars must be in the range 'A'..'Y'.
     return std::all_of(routeStr.begin(), routeStr.end(),

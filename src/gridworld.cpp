@@ -31,7 +31,8 @@ GridWorld::GridWorld(const Position & posM, metres horizontalGridUnit, metres ve
         for (int j = 0; j < gridSize; ++j)
         {
             metres ele = calcElevationFor(currentPoint, posM.elevation(), verticalGridUnit);
-            grid.insert({currentPoint,normalisePosition(Position(lat,lon,ele))});
+            std::pair<degrees,degrees> normLatLon = normaliseLatLon(lat,lon);
+            grid.insert({currentPoint,Position(normLatLon.first,normLatLon.second,ele)});
             lon += deltaLon;
             ++currentPoint;
         }
@@ -44,12 +45,25 @@ const Position& GridWorld::operator[](Point point) const
     return grid.at(point);
 }
 
-// TODO: This should be incorporated into the Position constructor.
-Position GridWorld::normalisePosition(const Position & pos)
+metres GridWorld::calcElevationFor(Point point, metres eleM, metres verticalGridUnit)
 {
-    degrees lat = pos.latitude();
-    degrees lon = pos.longitude();
+    /* "eleM" is the elevation of Point M.
+     * Neighbours of M are 1 vertical grid unit lower than M.
+     * All other Points are 2 vertical grid units lower than M.
+     */
+    switch (point)
+    {
+        case 'M':
+            return eleM;
+        case 'G': case 'H': case 'I': case 'L': case 'N': case 'Q': case 'R': case 'S':
+            return eleM - verticalGridUnit;
+        default:
+            return eleM - (2 * verticalGridUnit);
+    }
+}
 
+std::pair<degrees,degrees> GPS::normaliseLatLon(degrees lat, degrees lon)
+{
     // First get latitude in (-180,180] range
     lat = normaliseDeg(lat);
 
@@ -70,23 +84,5 @@ Position GridWorld::normalisePosition(const Position & pos)
     // Ensure longitude does not exceed Greenwich anti-meridian (180' E/W).
     lon = normaliseDeg(lon);
 
-    return Position(lat,lon,pos.elevation());
+    return {lat,lon};
 }
-
-metres GridWorld::calcElevationFor(Point point, metres eleM, metres verticalGridUnit)
-{
-    /* "eleM" is the elevation of Point M.
-     * Neighbours of M are 1 vertical grid unit lower than M.
-     * All other Points are 2 vertical grid units lower than M.
-     */
-    switch (point)
-    {
-        case 'M':
-            return eleM;
-        case 'G': case 'H': case 'I': case 'L': case 'N': case 'Q': case 'R': case 'S':
-            return eleM - verticalGridUnit;
-        default:
-            return eleM - (2 * verticalGridUnit);
-    }
-}
-

@@ -24,7 +24,7 @@ namespace GPS
 
       std::string toString() const;
 
-      static bool isValidRouteString(const string&);
+      static bool isValidRouteString(const std::string&);
 
     private:
       const std::string routeString;

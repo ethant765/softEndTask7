@@ -28,8 +28,8 @@ namespace GPS
       std::string toNMEA(seconds logInterval) const; // unimplemented
       std::string toString() const;
 
-      static bool isValidTrackString(const string &);
-      static std::string routeStringFromTrackString(const string &);
+      static bool isValidTrackString(const std::string &);
+      static std::string routeStringFromTrackString(const std::string &);
 
     private:
       const std::string trackString;
