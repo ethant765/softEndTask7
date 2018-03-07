@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cassert>
 #include <cmath>
+#include <stdexcept>
 
 #include "geometry.h"
 #include "xmlparser.h"

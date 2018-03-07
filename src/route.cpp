@@ -3,8 +3,6 @@
 #include <iostream>
 #include <cassert>
 #include <cmath>
-#include <algorithm>
-#include <iterator>
 #include <stdexcept>
 
 #include "xmlparser.h"
