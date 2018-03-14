@@ -1,11 +1,11 @@
 Route::numPositions() -
 Route::totalLength() - N0673230
-Route::netLength() -
+Route::netLength() - n0494166
 Route::totalHeightGain() -
-Route::netHeightGain() -
+Route::netHeightGain() - N0689061
 Route::minLatitude() -
-Route::maxLatitude() -
-Route::minLongitude() -N0676284
+Route::maxLatitude() - N0690641
+Route::minLongitude() - N0676284
 Route::maxLongitude() -
 Route::minElevation() -
 Route::maxElevation() -
@@ -13,13 +13,13 @@ Route::maxGradient() -
 Route::minGradient() -
 Route::steepestGradient() -
 Route::operator[]() -
-Route::findPosition() -
+Route::findPosition() - N0680192
 Route::findNameOf() -
 Route::timesVisited(string) -
 Route::timesVisited(Position) -
 Track::totalTime() -
 Track::restingTime() -
-Track::travellingTime() -
+Track::travellingTime() - N0696066
 Track::maxSpeed() -
 Track::averageSpeed() - N0695426
 Track::maxRateOfAscent() -
