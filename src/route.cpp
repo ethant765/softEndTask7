@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <iterator>
 #include <stdexcept>
-
+#include "position.h"
 #include "xmlparser.h"
 #include "geometry.h"
 #include "earth.h"
@@ -32,25 +32,15 @@ metres Route::totalLength() const
 
 metres Route::netLength() const
 {
-    Position first, last;
-    first = *(positions.begin());
-    last = *(positions.end() - 1);
-    return distanceBetween(first, last);
+    std::vector<Position>::const_iterator first, last;
+    first = positions.begin();
+    last =  positions.end() - 1;
+    return distanceBetween(*first, *last);
 }
 
 metres Route::totalHeightGain() const
 {
-    Position pos;
-    metres sum_heights=0;
-
-    for(std::vector<Position>::iterator i = positions.begin(); i!=positions.end(); i++)
-    {
-        if(i->elevation() > 0)
-            sum_heights+=i->elevation();
-    }
-
-    return sum_heights;
-
+    return 0;
 }
 
 metres Route::netHeightGain() const
