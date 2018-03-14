@@ -40,7 +40,12 @@ metres Route::netLength() const
 
 metres Route::totalHeightGain() const
 {
-    return 0;
+    std::vector<Position>::const_iterator first, last;
+    first = positions.begin();
+    last =  positions.end() - 1;
+
+    return last->elevation() - first->elevation();
+
 }
 
 metres Route::netHeightGain() const
