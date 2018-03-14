@@ -19,7 +19,7 @@ Route::timesVisited(string) -
 Route::timesVisited(Position) -
 Track::totalTime() -
 Track::restingTime() -
-Track::travellingTime() -
+Track::travellingTime() - N0696066
 Track::maxSpeed() -
 Track::averageSpeed() - N0695426
 Track::maxRateOfAscent() -
