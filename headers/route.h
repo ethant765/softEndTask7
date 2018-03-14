@@ -98,9 +98,9 @@ namespace GPS
       metres granularity;
 
       metres routeLength;
-      string routeName;
+      std::string routeName;
       std::vector<Position> positions;
-      std::vector<string> positionNames;
+      std::vector<std::string> positionNames;
 
       std::string report;
 

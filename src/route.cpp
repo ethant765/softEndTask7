@@ -3,8 +3,6 @@
 #include <iostream>
 #include <cassert>
 #include <cmath>
-#include <algorithm>
-#include <iterator>
 #include <stdexcept>
 
 #include "position.h"
@@ -193,7 +191,7 @@ Route::Route(std::string source, bool isFileName, metres granularity)
     unsigned int num;
     this->granularity = granularity;
     if (isFileName){
-        ifstream fs = ifstream(source);
+        ifstream fs(source);
         if (! fs.good()) throw invalid_argument("Error opening source file '" + source + "'.");
         oss << "Source file '" << source << "' opened okay." << endl;
         while (fs.good()) {

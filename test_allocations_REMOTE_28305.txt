@@ -1,6 +1,6 @@
 Route::numPositions() -
 Route::totalLength() - N0673230
-Route::netLength() - n0494166
+Route::netLength() -
 Route::totalHeightGain() -
 Route::netHeightGain() - N0689061
 Route::minLatitude() -
