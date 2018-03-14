@@ -5,7 +5,7 @@ Route::totalHeightGain() -
 Route::netHeightGain() -
 Route::minLatitude() -
 Route::maxLatitude() -
-Route::minLongitude() -
+Route::minLongitude() -N0676284
 Route::maxLongitude() -
 Route::minElevation() -
 Route::maxElevation() -
