@@ -27,6 +27,15 @@ unsigned int Route::numPositions() const
 
 metres Route::totalLength() const
 {
+   metres totalLength;
+   Position * lastPosition = nullptr;
+
+   for(auto pos : positions){
+        if(lastPosition)
+            totalLength += distanceBetween(*lastPosition, pos);
+
+        lastPosition = &pos;
+   }
     return routeLength;
 }
 
@@ -40,9 +49,12 @@ metres Route::netLength() const
 
 metres Route::totalHeightGain() const
 {
+    metres totalHeight;
 
-    const bool implemented = false;
-    assert(implemented);
+    for(auto pos : positions){
+        totalHeight += pos.elevation();
+    }
+     return totalHeight;
 }
 
 metres Route::netHeightGain() const
@@ -56,38 +68,62 @@ metres Route::netHeightGain() const
 
 degrees Route::minLatitude() const
 {
-    const bool implemented = false;
-    assert(implemented);
+    degrees minLat = positions[0].latitude();
+    for(auto pos : positions){
+        if(pos.latitude() < minLat)
+            minLat = pos.latitude();
+    }
+    return minLat;
 }
 
 degrees Route::maxLatitude() const
 {
-    const bool implemented = false;
-    assert(implemented);
+    degrees maxLat = positions[0].latitude();
+    for(auto pos : positions){
+        if(pos.latitude() > maxLat)
+            maxLat = pos.latitude();
+    }
+    return maxLat;
 }
 
 degrees Route::minLongitude() const
 {
-    const bool implemented = false;
-    assert(implemented);
+    degrees minLong = positions[0].longitude();
+    for(auto pos : positions){
+        if(pos.longitude() < minLong)
+            minLong = pos.longitude();
+    }
+    return minLong;
 }
 
 degrees Route::maxLongitude() const
 {
-    const bool implemented = false;
-    assert(implemented);
+    degrees maxLong = positions[0].longitude();
+    for(auto pos : positions){
+        if(pos.longitude() > maxLong)
+            maxLong = pos.longitude();
+    }
+    return maxLong;
 }
 
 metres Route::minElevation() const
 {
-    const bool implemented = false;
-    assert(implemented);
+    degrees minElev = positions[0].elevation();
+    for(auto pos : positions){
+        if(pos.elevation() < minElev)
+            minElev = pos.elevation();
+    }
+    return minElev;
 }
 
 metres Route::maxElevation() const
 {
-    const bool implemented = false;
-    assert(implemented);
+    degrees maxElev = positions[0].elevation();
+    for(auto pos : positions){
+        if(pos.elevation() > maxElev)
+            maxElev = pos.elevation();
+    }
+    return maxElev;
 }
 
 degrees Route::maxGradient() const
