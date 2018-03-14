@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <iterator>
 #include <stdexcept>
+
 #include "position.h"
 #include "xmlparser.h"
 #include "geometry.h"
@@ -30,9 +31,12 @@ metres Route::totalLength() const
    metres totalLength;
    Position * lastPosition = nullptr;
 
-   for(auto pos : positions){
+   for(auto pos : positions)
+   {
         if(lastPosition)
+        {
             totalLength += distanceBetween(*lastPosition, pos);
+        }
 
         lastPosition = &pos;
    }
