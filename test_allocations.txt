@@ -25,7 +25,7 @@ Route::timesVisited(Position) -
 Track::totalTime() - N0641991
 Track::restingTime() -
 Track::travellingTime() - N0696066
-Track::maxSpeed() -
+Track::maxSpeed() - N0669298
 Track::averageSpeed() - N0695426
 Track::maxRateOfAscent() -
 Track::maxRateOfDescent() -
