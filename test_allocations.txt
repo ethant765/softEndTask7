@@ -1,9 +1,13 @@
+<<<<<<< HEAD
 Route::numPositions() - 
+=======
+Route::numPositions() - N0695913
+>>>>>>> 068438055bdb4efc1beaaee74500973e612090cb
 Route::totalLength() - N0673230
 Route::netLength() - N0683389
 Route::totalHeightGain() -
 Route::netHeightGain() - N0689061
-Route::minLatitude() -
+Route::minLatitude() - N0720387
 Route::maxLatitude() - N0690641
 Route::minLongitude() - N0676284
 Route::maxLongitude() - n0494166
