@@ -17,7 +17,7 @@ Route::findPosition() - N0680192
 Route::findNameOf() -
 Route::timesVisited(string) -
 Route::timesVisited(Position) -
-Track::totalTime() -
+Track::totalTime() - N0641991
 Track::restingTime() -
 Track::travellingTime() - N0696066
 Track::maxSpeed() -
