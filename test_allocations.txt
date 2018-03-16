@@ -12,7 +12,7 @@ Route::minLatitude() - N0682255
 Route::maxLatitude() - N0690641
 Route::minLongitude() - N0676284
 Route::maxLongitude() - n0494166
-Route::minElevation() -
+Route::minElevation() - N0699610
 Route::maxElevation() -
 Route::maxGradient() -
 Route::minGradient() -
