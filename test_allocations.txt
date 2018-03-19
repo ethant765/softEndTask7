@@ -17,7 +17,7 @@ Route::maxGradient() -
 Route::minGradient() -
 Route::steepestGradient() -
 Route::operator[]() - T0073322
-Route::findPosition() - N0680192
+Route::findPosition() - N0680192, N0692013
 Route::findNameOf() -
 Route::timesVisited(string) -
 Route::timesVisited(Position) -
