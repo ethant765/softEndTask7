@@ -53,7 +53,11 @@ speed Track::maxRateOfAscent() const
 speed Track::maxRateOfDescent() const
 {
     const bool implemented = false;
+	double spd = 0.0;
+
+
     assert(implemented);
+	return spd;
 }
 
 Track::Track(std::string source, bool isFileName, metres granularity)
