@@ -1,5 +1,5 @@
 
-Route::numPositions() - N0695913
+Route::numPositions() - N0695913, N0719388
 Route::totalLength() - N0673230
 Route::netLength() -
 Route::totalHeightGain() - N0720387
