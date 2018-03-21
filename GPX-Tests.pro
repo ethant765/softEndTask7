@@ -22,7 +22,8 @@ SOURCES += \
     src/route.cpp \
     src/track.cpp \
     src/xmlparser.cpp \
-    src/gpx-tests/name.cpp
+    src/gpx-tests/name.cpp \
+    src/gpx-tests/array-operator.cpp
 
 
 INCLUDEPATH += headers/
