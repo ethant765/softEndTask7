@@ -137,14 +137,14 @@ BOOST_AUTO_TEST_CASE ( TrackLatitudeIncreases )
 }
 
 
-//Route file with a Latitude that increases
+//Route file with a negativev Latitude that increases
 BOOST_AUTO_TEST_CASE ( RouteNegativeLatiudeIncreases )
 {
     Route route = Route(LogFiles::GPXRoutesDir + "RouteNegativeLatiudeIncreases.gpx", isFileName);
     BOOST_CHECK_EQUAL( route.maxLatitude(), -41.94 );
 }
 
-//Track  with latitude that increases throughout the track
+//Track  with  negative latitude that increases throughout the track
 BOOST_AUTO_TEST_CASE ( TrackNegativeLatiudeIncreases )
 {
     Track track = Track(LogFiles::GPXTracksDir + "TrackNegativeLatiudeIncreases.gpx", isFileName);
@@ -153,14 +153,14 @@ BOOST_AUTO_TEST_CASE ( TrackNegativeLatiudeIncreases )
 
 
 
-//Route file with a Latitude that increases
+//Route log  with latitude decreasing and then increasing
 BOOST_AUTO_TEST_CASE ( RouteLatDecreaseThenIncrease )
 {
     Route route = Route(LogFiles::GPXRoutesDir + "RouteLatDecreaseThenIncrease.gpx", isFileName);
     BOOST_CHECK_EQUAL( route.maxLatitude(), 24.46 );
 }
 
-//Track  with latitude that increases throughout the track
+//Track with latitude decreases and then increases
 BOOST_AUTO_TEST_CASE ( TrackLatDecreaseThenIncrease )
 {
     Track track = Track(LogFiles::GPXTracksDir + "TrackLatDecreaseThenIncrease.gpx", isFileName);
@@ -169,7 +169,7 @@ BOOST_AUTO_TEST_CASE ( TrackLatDecreaseThenIncrease )
 
 
 
-//Route file with a Latitude that increases
+//Route log with Increasing latitude then decreasing
 BOOST_AUTO_TEST_CASE ( RouteLatIncreaseThenDecrease )
 {
     Route route = Route(LogFiles::GPXRoutesDir + "RouteLatIncreaseThenDecrease.gpx", isFileName);
@@ -178,12 +178,28 @@ BOOST_AUTO_TEST_CASE ( RouteLatIncreaseThenDecrease )
 
 
 
-//Track  with latitude that increases throughout the track
+//Track  with latitude increasing then decreasing
 BOOST_AUTO_TEST_CASE ( TrackLatIncreaseThenDecrease )
 {
     Track track = Track(LogFiles::GPXTracksDir + "TrackLatIncreaseThenDecrease.gpx", isFileName);
     BOOST_CHECK_EQUAL( track.maxLatitude(), 11.31);
 }
 
+
+//Route With Latitude of 89.9 testing edge cases
+BOOST_AUTO_TEST_CASE ( RouteLatAt89 )
+{
+    Route route = Route(LogFiles::GPXRoutesDir + "RouteLatAt89.gpx", isFileName);
+    BOOST_CHECK_EQUAL( route.maxLatitude(), 89.9818 );
+}
+
+//Track with latitude and 
+BOOST_AUTO_TEST_CASE ( TrackLatAt89 )
+{
+    Track track = Track(LogFiles::GPXTracksDir + "TrackLatAt89.gpx", isFileName);
+    BOOST_CHECK_EQUAL( track.maxLatitude(), 89.9818);
+}
+
+    
 BOOST_AUTO_TEST_SUITE_END()
 
