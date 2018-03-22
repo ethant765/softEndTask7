@@ -49,7 +49,7 @@ metres Route::netHeightGain() const
 degrees Route::minLatitude() const
 {
     degrees minLat = positions[0].latitude();
-    for(unsigned int i = 1; i < positions.length(); i++)
+    for(unsigned int i = 1; i < positions.size(); i++)
     {
         if(positions[i].latitude() < minLat)
         {
