@@ -57,6 +57,16 @@ degrees Route::minLatitude() const
 //        }
 //    }
 //    return minLat;
+    degrees minLat = positions[0].latitude();
+    for(unsigned int i = 1; i < positions.size(); i++)
+    {
+        if(positions[i].latitude() < minLat)
+        {
+            minLat = positions[i].latitude();
+        }
+    }
+    return minLat;
+
 }
 
 degrees Route::maxLatitude() const
