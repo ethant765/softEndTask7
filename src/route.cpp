@@ -106,10 +106,23 @@ metres Route::minElevation() const
     assert(implemented);
 }
 
-metres Route::maxElevation() const
+metres Route::maxElevation() const // N0669298
 {
-    const bool implemented = false;
+    const bool implemented = true;
     assert(implemented);
+
+
+    int MaxIndex = 0;
+    for (int i = 0; i < positions.size() ; i++)
+    {
+
+        if (positions[i].elevation() > positions[MaxIndex].elevation()) {
+            MaxIndex = i;
+        }
+
+    }
+
+    return positions[MaxIndex].elevation();
 }
 
 degrees Route::maxGradient() const
