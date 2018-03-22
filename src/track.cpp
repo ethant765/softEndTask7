@@ -28,8 +28,42 @@ seconds Track::restingTime() const
 
 seconds Track::travellingTime() const
 {
-    const bool implemented = false;
+    const bool implemented = true;
+
+    //Varibales
+    metres initElevation;
+    metres prevElevation;
+    degrees initLatitude;
+    degrees prevLatitute;
+    degrees initLongitude;
+    degrees prevLongitude;
+    seconds stopped = 0;
+
+    //Loop through all positions
+    for (int i= 1; i < positions.size(); i++)
+    {
+        //Sets the varibales to the current <coordinate>
+        initElevation = positions.at(i).elevation();
+        prevElevation = positions.at(i-1).elevation();
+
+        initLatitude = positions.at(i).latitude();
+        prevLatitute = positions.at(i-1).latitude();
+
+        initLongitude = positions.at(i).longitude();
+        prevLongitude = positions.at(i-1).longitude();
+
+        //If the initial <coordinate> matches the previous <coordinate> then the track isn't moving
+        //Add 1 to the time
+        if (initElevation == prevElevation || initLatitude == prevLatitute || initLongitude == prevLongitude)
+        {
+            stopped++;
+        }
+    }
+    
+    //Check if the function is implemented
     assert(implemented);
+
+    return stopped;
 }
 
 speed Track::maxSpeed() const

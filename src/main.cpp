@@ -24,8 +24,21 @@ void testRoute(std::string fileName)
     cout << endl;
 }
 
+void testTrack(std::string fileName)
+{
+  const std::string filePath = LogFiles::GPXTracksDir + fileName + ".gpx";
+
+  const bool isFileName = true;
+
+  Track track = Track(filePath,isFileName);
+
+  cout << "timeTravelling() is " << track.travellingTime() << endl;
+  cout << endl;
+}
+
 int main()
 {
-    testRoute("NorthYorkMoors");
-    testRoute("ABCD");
+    //testRoute("NorthYorkMoors");
+    //testRoute("ABCD");
+    testTrack("A1B3C");
 }
