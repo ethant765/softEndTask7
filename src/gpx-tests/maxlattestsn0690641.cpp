@@ -231,5 +231,19 @@ BOOST_AUTO_TEST_CASE ( Route30Positions )
     BOOST_CHECK_EQUAL( route.maxLatitude(), 60.7364 );
 }
 
+//Test case to check if Latitude greater than 90 can be accepted
+BOOST_AUTO_TEST_CASE ( RouteLatitudeGreater90 )
+{
+    Route route = Route(LogFiles::GPXRoutesDir + "RouteLatitudeGreater90.gpx", isFileName);
+    BOOST_CHECK_THROW( route.maxLatitude(), std::out_of_range);
+}
+
+//Test case to check if Latitude smaller than -90 can be accepted
+BOOST_AUTO_TEST_CASE ( RouteLatitudeSmaller90 )
+{
+    Route route = Route(LogFiles::GPXRoutesDir + "RouteLatitudeSmaller90.gpx", isFileName);
+    BOOST_CHECK_THROW( route.maxLatitude(), std::out_of_range);
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 
