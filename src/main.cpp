@@ -38,7 +38,7 @@ void testTrack(std::string fileName)
 
 int main()
 {
-    //GridWorld gridWorld = GridWorld(Earth::Pontianak,1000,0);
+    //GridWorld gridWorld = GridWorld(Earth::Pontianak);
     generateGPXTrack("A1B2C", "TrackDuration1",1,1);
     generateGPXTrack("A3B1C", "TrackDuration10",1,10);
     generateGPXTrack("A4B2C", "TrackDurationEven",1,2);
@@ -46,10 +46,12 @@ int main()
     generateGPXTrack("R4U2A","TrackI&D1",1,1);
     generateGPXTrack("A2U4R","TrackInterval10",10);
     generateGPXTrack("M3A2G","TrackIntervalNegative",-1,1);
-    //TODO All of these below
-    generateGPXTrack("M3A2G","TrackIntervalEven",4,10);
-    generateGPXTrack("M3A2G","TrackIntervalOdd",5,9);
+    generateGPXTrack("M3A2G","TrackIntervalEven&lessthanhalf",5,20);
+    generateGPXTrack("M3A2G","TrackI&DMultiplesOdd",3,9);
+    generateGPXTrack("M3A2G","TrackI&DNotMultiples",3,7);
     generateGPXTrack("A3B1C", "TrackAbsoluteTime1", 1,10,1);
     generateGPXTrack("A3B1C", "TrackAbsoluteTimeNegative", 1,10,-1);
-    testTrack("TrackIntervalOdd");
+    generateGPXTrack("A7X2E1U4M", "TrackMultiplePoints", 100,1000);
+    generateGPXTrack("A3A2B1M", "TrackHasRests", 1,10);
+    generateGPXTrack("A0A2M2M", "TrackHas0andRests", 1,10);
 }

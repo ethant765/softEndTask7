@@ -56,7 +56,7 @@ BOOST_AUTO_TEST_CASE ( interval_10 )
     BOOST_CHECK_EQUAL(track.travellingTime(), 60);
 }
 
-/*This test checks the travel time when the log interval is a negative number
+/*This test checks that an error is thrown when the log interval is a negative number
 because if the log interval is set a negative number then the GPX log becomes corrupted
 and doesn't show the correct track*/
 BOOST_AUTO_TEST_CASE ( interval_negative )
@@ -65,18 +65,33 @@ BOOST_AUTO_TEST_CASE ( interval_negative )
     BOOST_CHECK_THROW(track.travellingTime(), std::invalid_argument);
 }
 
-//TODO
-BOOST_AUTO_TEST_CASE ( interval_negative )
+/*This test checks that the correct travel time is produced when log interval is a multiple
+ *of the duration and they're both odd numbers*/
+BOOST_AUTO_TEST_CASE ( interval_multiple_of_duration )
 {
-    Track track = Track(LogFiles::GPXTracksDir + "TrackIntervalEven.gpx", isFileName);
+    Track track = Track(LogFiles::GPXTracksDir + "TrackI&DMultiples.gpx", isFileName);
+    BOOST_CHECK_EQUAL(track.travellingTime(), 45);
+}
+
+/*This test checks if an error is thrown when
+ *the log interval and the duration are odd numbers and if they're not multiples.
+  The logs produced don't produce the correct number of logs to calculate the travelling time*/
+BOOST_AUTO_TEST_CASE( interval_not_multiple_of_duration_odd )
+{
+    Track track = Track(LogFiles::GPXTracksDir + "TrackI&DNotMultiples.gpx", isFileName);
     BOOST_CHECK_THROW(track.travellingTime(), std::invalid_argument);
 }
 
-//TODO
-BOOST_AUTO_TEST_CASE ( interval_negative )
+/*the purpose of this test is to check that the duration is an even number and that
+ * the log interval is a factor of the duration while remaining to be equal to
+ * or less than half of the duration. This is because if the log interval is more than half
+ * of the duration it'll produce incorrect logs and if it is not a factor it also produces incorrect
+ * logs
+ */
+BOOST_AUTO_TEST_CASE( interval_factor_of_duration_and_less_than_half_of_duration )
 {
-    Track track = Track(LogFiles::GPXTracksDir + "TrackIntervalOdd.gpx", isFileName);
-    BOOST_CHECK_THROW(track.travellingTime(), std::invalid_argument);
+    Track track = Track(LogFiles::GPXTracksDir + "TrackIntervalEven&lessthanhalf.gpx", isFileName);
+    BOOST_CHECK_EQUAL(track.travellingTime(), 100);
 }
 
 /*This test checks the travel time when the absolute start time is a number beyond 1
@@ -93,7 +108,23 @@ and doesn't show the correct path*/
 BOOST_AUTO_TEST_CASE ( absolute_negative )
 {
     Track track = Track(LogFiles::GPXTracksDir + "TrackAbsoluteTimeNegative.gpx", isFileName);
-    BOOST_CHECK_THROW(track.travellingTime(), std::invalid_argument);
+    BOOST_CHECK_EQUAL(track.travellingTime(), std::invalid_argument);
+}
+
+//This test checks if the correct travel time is returned while the track includes points of no movement
+BOOST_AUTO_TEST_CASE ( track_has_rests )
+{
+    Track track = Track(LogFiles::GPXTracksDir + "TrackHasRests.gpx", isFileName);
+    BOOST_CHECK_EQUAL(track.travellingTime(), 30);
+}
+
+/*This test checks if the correct travel time appears when one of the point
+ * sequence is equal to 0. Eg. A0A2B
+*/
+BOOST_AUTO_TEST_CASE ( Track_zero_sequence )
+{
+    Track track = Track(LogFiles::GPXTracksDir + "TrackHas0andRests.gpx", isFileName);
+    BOOST_CHECK_EQUAL(track.travellingTime(), 20);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

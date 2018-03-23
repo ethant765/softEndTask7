@@ -37,7 +37,7 @@ seconds Track::travellingTime() const
     for (int i= 1; i < positions.size(); i++)
     {
         std::cout << "elevation: " <<positions.at(i).elevation() << " lat: " << positions.at(i).latitude() << " long: " << positions.at(i).longitude() << std::endl;
-        std::cout << "arrived: " << arrived.at(i) << "Departed: " << departed.at(i) << std::endl;
+        std::cout << "arrived: " << arrived.at(i) << " Departed: " << departed.at(i) << std::endl;
     }
 
     assert(implemented);
