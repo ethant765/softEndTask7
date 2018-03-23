@@ -24,14 +24,14 @@ void generateGPXRoute(std::string points)
     cout << "file " + filePath + " written" << endl;
 }
 
-void generateGPXTrack(std::string track)
+void generateGPXTrack(std::string trackString,std::string trackName = "")
 {
-    const std::string filePath = LogFiles::GPXTracksDir + track + ".gpx";
+    const std::string filePath = LogFiles::GPXTracksDir + trackName + ".gpx";
 
     std::ofstream out (filePath);
 
-    GridWorldTrack gridWorldRoute = GridWorldTrack(track);
-    out << gridWorldRoute.toGPX(1);
+    GridWorldTrack gridWorldRoute = GridWorldTrack(trackString);
+    out << gridWorldRoute.toGPX(1,,trackName);
     out.close();
     cout << "file " + filePath + " written" << endl;
 }
@@ -68,6 +68,6 @@ int main()
     //testRoute("NorthYorkMoors");
     //testRoute("ABCD");
     //testTrack("A1B3C");
-    generateGPXTrack("A1B");
-    testTrack("A1B");
+    generateGPXTrack("A1B1C", "test");
+
 }
