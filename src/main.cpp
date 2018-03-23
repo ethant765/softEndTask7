@@ -12,26 +12,14 @@ using namespace GPS;
 using std::cout;
 using std::endl;
 
-void generateGPXRoute(std::string points)
-{
-    const std::string filePath = LogFiles::GPXRoutesDir + points + ".gpx";
-
-    std::ofstream out (filePath);
-
-    GridWorldRoute gridWorldRoute = GridWorldRoute(points);
-    out << gridWorldRoute.toGPX();
-    out.close();
-    cout << "file " + filePath + " written" << endl;
-}
-
-void generateGPXTrack(std::string trackString,std::string trackName = "")
+void generateGPXTrack(std::string trackString,std::string trackName = "", int interval = 1, seconds timeUnitDuration = 10, seconds absoluteStartTime = 0, GridWorld gridWorld = GridWorld())
 {
     const std::string filePath = LogFiles::GPXTracksDir + trackName + ".gpx";
 
     std::ofstream out (filePath);
 
-    GridWorldTrack gridWorldRoute = GridWorldTrack(trackString);
-    out << gridWorldRoute.toGPX(1,,trackName);
+    GridWorldTrack gridWorldRoute = GridWorldTrack(trackString,timeUnitDuration,absoluteStartTime, gridWorld);
+    out << gridWorldRoute.toGPX(interval,true,trackName);
     out.close();
     cout << "file " + filePath + " written" << endl;
 }
@@ -68,6 +56,10 @@ int main()
     //testRoute("NorthYorkMoors");
     //testRoute("ABCD");
     //testTrack("A1B3C");
-    generateGPXTrack("A1B1C", "test");
+
+    generateGPXTrack("A1B2C", "TrackDuration1",1,1);
+    generateGPXTrack("A3B1C", "TrackDuration10",1,10);
+    generateGPXTrack("A4B2C", "TrackDurationEven",1,2);
+    generateGPXTrack("M3A2G", "TrackDurationOdd",1,7);
 
 }

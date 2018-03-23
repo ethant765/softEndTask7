@@ -23,7 +23,7 @@ SOURCES += \
     src/track.cpp \
     src/xmlparser.cpp \
     src/gpx-tests/name.cpp \
-    src/gpx-tests/travellingTime.cpp
+    src/gpx-tests/travellingTime-N0696066.cpp \
 
 
 INCLUDEPATH += headers/
