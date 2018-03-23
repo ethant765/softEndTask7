@@ -28,8 +28,8 @@ seconds Track::restingTime() const
 
 seconds Track::travellingTime() const
 {
-    const bool implemented = false;
-/*
+    const bool implemented = true;
+
     //temp variable
     seconds moving = 0;
 
@@ -39,8 +39,9 @@ seconds Track::travellingTime() const
         std::cout << "elevation: " <<positions.at(i).elevation() << " lat: " << positions.at(i).latitude() << " long: " << positions.at(i).longitude() << std::endl;
         std::cout << "arrived: " << arrived.at(i) << " Departed: " << departed.at(i) << std::endl;
     }
-*/
+
     assert(implemented);
+    return moving;
 }
 
 speed Track::maxSpeed() const

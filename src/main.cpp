@@ -51,7 +51,7 @@ int main()
     generateGPXTrack("M3A2G","TrackI&DNotMultiples",3,7);
     generateGPXTrack("A3B1C", "TrackAbsoluteTime1", 1,10,1);
     generateGPXTrack("A3B1C", "TrackAbsoluteTimeNegative", 1,10,-1);
-    generateGPXTrack("A7X2E1U4M2V5G", "TrackMultiplePoints", 100,1000);
+    generateGPXTrack("A7X2E1U4M", "TrackMultiplePoints", 100,1000);
     generateGPXTrack("A3A2B1M", "TrackHasRests", 1,10);
     generateGPXTrack("A0A2M2M", "TrackHas0andRests", 1,10);
 }

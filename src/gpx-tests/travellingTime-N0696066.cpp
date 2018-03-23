@@ -108,14 +108,7 @@ and doesn't show the correct path*/
 BOOST_AUTO_TEST_CASE ( absolute_negative )
 {
     Track track = Track(LogFiles::GPXTracksDir + "TrackAbsoluteTimeNegative.gpx", isFileName);
-    BOOST_CHECK_THROW(track.travellingTime(), std::invalid_argument);
-}
-
-//This tests checks that is can produce the correct results when handling a large track
-BOOST_AUTO_TEST_CASE ( multiple_tracks )
-{
-    Track track = Track(LogFiles::GPXTracksDir + "TrackMultiplePoints.gpx", isFileName);
-    BOOST_CHECK_EQUAL(track.travellingTime(), 21000);
+    BOOST_CHECK_EQUAL(track.travellingTime(), std::invalid_argument);
 }
 
 //This test checks if the correct travel time is returned while the track includes points of no movement
