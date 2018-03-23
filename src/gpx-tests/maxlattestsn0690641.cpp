@@ -186,14 +186,14 @@ BOOST_AUTO_TEST_CASE ( TrackLatIncreaseThenDecrease )
 }
 
 
-//Route With Latitude of 89.9 testing edge cases
+//Route With Latitude of 89.9 testing edge cases. As lat can only be between -90 and 90
 BOOST_AUTO_TEST_CASE ( RouteLatAt89 )
 {
     Route route = Route(LogFiles::GPXRoutesDir + "RouteLatAt89.gpx", isFileName);
     BOOST_CHECK_EQUAL( route.maxLatitude(), 89.9818 );
 }
 
-//Track with latitude and 
+//Track with latitude at 89.9 testing the edge cases 
 BOOST_AUTO_TEST_CASE ( TrackLatAt89 )
 {
     Track track = Track(LogFiles::GPXTracksDir + "TrackLatAt89.gpx", isFileName);
@@ -201,5 +201,35 @@ BOOST_AUTO_TEST_CASE ( TrackLatAt89 )
 }
 
     
+
+//Testing the other edge case of -89 in a route log to see if the function can handle this number
+BOOST_AUTO_TEST_CASE ( RouteLatAtNegative89 )
+{
+    Route route = Route(LogFiles::GPXRoutesDir + "RouteLatAtNegative89.gpx", isFileName);
+    BOOST_CHECK_EQUAL( route.maxLatitude(), -62.8436 );
+}
+
+//Testing if the MaxLat function works properly with the edge case -89 within the Track log 
+BOOST_AUTO_TEST_CASE ( TrackLatAtNegative89 )
+{
+    Track track = Track(LogFiles::GPXTracksDir + "TrackLatAtNegative89.gpx", isFileName);
+    BOOST_CHECK_EQUAL( track.maxLatitude(), -62.8436);
+}
+
+
+//Test case to see if the Maximum latitude was able to be identified in a Route log with only 1 position
+BOOST_AUTO_TEST_CASE ( RouteSinglePosition )
+{
+    Route route = Route(LogFiles::GPXRoutesDir + "RouteSinglePosition.gpx", isFileName);
+    BOOST_CHECK_EQUAL( route.maxLatitude(), 42.74 );
+}
+
+//Test case to see if MaximumLatitude can find the correct value of lattitude when there is 30 different points within the route log
+BOOST_AUTO_TEST_CASE ( Route30Positions )
+{
+    Route route = Route(LogFiles::GPXRoutesDir + "Route30Positions.gpx", isFileName);
+    BOOST_CHECK_EQUAL( route.maxLatitude(), 60.7364 );
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 
