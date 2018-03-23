@@ -11,7 +11,7 @@ BOOST_AUTO_TEST_SUITE( Travel_Time )
 const bool isFileName = true;
 
 //Checks that the travel time is correct for GPX route containing positions
-BOOST_AUTO_TEST_CASE ( correct_travel_time )
+BOOST_AUTO_TEST_CASE ( log1 )
 {
     Track track = Track(LogFiles::GPXTracksDir + "A1B3C.gpx", isFileName);
     BOOST_CHECK_EQUAL(track.travellingTime(), 40);
