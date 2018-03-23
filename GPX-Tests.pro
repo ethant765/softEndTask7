@@ -24,7 +24,7 @@ SOURCES += \
     src/xmlparser.cpp \
     src/gpx-tests/name.cpp \
     src/gpx-tests/maxlattestsn0690641.cpp
-
+    src/gpx-tests/tests.cpp
 
 INCLUDEPATH += headers/
 
