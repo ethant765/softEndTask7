@@ -28,24 +28,20 @@ seconds Track::restingTime() const
 
 seconds Track::travellingTime() const
 {
-    const bool implemented = false;
+    const bool implemented = true;
 
-    /*
-    //Varibales
+    //temp variable
     seconds moving = 0;
 
-    //Loop through all positions
+    //This is for debugging
     for (int i= 1; i < positions.size(); i++)
     {
-
-        if (distanceBetween(positions.at(i), positions.at(i-1)) > 0.1)
-        {
-                moving++;
-        }
+        std::cout << "elevation: " <<positions.at(i).elevation() << " lat: " << positions.at(i).latitude() << " long: " << positions.at(i).longitude() << std::endl;
+        std::cout << "arrived: " << arrived.at(i) << "Departed: " << departed.at(i) << std::endl;
     }
-    
-    //Check if the function is implemented*/
+
     assert(implemented);
+    return moving;
 }
 
 speed Track::maxSpeed() const

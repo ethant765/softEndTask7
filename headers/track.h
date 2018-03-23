@@ -28,10 +28,10 @@ namespace GPS
       // Total elapsed time between start and finish of track.
       seconds totalTime() const;
 
-      // Total elapsed time between start and finish of the Track that is spent not moving.
+      // Total elapsed time between start and finish of the Track that is spent moving.
       seconds travellingTime() const;
 
-      // Total elapsed time between start and finish of the Track that is spent moving.
+      // Total elapsed time between start and finish of the Track that is spent not moving.
       seconds restingTime() const;
 
       // The fastest speed between successive track points.
