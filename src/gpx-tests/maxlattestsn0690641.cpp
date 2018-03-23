@@ -239,11 +239,27 @@ BOOST_AUTO_TEST_CASE ( RouteLatitudeGreater90 )
 }
 
 //Test case to check if Latitude smaller than -90 can be accepted
-BOOST_AUTO_TEST_CASE ( RouteLatitudeSmaller90 )
+BOOST_AUTO_TEST_CASE ( RouteLatitudeSmallerNegative90 )
 {
     Route route = Route(LogFiles::GPXRoutesDir + "RouteLatitudeSmaller90.gpx", isFileName);
     BOOST_CHECK_THROW( route.maxLatitude(), std::out_of_range);
 }
+
+//Test designed to see if the MaxLatitude function still works when 0 is the highest lat in the Route log
+BOOST_AUTO_TEST_CASE ( RouteLatAt0 )
+{
+    Route route = Route(LogFiles::GPXRoutesDir + "RouteLatAt0.gpx", isFileName);
+    BOOST_CHECK_EQUAL( route.maxLatitude(), 0 );
+}
+
+
+//Testing if the Max lat function can detect changes of latitude between points of 0.0001 difference
+BOOST_AUTO_TEST_CASE ( RouteLatitudeDiff0001 )
+{
+    Route route = Route(LogFiles::GPXRoutesDir + "RouteLatitudeDiff0001.gpx", isFileName);
+    BOOST_CHECK_EQUAL( route.maxLatitude(), 10.0002);
+}
+
 
 BOOST_AUTO_TEST_SUITE_END()
 
