@@ -93,4 +93,17 @@ BOOST_AUTO_TEST_CASE( correct_index_track ) {
     BOOST_CHECK_EQUAL(track[2].elevation(), pos2.elevation());
 }
 
+
+/**
+  * Check that an std::out_of_range exception is thrown when the given index is
+  * greater or equal to the size of the positions vector.
+  **/
+BOOST_AUTO_TEST_CASE( out_of_range_upper ) {
+    Route route = Route(LogFiles::GPXRoutesDir + "MIOT.gpx", true);
+
+    BOOST_CHECK_THROW( route[5], std::out_of_range );
+    BOOST_CHECK_THROW( route[10], std::out_of_range );
+    BOOST_CHECK_THROW( route[15], std::out_of_range );
+}
+
 BOOST_AUTO_TEST_SUITE_END()
