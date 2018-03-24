@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<gpx version="1.1" creator="NTU" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+    <trk>
+        <name>M3I6O1T</name>
+        <trkseg>
+            <name>M-I</name>
+            <trkpt lat="0" lon="109.322">
+                <ele>0.000000</ele>
+                <time>0</time>
+            </trkpt>
+            <trkpt lat="0.029994" lon="109.352">
+                <ele>0.000000</ele>
+                <time>10</time>
+            </trkpt>
+            <trkpt lat="0.059988" lon="109.382">
+                <ele>0.000000</ele>
+                <time>20</time>
+            </trkpt>
+            <trkpt lat="0.089982" lon="109.412">
+                <ele>0.000000</ele>
+                <time>30</time>
+            </trkpt>
+        </trkseg>
+        <trkseg>
+            <name>I-O</name>
+            <trkpt lat="0.089982" lon="109.412">
+                <ele>0.000000</ele>
+                <time>30</time>
+            </trkpt>
+            <trkpt lat="0.074985" lon="109.427">
+                <ele>0.000000</ele>
+                <time>40</time>
+            </trkpt>
+            <trkpt lat="0.059988" lon="109.442">
+                <ele>0.000000</ele>
+                <time>50</time>
+            </trkpt>
+            <trkpt lat="0.044991" lon="109.457">
+                <ele>0.000000</ele>
+                <time>60</time>
+            </trkpt>
+            <trkpt lat="0.029994" lon="109.472">
+                <ele>0.000000</ele>
+                <time>70</time>
+            </trkpt>
+            <trkpt lat="0.014997" lon="109.487">
+                <ele>0.000000</ele>
+                <time>80</time>
+            </trkpt>
+            <trkpt lat="-6.93889e-18" lon="109.502">
+                <ele>0.000000</ele>
+                <time>90</time>
+            </trkpt>
+        </trkseg>
+        <trkseg>
+            <name>O-T</name>
+            <trkpt lat="0" lon="109.502">
+                <ele>0.000000</ele>
+                <time>90</time>
+            </trkpt>
+            <trkpt lat="-0.089982" lon="109.502">
+                <ele>0.000000</ele>
+                <time>100</time>
+            </trkpt>
+        </trkseg>
+    </trk>
+</gpx>
