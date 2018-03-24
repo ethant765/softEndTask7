@@ -23,3 +23,10 @@
  * Finally, We test Route::operator[]() using an empty route which does not
  * have any points. Since a route contains an array of Positions, the []
  * operator should throw an std::out_of_range exception at any index.
+ **/
+
+#include <boost/test/unit_test.hpp>
+
+BOOST_AUTO_TEST_SUITE( Route_array_operator )
+
+BOOST_AUTO_TEST_SUITE_END()
