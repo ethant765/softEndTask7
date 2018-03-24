@@ -128,8 +128,17 @@ metres Route::maxElevation() const // N0669298
 
 degrees Route::maxGradient() const
 {
-    const bool implemented = false;
+    const bool implemented = true;
     assert(implemented);
+
+    degrees largestGradient = positions[1].elevation() - positions[0].elevation();
+
+    for(size_t x = 2; x < positions.size(); x++){
+        if((positions[x].elevation() - positions[x-1].elevation()) > largestGradient){
+            largestGradient = positions[x].elevation() - positions[x-1].elevation();
+        }
+    }
+    return largestGradient;
 }
 
 degrees Route::minGradient() const
