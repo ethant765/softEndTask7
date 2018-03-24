@@ -118,4 +118,15 @@ BOOST_AUTO_TEST_CASE( out_of_range_negative ) {
     BOOST_CHECK_THROW( route[-15], std::out_of_range );
 }
 
+/**
+  * Check that std::out_of_range is NOT thrown when the index is equal to
+  * one of the endpoints of accepted range. (i.e. 0 and vector size - 1).
+  **/
+BOOST_AUTO_TEST_CASE( out_of_range_endpoints ) {
+    Route route = Route(LogFiles::GPXRoutesDir + "MIOT.gpx", true);
+
+    BOOST_CHECK_NO_THROW( route[0] );
+    BOOST_CHECK_NO_THROW( route[3] );
+}
+
 BOOST_AUTO_TEST_SUITE_END()
