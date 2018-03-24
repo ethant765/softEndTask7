@@ -97,8 +97,9 @@ BOOST_AUTO_TEST_CASE( correct_index_track ) {
 /**
   * Check that an std::out_of_range exception is thrown when the given index is
   * greater or equal to the size of the positions vector.
+  * Test using a Route.
   **/
-BOOST_AUTO_TEST_CASE( out_of_range_upper ) {
+BOOST_AUTO_TEST_CASE( out_of_range_upper_route ) {
     Route route = Route(LogFiles::GPXRoutesDir + "MIOT.gpx", true);
 
     BOOST_CHECK_THROW( route[5], std::out_of_range );
@@ -108,9 +109,23 @@ BOOST_AUTO_TEST_CASE( out_of_range_upper ) {
 
 /**
   * Check that an std::out_of_range exception is thrown when the given index is
-  * negative.
+  * greater or equal to the size of the positions vector.
+  * Test using a Track.
   **/
-BOOST_AUTO_TEST_CASE( out_of_range_negative ) {
+BOOST_AUTO_TEST_CASE( out_of_range_upper_track ) {
+    Track track = Track(LogFiles::GPXTracksDir + "M3I6O1T.gpx", true);
+
+    BOOST_CHECK_THROW( track[5], std::out_of_range );
+    BOOST_CHECK_THROW( track[10], std::out_of_range );
+    BOOST_CHECK_THROW( track[15], std::out_of_range );
+}
+
+/**
+  * Check that an std::out_of_range exception is thrown when the given index is
+  * negative.
+  * Test using a Route.
+  **/
+BOOST_AUTO_TEST_CASE( out_of_range_negative_route ) {
     Route route = Route(LogFiles::GPXRoutesDir + "MIOT.gpx", true);
 
     BOOST_CHECK_THROW( route[-5], std::out_of_range );
@@ -119,10 +134,24 @@ BOOST_AUTO_TEST_CASE( out_of_range_negative ) {
 }
 
 /**
+  * Check that an std::out_of_range exception is thrown when the given index is
+  * negative.
+  * Test using a Track.
+  **/
+BOOST_AUTO_TEST_CASE( out_of_range_negative_track ) {
+    Track track = Track(LogFiles::GPXTracksDir + "M3I6O1T.gpx", true);
+
+    BOOST_CHECK_THROW( track[-5], std::out_of_range );
+    BOOST_CHECK_THROW( track[-10], std::out_of_range );
+    BOOST_CHECK_THROW( track[-15], std::out_of_range );
+}
+
+/**
   * Check that std::out_of_range is NOT thrown when the index is equal to
   * one of the endpoints of accepted range. (i.e. 0 and vector size - 1).
+  * Test using a Route.
   **/
-BOOST_AUTO_TEST_CASE( out_of_range_endpoints ) {
+BOOST_AUTO_TEST_CASE( out_of_range_endpoints_route ) {
     Route route = Route(LogFiles::GPXRoutesDir + "MIOT.gpx", true);
 
     BOOST_CHECK_NO_THROW( route[0] );
@@ -130,15 +159,41 @@ BOOST_AUTO_TEST_CASE( out_of_range_endpoints ) {
 }
 
 /**
+  * Check that std::out_of_range is NOT thrown when the index is equal to
+  * one of the endpoints of accepted range. (i.e. 0 and vector size - 1).
+  * Test using a Track.
+  **/
+BOOST_AUTO_TEST_CASE( out_of_range_endpoints_track ) {
+    Track track = Track(LogFiles::GPXTracksDir + "M3I6O1T.gpx", true);
+
+    BOOST_CHECK_NO_THROW( track[0] );
+    BOOST_CHECK_NO_THROW( track[2] );
+}
+
+/**
   * Check that std::out_of_range is thrown when the index is equal to one of
   * the outer bounds of the correct range (-1 and vector size).
+  * Test using a Route.
   **/
-BOOST_AUTO_TEST_CASE( out_of_range_outer_bounds )
+BOOST_AUTO_TEST_CASE( out_of_range_outer_bounds_route )
 {
     Route route = Route(LogFiles::GPXRoutesDir + "MIOT.gpx", true);
 
     BOOST_CHECK_THROW( route[-1], std::out_of_range );
     BOOST_CHECK_THROW( route[4], std::out_of_range );
+}
+
+/**
+  * Check that std::out_of_range is thrown when the index is equal to one of
+  * the outer bounds of the correct range (-1 and vector size).
+  * Test using a Track.
+  **/
+BOOST_AUTO_TEST_CASE( out_of_range_outer_bounds_track )
+{
+    Track track = Track(LogFiles::GPXTracksDir + "M3I6O1T.gpx", true);
+
+    BOOST_CHECK_THROW( track[-1], std::out_of_range );
+    BOOST_CHECK_THROW( track[3], std::out_of_range );
 }
 
 BOOST_AUTO_TEST_SUITE_END()
