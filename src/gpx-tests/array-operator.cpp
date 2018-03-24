@@ -106,4 +106,16 @@ BOOST_AUTO_TEST_CASE( out_of_range_upper ) {
     BOOST_CHECK_THROW( route[15], std::out_of_range );
 }
 
+/**
+  * Check that an std::out_of_range exception is thrown when the given index is
+  * negative.
+  **/
+BOOST_AUTO_TEST_CASE( out_of_range_negative ) {
+    Route route = Route(LogFiles::GPXRoutesDir + "MIOT.gpx", true);
+
+    BOOST_CHECK_THROW( route[-5], std::out_of_range );
+    BOOST_CHECK_THROW( route[-10], std::out_of_range );
+    BOOST_CHECK_THROW( route[-15], std::out_of_range );
+}
+
 BOOST_AUTO_TEST_SUITE_END()
