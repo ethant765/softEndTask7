@@ -1,23 +1,23 @@
 Route::numPositions() - N0695913, N0719388, N0650950
-Route::totalLength() - N0673230, T0068955
+Route::totalLength() - N0673230, T0068955, N0683389
 Route::netLength() -
 Route::totalHeightGain() - N0720387
 Route::netHeightGain() - N0689061, N0683858
 Route::minLatitude() - N0720717
-Route::netLength() - N0683389
+Route::netLength() - 
 Route::totalHeightGain() -N0700591
 Route::netHeightGain() - N0689061
-Route::minLatitude() - N0682255, N0680337, N0707417
+Route::minLatitude() - N0682255, N0707417, N0720144
 Route::maxLatitude() - N0690641, N0630057, N0643498
-Route::minLongitude() - N0676284, 
-Route::maxLongitude() - n0494166, N0669298
+Route::minLongitude() - N0676284, N0692013
+Route::maxLongitude() - n0494166, N0669298, N0680337
 Route::minElevation() - N0699610, N0719715, N0680788
 Route::maxElevation() - N0689529, N0686300
 Route::maxGradient() -
 Route::minGradient() -
 Route::steepestGradient() -
 Route::operator[]() - T0073322
-Route::findPosition() - N0680192, N0692013
+Route::findPosition() - N0680192
 Route::findNameOf() -
 Route::timesVisited(string) -
 Route::timesVisited(Position) -
