@@ -231,18 +231,22 @@ BOOST_AUTO_TEST_CASE ( Route30Positions )
     BOOST_CHECK_EQUAL( route.maxLatitude(), 60.7364 );
 }
 
-//Test case to check if Latitude greater than 90 can be accepted
+//Test case to check if a route log with a latitude over 90 (Out of range) is selected as the maximum latitude
+//Even though a number over 90 is not valid, the function should still return that number, as it is the
+//route constructors job to Reject invalid information
 BOOST_AUTO_TEST_CASE ( RouteLatitudeGreater90 )
 {
     Route route = Route(LogFiles::GPXRoutesDir + "RouteLatitudeGreater90.gpx", isFileName);
-    BOOST_CHECK_THROW( route.maxLatitude(), std::out_of_range);
+    BOOST_CHECK_EQUAL ( route.maxLatitude(), 90.0001);
 }
 
-//Test case to check if Latitude smaller than -90 can be accepted
+//Test case to check if a latitude smaller than -90 does not stop the function from working
+//the function should still send back the highest latitude in the log, even if one of the points
+//latitude is out of range. It is the route constructors to reject invalid data
 BOOST_AUTO_TEST_CASE ( RouteLatitudeSmallerNegative90 )
 {
     Route route = Route(LogFiles::GPXRoutesDir + "RouteLatitudeSmaller90.gpx", isFileName);
-    BOOST_CHECK_THROW( route.maxLatitude(), std::out_of_range);
+    BOOST_CHECK_EQUAL ( route.maxLatitude(), -62.1736);
 }
 
 //Test designed to see if the MaxLatitude function still works when 0 is the highest lat in the Route log
