@@ -53,8 +53,15 @@ speed Track::maxRateOfAscent() const
 speed Track::maxRateOfDescent() const
 {
 	//n0693165
-    const bool implemented = false;
+    const bool implemented = true;
     assert(implemented);
+    double hc = 0.0;
+    for (int i = 0; i < (int)positions.size() - 1; i++){
+        if (positions[i].elevation() > positions[i+1].elevation()){
+            hc = positions[i+1].elevation() - positions[i].elevation();
+        }
+    }
+    return hc;
 }
 
 Track::Track(std::string source, bool isFileName, metres granularity)

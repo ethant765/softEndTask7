@@ -22,8 +22,9 @@ SOURCES += \
     src/route.cpp \
     src/track.cpp \
     src/xmlparser.cpp \
-    src/gpx-tests/name.cpp \
-    src/gpx-tests/maxlattestsn0690641.cpp
+    src/gpx-tests/n0693165.cpp \
+    src/gpx-tests/maxlattestsn0690641.cpp \
+    src/gpx-tests/name.cpp
 
 
 INCLUDEPATH += headers/
