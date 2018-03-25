@@ -26,14 +26,10 @@ SOURCES += \
     src/gpx-tests/travellingTime-N0696066.cpp \
     src/gpx-tests/maxlattestsn0690641.cpp \
     src/gpx-tests/totalLength-n0683389.cpp \
-<<<<<<< HEAD
-	src/gpx-tests/n0693165.cpp \
-=======
+    src/gpx-tests/n0693165.cpp \
     src/gpx-tests/maxLongTests_N0669298.cpp
 
 
-
->>>>>>> 919ef5975710ee165ba0c91534b2c65ed55b6f27
 INCLUDEPATH += headers/
 
 TARGET = $$_PRO_FILE_PWD_/execs/gpx-tests
