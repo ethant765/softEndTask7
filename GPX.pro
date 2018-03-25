@@ -11,7 +11,11 @@ HEADERS += \
     headers/route.h \
     headers/track.h \
     headers/types.h \
-    headers/xmlparser.h
+    headers/xmlparser.h \
+    headers/xmlgenerator.h \
+    headers/gridworld.h \
+    headers/gridworld_track.h \
+    headers/gridworld_route.h
 
 SOURCES += \
     src/earth.cpp \
@@ -21,7 +25,11 @@ SOURCES += \
     src/position.cpp \
     src/route.cpp \
     src/track.cpp \
-    src/xmlparser.cpp
+    src/xmlparser.cpp \
+    src/gridworld_track.cpp \
+    src/gridworld_route.cpp \
+    src/gridworld.cpp \
+    src/xmlgenerator.cpp
 
 INCLUDEPATH += headers/
 
