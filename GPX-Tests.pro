@@ -29,7 +29,6 @@ SOURCES += \
     src/gpx-tests/n0693165.cpp \
     src/gpx-tests/maxLongTests_N0669298.cpp
 
-
 INCLUDEPATH += headers/
 
 TARGET = $$_PRO_FILE_PWD_/execs/gpx-tests
