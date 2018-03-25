@@ -15,15 +15,13 @@ HEADERS += \
 
 SOURCES += \
     src/earth.cpp \
-    src/gpx-tests.cpp \
     src/geometry.cpp \
     src/logs.cpp \
     src/position.cpp \
     src/route.cpp \
     src/track.cpp \
     src/xmlparser.cpp \
-    src/gpx-tests/name.cpp
-
+    src/gpx-tests/netHeightGain.cpp
 
 INCLUDEPATH += headers/
 
