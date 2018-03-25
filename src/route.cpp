@@ -97,8 +97,25 @@ degrees Route::minLongitude() const
 
 degrees Route::maxLongitude() const
 {
-    const bool implemented = false;
+    const bool implemented = true;
+
     assert(implemented);
+
+    int MaximumIndex = 0;
+    for (unsigned int i = 0; i < positions.size() ; i++)
+    {
+
+        if ((positions[i].longitude() > 180) || (positions[i].longitude() < -180)){
+            throw std::out_of_range("Not in bounds of long");
+        }
+
+        if (positions[i].longitude() > positions[MaximumIndex].longitude()) {
+            MaximumIndex = i;
+        }
+
+    }
+
+    return positions[MaximumIndex].longitude();
 }
 
 metres Route::minElevation() const
