@@ -34,7 +34,8 @@ BOOST_AUTO_TEST_CASE( correctnesstests_elevation_down )
  */
 BOOST_AUTO_TEST_CASE( correctnesstests_elevation_up )
 {
-    BOOST_CHECK_EQUAL( Track(LogFiles::GPXTracksDir + "changingelevationpositive.gpx", isFileName).maxRateOfDescent(), 0.0 );
+    BOOST_CHECK_EQUAL( Track(LogFiles::GPXTracksDir + "changingelevationpositive.gpx", isFileName).maxRateOfDescent(), 0);
+
 }
 
 //Underflow and overflow tests
@@ -42,13 +43,14 @@ BOOST_AUTO_TEST_CASE( correctnesstests_elevation_up )
  */
 BOOST_AUTO_TEST_CASE( largest_value_initial )
 {
-
+    //Track track = Track(LogFiles::GPXTracksDir + "changingelevationmaxvalue.gpx", isFileName);
+    //changingelevationmaxvalue
 }
 /* In this test case the track will have an initial value of the lowest value double
  */
 BOOST_AUTO_TEST_CASE( largest_value_subtract )
 {
-
+    //BOOST_CHECK_THROW(Track(LogFiles::GPXTracksDir + "changingelevationtakeawaymaxvalue.gpx", isFileName).maxRateOfDescent(), "potential underflow");
 }
 
 BOOST_AUTO_TEST_CASE( lowest_value_initial )
