@@ -1,7 +1,7 @@
 Route::numPositions() - N0695913, N0719388, N0650950
 Route::totalLength() - N0673230, T0068955, N0683389
 Route::netLength() -
-Route::totalHeightGain() - N0720387, N0693955
+Route::totalHeightGain() - N0720387, N0693955, N0673230
 Route::netHeightGain() - N0689061, N0683858
 Route::minLatitude() - N0720717
 Route::netLength() - N0641701, T0073651
