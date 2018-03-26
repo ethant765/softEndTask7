@@ -12,6 +12,16 @@ using namespace GPS;
 using std::cout;
 using std::endl;
 
+void generateGPXRoute(string route, string routeName)
+{
+  GridWorldRoute test = GridWorldRoute(route);
+  const std::string filePath = LogFiles::GPXRoutesDir + routeName + ".gpx";
+  std::ofstream out(filePath);
+  out << test.toGPX(true, routeName);
+  out.close();
+  cout << "File: " << filePath << " has been written" << endl;
+}
+
 void testRoute(std::string fileName)
 {
     const std::string filePath = LogFiles::GPXRoutesDir + fileName + ".gpx";
@@ -31,4 +41,5 @@ int main()
 {
     testRoute("NorthYorkMoors");
     testRoute("ABCD");
+    generateGPXRoute("AMG", "test1");
 }
