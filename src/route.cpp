@@ -64,9 +64,9 @@ metres Route::netHeightGain() const
 {
     std::vector<Position>::const_iterator first, last;
     first = positions.begin();
-    //std::cout << first->elevation()<< "\n";
+    std::cout << "First: " << first->elevation()<< "\n";
     last =  positions.end() - 1;
-    //std::cout << last->elevation() <<  "\n";
+    std::cout << "Last: " << last->elevation() <<  "\n";
     if (last->elevation() - first->elevation() > 0){
         return last->elevation() - first->elevation();
     }

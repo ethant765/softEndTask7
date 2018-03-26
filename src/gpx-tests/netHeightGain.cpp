@@ -1,3 +1,4 @@
+//Created by N0689061
 #define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MODULE RouteTests
 #include <boost/test/unit_test.hpp>
@@ -24,7 +25,8 @@ BOOST_AUTO_TEST_CASE(valid_last_value){
 }
 
 BOOST_AUTO_TEST_CASE(negative_result){
-
+    Route route = Route(LogFiles::GPXRoutesDir + "NorthYorkMoors.gpx", isFileName);
+    BOOST_CHECK_EQUAL(route.netHeightGain(), 0);
 }
 
 BOOST_AUTO_TEST_CASE(correct_answer){

@@ -18,12 +18,8 @@ void testRoute(std::string fileName)
     Route route = Route(filePath,isFileName);
 
     cout << "Route name: " << route.name() << endl;
-    // cout << "Number of positions in route: " << route.numPositions() << endl;
-
     cout << "Net Height Gain: " << route.netHeightGain() << endl;
-
     cout << "Total route length: " << route.totalLength() << endl;
-    // cout << "Net route length: " << route.netLength() << endl;
     cout << endl;
 }
 
