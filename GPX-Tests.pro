@@ -29,6 +29,7 @@ SOURCES += \
     src/gpx-tests/maxLongTests_N0669298.cpp \
     src/gpx-tests/n0650950_numPos_Tests.cpp \
     src/gpx-tests/N0680192.cpp \
+    src/gpx-tests/netLength_n0641701.cpp \
 
 
 INCLUDEPATH += headers/
