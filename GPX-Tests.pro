@@ -26,7 +26,8 @@ SOURCES += \
     src/gpx-tests/travellingTime-N0696066.cpp \
     src/gpx-tests/maxlattestsn0690641.cpp \
     src/gpx-tests/totalLength-n0683389.cpp \
-    src/gpx-tests/maxLongTests_N0669298.cpp
+    src/gpx-tests/maxLongTests_N0669298.cpp \
+    src/gpx-tests/n0650950_numPos_Tests.cpp \
 
 
 
