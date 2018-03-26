@@ -4,6 +4,7 @@
 #include <cassert>
 #include <cmath>
 #include <stdexcept>
+#include <iomanip>
 
 #include "xmlparser.h"
 #include "geometry.h"
@@ -50,9 +51,18 @@ metres Route::netLength() const
 
         //loop through all of the values in positions. Add the elevation values to the total height gain.
         for(auto pos : positions){
+            if(pos.elevation() <= Earth::meanRadius)
+            {
             totalHeight += pos.elevation();
+            }
+            else
+            {
+                throw std::out_of_range("Elevation value out of range");
+            }
+
         }
-         return totalHeight;
+        totalHeight = round(totalHeight);
+        return totalHeight;
     }
 
 
