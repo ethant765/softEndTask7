@@ -74,20 +74,18 @@ BOOST_AUTO_TEST_CASE(numPositions_GranCheck1000_route) {
 
 //TESTING LOWER EDGE CASE GRANULARITY
 BOOST_AUTO_TEST_CASE(numPositions_lowerEdgeCaseGran_route) {
-  //The distance between the two points in "myNewPosition" is 4.92 metres. The granularity is
+  //The distance between the two points in "route2" is 4.88 metres. The granularity is
   // 4.88 metres so the route class should throw 0 of the positions away
-  string myNewPosition = "<gpx> <rte> <rtept lat=24.016310 lon=8.035993> <ele> 000 </ele> </rtept> <rtept lat=24.016301 lon=8.036040> <ele>000 </ele> </rtept> </rte> </gpx>";
-  Route route = Route(myNewPosition, notFileName, 4.88);
+  Route route2 = Route(LogFiles::GPXRoutesDir + "N0650950_Routes2.gpx", isFileName, 4.88);
   unsigned int noofpos = route.numPositions();
   BOOST_CHECK_EQUAL(noofpos, 2);
 }
 
 //TESTING UPPER EDGE CASE GRANULARITY
 BOOST_AUTO_TEST_CASE(numPositions_upperEdgeCaseGran_route) {
-  //The distance between the two points in "myNewPosition" is 4.92 metres. The granularity is
+  //The distance between the two points in "route2" is 4.92 metres. The granularity is
   // 4.96 metres so the route class should throw 1 of the positions away
-  string myNewPosition = "<gpx> <rte> <rtept lat=24.016310 lon=8.035993> <ele> 000 </ele> </rtept> <rtept lat=24.016301 lon=8.036040> <ele>000 </ele> </rtept> </rte> </gpx>";
-  Route route = Route(myNewPosition, notFileName, 4.96);
+  Route route2 = Route(LogFiles::GPXRoutesDir + "N0650950_Routes2.gpx", isFileName, 4.96);
   unsigned int noofpos = route.numPositions();
   BOOST_CHECK_EQUAL(noofpos, 1);
 }
