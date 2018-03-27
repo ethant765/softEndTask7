@@ -169,7 +169,7 @@ degrees Route::minGradient() const
     {
         if((positions[x].elevation() - positions[x-1].elevation()) < smallestGrad)
         {
-            smallestGrad = (positions[x].elevation() - positions[x-1].elevation();
+            smallestGrad = positions[x].elevation() - positions[x-1].elevation();
         }
     }
     return smallestGrad;
