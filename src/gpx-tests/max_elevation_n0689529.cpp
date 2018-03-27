@@ -24,6 +24,7 @@ The values in the list of elevations could be staggerd or ordered in a specific 
 
 Other tests if time:
 11. if a known altitude at a specific coordinate is known to be X, but is found to be equal to Y then the test should fail.
+12. formatting tests.
 
 cases I did consider, but deemed unnecessary:
 A. The maximum altitude on earth is Mt. Everest, so I could have potentially tested to see if a elevation exceeded this.
@@ -41,10 +42,28 @@ A. The maximum altitude on earth is Mt. Everest, so I could have potentially tes
 
 using namespace GPS;
 
+
 BOOST_AUTO_TEST_SUITE( max_elevation )
 
+const bool isFileName = true;
 
+// Tests for positive or negative max elevations:
 
+// Test: 1. (test number referenced with design section) 
+BOOST_AUTO_TEST_CASE( max_elevation_from_positve_list ) {
+    Route route = Route(LogFiles::GPXRoutesDir + "", isFileName);
+    
+}
+
+// Test: 2.
+BOOST_AUTO_TEST_CASE( max_elevation_from_negative_list ) {
+
+}
+
+// Test: 3.
+BOOST_AUTO_TEST_CASE( max_elevation_form_pos_neg_list ) {
+
+}
 
 
 
