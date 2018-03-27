@@ -29,6 +29,17 @@ seconds Track::restingTime() const
 seconds Track::travellingTime() const
 {
     const bool implemented = false;
+/*
+    //temp variable
+    seconds moving = 0;
+
+    //This is for debugging
+    for (int i= 1; i < positions.size(); i++)
+    {
+        std::cout << "elevation: " <<positions.at(i).elevation() << " lat: " << positions.at(i).latitude() << " long: " << positions.at(i).longitude() << std::endl;
+        std::cout << "arrived: " << arrived.at(i) << " Departed: " << departed.at(i) << std::endl;
+    }
+*/
     assert(implemented);
 }
 
@@ -52,8 +63,16 @@ speed Track::maxRateOfAscent() const
 
 speed Track::maxRateOfDescent() const
 {
-    const bool implemented = false;
+	//n0693165
+    const bool implemented = true;
     assert(implemented);
+    double hc = 0.0;
+    for (int i = 0; i < (int)positions.size() - 1; i++){
+        if (positions[i].elevation() > positions[i+1].elevation()){
+            hc = positions[i+1].elevation() - positions[i].elevation();
+        }
+    }
+    return hc;
 }
 
 Track::Track(std::string source, bool isFileName, metres granularity)
