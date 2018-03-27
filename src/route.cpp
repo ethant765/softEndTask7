@@ -51,7 +51,8 @@ metres Route::netLength() const
 
         //loop through all of the values in positions. Add the elevation values to the total height gain.
         for(auto pos : positions){
-            if(pos.elevation() >= -(Earth::meanRadius))
+            //lowest elevation will be the negative of the earths radius.
+            if(pos.elevation() >= (-1*(Earth::meanRadius)))
             {
             totalHeight += pos.elevation();
             }
