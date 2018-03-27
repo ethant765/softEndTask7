@@ -1,8 +1,11 @@
 #include <iostream>
+#include <fstream>
 
 #include "logs.h"
 #include "route.h"
 #include "track.h"
+#include "gridworld_route.h"
+#include "gridworld_track.h"
 
 using namespace GPS;
 
@@ -15,7 +18,7 @@ void testRoute(std::string fileName)
 
     const bool isFileName = true;
 
-    Route route = Route(filePath,isFileName);
+    Route route = Route(filePath, isFileName);
 
     cout << "Route name: " << route.name() << endl;
     // cout << "Number of positions in route: " << route.numPositions() << endl;
