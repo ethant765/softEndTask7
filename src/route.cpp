@@ -163,7 +163,7 @@ degrees Route::minGradient() const
     const bool implemented = false;
     assert(implemented);
 
-    degrees smallestGrad = positions[1].elevation() - positions[0].elevations();
+    degrees smallestGrad = positions[1].elevation() - positions[0].elevation();
 
     for(size_t x=2; x<positions.size(); x++)
     {
