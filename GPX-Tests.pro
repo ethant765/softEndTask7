@@ -21,7 +21,7 @@ SOURCES += \
     src/route.cpp \
     src/track.cpp \
     src/xmlparser.cpp \
-    src/gpx-tests/netHeightGain.cpp
+    src/gpx-tests/netHeightGain_n0689061.cpp
 
 INCLUDEPATH += headers/
 
