@@ -19,6 +19,15 @@ const bool isFileName = true;
 	
 	Tests/Considerations & Explanations:
 	
+        IMPLEMENTATION CONSIDERATIONS:
+                Data out of order:
+                When passed data is out of order, namely, when time isn't necessarily increasing with each point in a track, it would be reasonable to throw an error; but
+                given that the implementation of totalTime could simply find the difference between the first and last points in time, it is simple to implement a function
+                that would handle this data correctly.
+
+
+
+
 	CORRECT: 
 	
 		Regular input:
@@ -28,7 +37,12 @@ const bool isFileName = true;
 		Ensures the Total Time function isn't assuming the start time is zero
 		
 		
-		
+                Regular input, two points at the same start time:
+                Ensures that the code can handle two identical start times
+
+                Only two points at the same time
+                Similarly ensures the code can handle the start times being the same as end times
+
 		Correct input, data not ordered correctly by time:
 		Though there are arguments for data that isn't ordered being invalid, providing functionality for time going back and forth will help in the case of 
 		manually-typed data being slightly incorrect.
@@ -39,8 +53,11 @@ const bool isFileName = true;
 			Smallest time out of place (Not first nor last)
 			Smallest time immediately before largest time
 			Smallest time immediately after largest time
-			
-		
+                        Two start points at same time, not at beginning of code
+                        Two end points at same time, not at end of code
+                        Two start and end points, flipped
+
+
 		
 		Correct input, maximum values for time:
 		Maximum time unit given that time is ULL = 18446744073709551615		
@@ -63,13 +80,13 @@ const bool isFileName = true;
 		
 		
 		
-	CONSIDERATIONS & REASONS FOR NOT IMPLEMENTING:
+        OTHER UNIMPLEMENTED TESTS:
 		
 
 		Malformatted XML:
 		This error would instead be handled by the parser.
 		
-		Empty track containing no points:
+                Empty track containing no points:
 		If there are no points for the track, the parser will throw an error.
 		
 		
@@ -109,15 +126,15 @@ BOOST_AUTO_TEST_CASE( totaltime_large_quantity)
 }
 
 
-// Tests for earliest time out of order
-BOOST_AUTO_TEST_CASE( totaltime_backwards)
+// Test for disordered first value
+BOOST_AUTO_TEST_CASE( totaltime_earliest_disordered)
 {
    Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeEarliestOffset.gpx", isFileName);
    BOOST_CHECK_EQUAL( route.name(), 40 );	
 }
 
-// Tests for latest time out of order
-BOOST_AUTO_TEST_CASE( totaltime_backwards)
+// Test for disordered last value
+BOOST_AUTO_TEST_CASE( totaltime_latest_disordered)
 {
    Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeLatestOffset.gpx", isFileName);
    BOOST_CHECK_EQUAL( route.name(), 40 );	
@@ -126,7 +143,7 @@ BOOST_AUTO_TEST_CASE( totaltime_backwards)
 
 
 
-// Tests for time going backwards
+// Test for time going backwards
 BOOST_AUTO_TEST_CASE( totaltime_backwards)
 {
    Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeBackwards.gpx", isFileName);
@@ -135,28 +152,71 @@ BOOST_AUTO_TEST_CASE( totaltime_backwards)
 
 
 
-// Tests for earliest time out of order, before last time
-BOOST_AUTO_TEST_CASE( totaltime_backwards)
+// Test for disordered first & last values, first before last
+BOOST_AUTO_TEST_CASE( totaltime_disordered_fbl)
 {
    Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeFirstBeforeLast.gpx", isFileName);
    BOOST_CHECK_EQUAL( route.name(), 60 );	
 }
 
 
-// Tests for earliest time out of order, placed after last time
-BOOST_AUTO_TEST_CASE( totaltime_backwards)
+// Test for disordered first & last values, last before first
+BOOST_AUTO_TEST_CASE( totaltime_disordered_lbf)
 {
    Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeLastBeforeFirst.gpx", isFileName);
    BOOST_CHECK_EQUAL( route.name(), 60 );	
 }
 
 
-// Tests for largest integer
-BOOST_AUTO_TEST_CASE( totaltime_backwards)
+// Test for largest integer
+BOOST_AUTO_TEST_CASE( totaltime_maxull)
 {
    Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeLargestPossible.gpx", isFileName);
    BOOST_CHECK_EQUAL( route.name(), 18446744073709551615 );	
 }
+
+// Tests for duplicate values
+BOOST_AUTO_TEST_CASE( totaltime_start_duplicate)
+{
+   Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeSameValuesStart.gpx", isFileName);
+   BOOST_CHECK_EQUAL( route.name(), 40 );
+}
+BOOST_AUTO_TEST_CASE( totaltime_end_duplicate)
+{
+   Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeSameValuesEnd.gpx", isFileName);
+   BOOST_CHECK_EQUAL( route.name(), 40 );
+}
+BOOST_AUTO_TEST_CASE( totaltime_startend_duplicate)
+{
+   Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeSameValuesStartEnd.gpx", isFileName);
+   BOOST_CHECK_EQUAL( route.name(), 40 );
+}
+BOOST_AUTO_TEST_CASE( totaltime_startend_duplicate_disordered)
+{
+   Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeSameValuesStartEndDisordered.gpx", isFileName);
+   BOOST_CHECK_EQUAL( route.name(), 40 );
+}
+BOOST_AUTO_TEST_CASE( totaltime_startend_duplicate_disordered_lbf)
+{
+   Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeSameValuesStartEndDisorderedEndBeforeStart.gpx", isFileName);
+   BOOST_CHECK_EQUAL( route.name(), 40 );
+}
+
+
+
+
+// Tests for same start & end
+BOOST_AUTO_TEST_CASE( totaltime_same_startend)
+{
+   Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeSameStartEnd.gpx", isFileName);
+   BOOST_CHECK_EQUAL( route.name(), 0 );
+}
+BOOST_AUTO_TEST_CASE( totaltime_same_startend_nonzero)
+{
+   Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeSameStartEndNonzero.gpx", isFileName);
+   BOOST_CHECK_EQUAL( route.name(), 0 );
+}
+
 
 
 
