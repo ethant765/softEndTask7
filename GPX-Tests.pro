@@ -30,6 +30,8 @@ SOURCES += \
     src/gpx-tests/n0650950_numPos_Tests.cpp \
     src/gpx-tests/N0680192.cpp \
     src/gpx-tests/n0671966_mingrad.cpp
+    src/gpx-tests/N0643498_Max_Latitude
+    
 
 
 INCLUDEPATH += headers/
