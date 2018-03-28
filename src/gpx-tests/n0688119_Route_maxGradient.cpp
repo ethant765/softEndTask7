@@ -1,6 +1,6 @@
 //Type:     Source file (Testing)
 //User:     n0688119 (Elliot Harding)
-//Puropse:  Testing the function route::maxGradient()
+//Purpose:  Testing the function route::maxGradient()
 
 /*
                 **Documentation**
