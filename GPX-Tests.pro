@@ -15,21 +15,14 @@ HEADERS += \
 
 SOURCES += \
     src/earth.cpp \
-    src/gpx-tests.cpp \
     src/geometry.cpp \
     src/logs.cpp \
     src/position.cpp \
     src/route.cpp \
     src/track.cpp \
     src/xmlparser.cpp \
-    src/gpx-tests/name.cpp \
-    src/gpx-tests/travellingTime-N0696066.cpp \
-    src/gpx-tests/maxlattestsn0690641.cpp \
-    src/gpx-tests/totalLength-n0683389.cpp \
-    src/gpx-tests/maxLongTests_N0669298.cpp \
-    src/gpx-tests/n0650950_numPos_Tests.cpp \
-    src/gpx-tests/N0680192.cpp \
-    src/gpx-tests/n0671966_mingrad.cpp
+    src/gpx-tests/N0682255_MinLAtitude.cpp
+
 
 
 INCLUDEPATH += headers/
