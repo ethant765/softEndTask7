@@ -141,27 +141,22 @@ degrees Route::maxLongitude() const
 
 metres Route::minElevation() const
 {
-    const bool implemented = false;
-    assert(implemented);
+    degrees minElev = positions[0].elevation();
+    for(auto pos : positions){
+        if(pos.elevation() < minElev)
+            minElev = pos.elevation();
+    }
+    return minElev;
 }
 
 metres Route::maxElevation() const // N0669298
 {
-    const bool implemented = true;
-    assert(implemented);
-
-
-    int MaxIndex = 0;
-    for (int i = 0; i < positions.size() ; i++)
-    {
-
-        if (positions[i].elevation() > positions[MaxIndex].elevation()) {
-            MaxIndex = i;
-        }
-
+    degrees maxElev = positions[0].elevation();
+    for(auto pos : positions){
+        if(pos.elevation() > maxElev)
+            maxElev = pos.elevation();
     }
-
-    return positions[MaxIndex].elevation();
+    return maxElev;
 }
 
 degrees Route::maxGradient() const
