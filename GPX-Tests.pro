@@ -33,9 +33,14 @@ SOURCES += \
     src/gpx-tests/N0643498_Max_Latitude.cpp \
     src/gpx-tests/totalHeightGain-N0720387.cpp \ 
     src/gpx-tests/max_elevation_n0689529.cpp \
+<<<<<<< HEAD
     src/gpx-tests/n0688119_Route_maxGradient.cpp
     src/gpx-tests/minElevation_N0699610.cpp 
 
+=======
+    src/gpx-tests/minElevation_N0699610.cpp \
+    src/gpx-tests/TestMinElev-N0719715.cpp
+>>>>>>> 7d9d178edc6668e20f78605bbda13b156094a1ab
 
 INCLUDEPATH += headers/
 
