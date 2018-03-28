@@ -32,7 +32,7 @@ namespace GPS
       // Defaults to Pontianak, the only equatorial city.
       GridWorld(const Position & posM = Earth::Pontianak, // Position of the central point 'M'.
                 metres horizontalGridUnit = 10000, // Horizontal distance between grid points.
-                metres verticalGridUnit = -ls10); // Vertical distance between grid levels.
+                metres verticalGridUnit = 0); // Vertical distance between grid levels.
 
       const Position& operator[](Point) const;
 
