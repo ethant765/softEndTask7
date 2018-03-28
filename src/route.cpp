@@ -151,6 +151,10 @@ metres Route::minElevation() const
 
 metres Route::maxElevation() const // N0669298
 {
+    if (positions.size() == 0)
+    {
+        throw std::invalid_argument("No positions in provided route");
+    }    
     degrees maxElev = positions[0].elevation();
     for(auto pos : positions){
         if(pos.elevation() > maxElev)
