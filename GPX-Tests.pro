@@ -25,7 +25,6 @@ SOURCES += \
     src/gpx-tests/name.cpp \
     src/gpx-tests/travellingTime-N0696066.cpp \
     src/gpx-tests/maxlattestsn0690641.cpp \
-    src/gpx-tests/totalLength-n0683389.cpp \
     src/gpx-tests/maxLongTests_N0669298.cpp \
     src/gpx-tests/n0650950_numPos_Tests.cpp \
     src/gpx-tests/N0680192.cpp \
@@ -44,7 +43,6 @@ SOURCES += \
     src/gpx-tests/numPositionsTests_n0719388.cpp \
     src/gpx-tests/maxElevation-n0686300.cpp \
     src/gpx-tests/totalTime-N0702007.cpp
-
 
 INCLUDEPATH += headers/
 
