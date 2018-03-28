@@ -2,7 +2,7 @@
 
 #include "logs.h"
 #include "route.h"
-#include "track.h"
+#include "track.h"	
 
 using namespace GPS;
 
@@ -13,6 +13,10 @@ const bool isFileName = true;
 /*
 	Function: Total Time
 	
+	Returns the difference in seconds between the earliest and latest points.
+	gridworld_track uses a timeUnitDuration variable, but I don't think it applies to regular Track calculations, so we'll do these functions in terms of GPX time units.
+	
+	
 	Tests/Considerations & Explanations:
 	
 	CORRECT: 
@@ -20,19 +24,26 @@ const bool isFileName = true;
 		Regular input:
 		Testing correct input ensures the function works as expected.
 		
+		Regular input, non-zero starting value:
+		Ensures the Total Time function isn't assuming the start time is zero
 		
-		Correct input, data not ordered correctly by time (1 value incorrectly placed):
-		Though I'm not sure if this should throw an error, the data is still technically valid, and testing & fixing for this will result in more robust code.
+		
+		
+		Correct input, data not ordered correctly by time:
+		Though there are arguments for data that isn't ordered being invalid, providing functionality for time going back and forth will help in the case of 
+		manually-typed data being slightly incorrect.
+		
 		The multiple cases for this test I'll cover are:
 			Time going backwards
-			Largest time out of place (Not first nor last)
+			Latest time out of place (Not first nor last)
 			Smallest time out of place (Not first nor last)
 			Smallest time immediately before largest time
 			Smallest time immediately after largest time
 			
 		
 		
-		Correct input, maximum values for inputs:
+		Correct input, maximum values for time:
+		Maximum time unit given that time is ULL = 18446744073709551615		
 		This ensures that the function won't fail given large input values (which could cause errors if the function doesn't allocate a large enough variable)
 		
 		Correct input, minimum values for inputs (No time taken):
@@ -67,7 +78,7 @@ const bool isFileName = true;
 		integer value with the first bit flipped, exactly the same as a very large positive value.
 			
 		Wrong type for time:
-		Incorrect types would throw an error at 'Track::StringToTime' and would not reach this function.
+		Incorrect types would throw an error at 'StringToTime' and would not reach this function.
 		
 		Incorrect & Correct input, multiple track segments
 		The transformation from XML to Route or Track combines all track segments into a single set of data.
@@ -78,14 +89,74 @@ const bool isFileName = true;
 */
 
 
-
-// Test for correct values
-BOOST_AUTO_TEST_CASE( totaltime_stationary_points )
+// Tests for correct, ordered values
+BOOST_AUTO_TEST_CASE( totaltime_correct_set1)
+{
+   Route route = Route(LogFiles::GPXTracksDir + "TrackDuration10.gpx", isFileName);
+   BOOST_CHECK_EQUAL( route.name(), 40 );	
+}
+BOOST_AUTO_TEST_CASE( totaltime_correct_set1)
 {
    Route route = Route(LogFiles::GPXTracksDir + "TrackDuration1.gpx", isFileName);
-   BOOST_CHECK_EQUAL( route.name(), 1 );	
+   BOOST_CHECK_EQUAL( route.name(), 3 );	
 }
 
+// This test also covers the 'large quantity of points' point to a reasonable standard
+BOOST_AUTO_TEST_CASE( totaltime_large_quantity)
+{
+   Route route = Route(LogFiles::GPXTracksDir + "TrackMultiplePoints.gpx", isFileName);
+   BOOST_CHECK_EQUAL( route.name(), 21000 );	
+}
+
+
+// Tests for earliest time out of order
+BOOST_AUTO_TEST_CASE( totaltime_backwards)
+{
+   Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeEarliestOffset.gpx", isFileName);
+   BOOST_CHECK_EQUAL( route.name(), 40 );	
+}
+
+// Tests for latest time out of order
+BOOST_AUTO_TEST_CASE( totaltime_backwards)
+{
+   Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeLatestOffset.gpx", isFileName);
+   BOOST_CHECK_EQUAL( route.name(), 40 );	
+}
+
+
+
+
+// Tests for time going backwards
+BOOST_AUTO_TEST_CASE( totaltime_backwards)
+{
+   Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeBackwards.gpx", isFileName);
+   BOOST_CHECK_EQUAL( route.name(), 60 );	
+}
+
+
+
+// Tests for earliest time out of order, before last time
+BOOST_AUTO_TEST_CASE( totaltime_backwards)
+{
+   Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeFirstBeforeLast.gpx", isFileName);
+   BOOST_CHECK_EQUAL( route.name(), 60 );	
+}
+
+
+// Tests for earliest time out of order, placed after last time
+BOOST_AUTO_TEST_CASE( totaltime_backwards)
+{
+   Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeLastBeforeFirst.gpx", isFileName);
+   BOOST_CHECK_EQUAL( route.name(), 60 );	
+}
+
+
+// Tests for largest integer
+BOOST_AUTO_TEST_CASE( totaltime_backwards)
+{
+   Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeLargestPossible.gpx", isFileName);
+   BOOST_CHECK_EQUAL( route.name(), 18446744073709551615 );	
+}
 
 
 
