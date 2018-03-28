@@ -15,11 +15,11 @@ BOOST_AUTO_TEST_SUITE(MinimumLatitudeTests)
 BOOST_AUTO_TEST_CASE(CheckSingleValue)
 {
     const bool isFileName = true;
-    const std::string filePath = LogFiles::GPXRoutesDir + "singleValueN0682255.gpx";
+    const std::string filePath = LogFiles::GPXRoutesDir + "singleValueN0682255.XML";
 
     Route route = Route(filePath, isFileName);
 
-    BOOST_CHECK_CLOSE(route.minLatitude() , 0);
+    BOOST_CHECK_EQUAL(route.minLatitude() , 0);
 
 }
 
