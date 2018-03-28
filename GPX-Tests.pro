@@ -21,7 +21,6 @@ SOURCES += \
     src/route.cpp \
     src/track.cpp \
     src/xmlparser.cpp \
-
     src/gpx-tests/name.cpp \
     src/gpx-tests/travellingTime-N0696066.cpp \
     src/gpx-tests/maxlattestsn0690641.cpp \
