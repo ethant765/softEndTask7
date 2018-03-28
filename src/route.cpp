@@ -26,37 +26,20 @@ unsigned int Route::numPositions() const
 
 metres Route::totalLength() const
 {
-   metres totalLength;
-   Position * lastPosition = nullptr;
-
-   for(auto pos : positions)
-   {
-        if(lastPosition)
-        {
-            totalLength += distanceBetween(*lastPosition, pos);
-        }
-
-        lastPosition = &pos;
-   }
-    return routeLength;
+    const bool implemented = false;
+    assert(implemented);
 }
 
 metres Route::netLength() const
 {
-    std::vector<Position>::const_iterator first, last;
-    first = positions.begin();
-    last =  positions.end() - 1;
-    return distanceBetween(*first, *last);
+    const bool implemented = false;
+    assert(implemented);
 }
 
 metres Route::totalHeightGain() const
 {
-    metres totalHeight;
-
-    for(auto pos : positions){
-        totalHeight += pos.elevation();
-    }
-     return totalHeight;
+    const bool implemented = false;
+    assert(implemented);
 }
 
 metres Route::netHeightGain() const
@@ -74,42 +57,26 @@ metres Route::netHeightGain() const
 
 degrees Route::minLatitude() const
 {
-    degrees minLat = positions[0].latitude();
-    for(auto pos : positions){
-        if(pos.latitude() < minLat)
-            minLat = pos.latitude();
-    }
-    return minLat;
+    const bool implemented = false;
+    assert(implemented);
 }
 
 degrees Route::maxLatitude() const
 {
-    degrees maxLat = positions[0].latitude();
-    for(auto pos : positions){
-        if(pos.latitude() > maxLat)
-            maxLat = pos.latitude();
-    }
-    return maxLat;
+    const bool implemented = false;
+    assert(implemented);
 }
 
 degrees Route::minLongitude() const
 {
-    degrees minLong = positions[0].longitude();
-    for(auto pos : positions){
-        if(pos.longitude() < minLong)
-            minLong = pos.longitude();
-    }
-    return minLong;
+    const bool implemented = false;
+    assert(implemented);
 }
 
 degrees Route::maxLongitude() const
 {
-    degrees maxLong = positions[0].longitude();
-    for(auto pos : positions){
-        if(pos.longitude() > maxLong)
-            maxLong = pos.longitude();
-    }
-    return maxLong;
+    const bool implemented = false;
+    assert(implemented);
 }
 
 metres Route::minElevation() const
@@ -119,7 +86,6 @@ metres Route::minElevation() const
         if(pos.elevation() < minElev)
             minElev = pos.elevation();
     }
-    std::cout << "Min elevation: " << minElev << std::endl;
     return minElev;
 }
 
@@ -130,7 +96,6 @@ metres Route::maxElevation() const
         if(pos.elevation() > maxElev)
             maxElev = pos.elevation();
     }
-    std::cout << "Max elevation: " << maxElev << std::endl;
     return maxElev;
 }
 
