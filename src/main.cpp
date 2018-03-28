@@ -1,35 +1,28 @@
-#include <iostream>
-#include <fstream>
 
-#include "logs.h"
-#include "route.h"
-#include "track.h"
 #include "gridworld_route.h"
-#include "gridworld_track.h"
-
+#include "position.h"
+#include <fstream>
+#include <iostream>
 using namespace GPS;
 
-using std::cout;
-using std::endl;
 
-void testRoute(std::string fileName)
-{
-    const std::string filePath = LogFiles::GPXRoutesDir + fileName + ".gpx";
+/* A B C D E
+ * F G H I J
+ * K L M N O
+ * P Q R S T
+ * U V W X Y
+ */
 
-    const bool isFileName = true;
 
-    Route route = Route(filePath, isFileName);
+//variables have been altered to generate alternate files.
 
-    cout << "Route name: " << route.name() << endl;
-    // cout << "Number of positions in route: " << route.numPositions() << endl;
-    cout << "Total route length: " << route.totalLength() << endl;
-    // cout << "Net route length: " << route.netLength() << endl;
-    cout << endl;
-}
+int main(){
 
-int main()
-{
-    testRoute("NorthYorkMoors");
-    testRoute("ABCD");
+    std :: ofstream thefile;
+    thefile.open("posOutOfBounds.XML");
+    //1110000
+    thefile << GridWorldRoute("HRMHW",GridWorld(Position(91,0),1110607.76,0.0)).toGPX();
+    thefile.close();
+    return 0;
 }
 
