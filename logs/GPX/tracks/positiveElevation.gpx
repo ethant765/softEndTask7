@@ -1,112 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<gpx xmlns="http://www.topografix.com/GPX/1/1" xmlns:gpsies="http://www.gpsies.com/GPX/1/0" creator="GPSies http://www.gpsies.com - positivelevation" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.gpsies.com/GPX/1/0 http://www.gpsies.com/gpsies.xsd">
-  <metadata>
-    <name>positivelevation</name>
-    <author>
-      <name>liana3</name>
-      <link href="http://www.gpsies.com/mapUser.do?username=liana3">
-        <text>liana3 on GPSies.com</text>
-        <type>GPSiesUserOnWeb</type>
-      </link>
-    </author>
-    <link href="http://www.gpsies.com/map.do?fileId=pazptzrxxvqzeuln">
-      <text>positivelevation on GPSies.com</text>
-      <type>trackOnWeb</type>
-    </link>
-    <time>2018-03-28T12:25:45Z</time>
-    <extensions>
-      <gpsies:property>one-way trip</gpsies:property>
-      <gpsies:trackLengthMeter>244945.27448372293</gpsies:trackLengthMeter>
-      <gpsies:totalAscentMeter>5799.0</gpsies:totalAscentMeter>
-      <gpsies:totalDescentMeter>5866.0</gpsies:totalDescentMeter>
-      <gpsies:minHeightMeter>49.0</gpsies:minHeightMeter>
-      <gpsies:maxHeightMeter>375.0</gpsies:maxHeightMeter>
-    </extensions>
-  </metadata>
-  <trk>
-    <name>positivelevation on GPSies.com</name>
-    <link href="http://www.gpsies.com/map.do?fileId=pazptzrxxvqzeuln">
-      <type>trackOnWeb</type>
-    </link>
-    <link href="http://www.gpsies.com/charts/pa/map/pazptzrxxvqzeuln_map.png">
-      <type>elevationChartUrlMap</type>
-    </link>
-    <link href="http://www.gpsies.com/charts/pa/mapThumb/pazptzrxxvqzeuln_mapThumb.png">
-      <type>elevationChartUrlMapThumb</type>
-    </link>
-    <link href="http://www.gpsies.com/charts/pa/tab/pazptzrxxvqzeuln_tab.png">
-      <type>elevationChartUrlTab</type>
-    </link>
-    <trkseg>
-      <trkpt lat="51.91716750" lon="-3.74633789">
-        <ele>375.00000</ele>
-        <time>2010-01-01T00:00:00Z</time>
-      </trkpt>
-      <trkpt lat="51.92394340" lon="-3.52661132">
-        <ele>274.00000</ele>
-        <time>2010-01-01T01:30:31Z</time>
-      </trkpt>
-      <trkpt lat="52.00517390" lon="-3.28491210">
-        <ele>165.00000</ele>
-        <time>2010-01-01T03:23:42Z</time>
-      </trkpt>
-      <trkpt lat="52.10650510" lon="-3.29589843">
-        <ele>326.00000</ele>
-        <time>2010-01-01T04:31:27Z</time>
-      </trkpt>
-      <trkpt lat="52.22779940" lon="-3.24096679">
-        <ele>309.00000</ele>
-        <time>2010-01-01T05:55:26Z</time>
-      </trkpt>
-      <trkpt lat="52.34205160" lon="-3.22998046">
-        <ele>354.00000</ele>
-        <time>2010-01-01T07:11:48Z</time>
-      </trkpt>
-      <trkpt lat="52.42922220" lon="-3.10913085">
-        <ele>288.00000</ele>
-        <time>2010-01-01T08:27:59Z</time>
-      </trkpt>
-      <trkpt lat="52.56299500" lon="-3.06518554">
-        <ele>185.00000</ele>
-        <time>2010-01-01T09:59:00Z</time>
-      </trkpt>
-      <trkpt lat="52.67638200" lon="-2.84545898">
-        <ele>87.000000</ele>
-        <time>2010-01-01T11:55:48Z</time>
-      </trkpt>
-      <trkpt lat="52.79611900" lon="-2.84545898">
-        <ele>87.000000</ele>
-        <time>2010-01-01T13:15:41Z</time>
-      </trkpt>
-      <trkpt lat="52.92877450" lon="-2.64770507">
-        <ele>91.000000</ele>
-        <time>2010-01-01T15:14:45Z</time>
-      </trkpt>
-      <trkpt lat="53.01478320" lon="-2.62573242">
-        <ele>74.000000</ele>
-        <time>2010-01-01T16:12:49Z</time>
-      </trkpt>
-      <trkpt lat="53.10721660" lon="-2.46093750">
-        <ele>49.000000</ele>
-        <time>2010-01-01T17:43:12Z</time>
-      </trkpt>
-      <trkpt lat="53.24549520" lon="-2.37304687">
-        <ele>50.000000</ele>
-        <time>2010-01-01T19:21:55Z</time>
-      </trkpt>
-      <trkpt lat="53.37677490" lon="-2.34008789">
-        <ele>50.000000</ele>
-        <time>2010-01-01T20:50:29Z</time>
-      </trkpt>
-      <trkpt lat="53.52071670" lon="-2.13134765">
-        <ele>132.00000</ele>
-        <time>2010-01-01T22:57:22Z</time>
-      </trkpt>
-      <trkpt lat="53.65766100" lon="-2.16430664">
-        <ele>308.00000</ele>
-        <time>2010-01-02T00:29:40Z</time>
-      </trkpt>
-    </trkseg>
-  </trk>
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<gpx version="1.1" creator="NTU" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+    <trk>
+        <name>positivelevation</name>
+        <trkseg>
+            <name>N-E</name>
+            <trkpt lat="53.05442180" lon="-3.38928222">
+                <ele>5.00000</ele>
+                <time>2010-01-01T00:00:00Z</time>
+            </trkpt>
+            <trkpt lat="52.98833720" lon="-3.18054199">
+                <ele>171.00000</ele>
+                <time>2010-01-01T01:34:39Z</time>
+            </trkpt>
+            <trkpt lat="52.96849210" lon="-2.93884277">
+                <ele>207.000000</ele>
+                <time>2010-01-01T03:12:39Z</time>
+            </trkpt>
+        </trkseg>
+    </trk>
 </gpx>
-
