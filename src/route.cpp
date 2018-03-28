@@ -36,8 +36,22 @@ metres Route::netLength() const
 
 metres Route::totalHeightGain() const
 {
-    const bool implemented = false;
-    assert(implemented);
+    metres heightGain = 0;
+    if (positions.size() == 0)
+    {
+        throw std::invalid_argument("No positions in provided route");
+    }
+    if (positions.size() > 1)
+    {
+        for (unsigned int i = 1; i<positions.size(); ++i)
+        {
+            if (positions[i].elevation()-positions[i-1].elevation()>0)
+            {
+                heightGain += positions[i].elevation()-positions[i-1].elevation();
+            }
+        }
+    }
+    return heightGain;
 }
 
 metres Route::netHeightGain() const
