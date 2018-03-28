@@ -63,26 +63,26 @@ metres Route::netHeightGain() const
 
 degrees Route::minLatitude() const
 {
-    const bool implemented = true;
-    assert(implemented);
-//    degrees minLat = positions[0].latitude();
-//    for(unsigned int i = 1; i < positions.length(); i++)
-//    {
-//        if(positions[i].latitude() < minLat)
-//        {
-//            minLat = positions[i].latitude();
-//        }
-//    }
-//    return minLat;
-    degrees minLat = positions[0].latitude();
-    for(unsigned int i = 1; i < positions.size(); i++)
-    {
-        if(positions[i].latitude() < minLat)
+    unsigned int min = 0;
+        for(unsigned int i = 1; i < positions.length(); i++)
         {
-            minLat = positions[i].latitude();
+            if(positions[i].latitude() < positions[min].latitude())
+                min = i;
+            else if(positions[min].latitude() < -90 || positions[min].latitude() > 90)
+                throw("Out of range");
         }
-    }
-    return minLat;
+        return positions[min].latitude;
+        /*
+        degrees minLat = positions[0].latitude();
+        for(unsigned int i = 1; i < positions.size(); i++)
+        {
+            if(positions[i].latitude() < minLat)
+            {
+                minLat = positions[i].latitude();
+            }
+        }
+        return minLat;
+        */
 }
 
 degrees Route::maxLatitude() const
