@@ -21,7 +21,6 @@ SOURCES += \
     src/earth.cpp \
     src/geometry.cpp \
     src/logs.cpp \
-    src/main.cpp \
     src/position.cpp \
     src/route.cpp \
     src/track.cpp \
@@ -29,7 +28,8 @@ SOURCES += \
     src/gridworld_track.cpp \
     src/gridworld_route.cpp \
     src/gridworld.cpp \
-    src/xmlgenerator.cpp
+    src/xmlgenerator.cpp \
+    src/old_main.cpp
 
 INCLUDEPATH += headers/
 
