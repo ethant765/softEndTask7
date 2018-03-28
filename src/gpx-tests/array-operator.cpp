@@ -75,7 +75,7 @@ BOOST_AUTO_TEST_CASE( correct_index_route ) {
  * individually.
  **/
 BOOST_AUTO_TEST_CASE( correct_index_track ) {
-    Track track = Track(LogFiles::GPXTracksDir + "M3I6O1T.gpx", true);
+    Track track = Track(LogFiles::GPXTracksDir + "M3I6O.gpx", true);
 
     Position pos0 = Position(0, 109.322, 0);
     BOOST_CHECK_EQUAL(track[0].latitude(), pos0.latitude());
@@ -113,7 +113,7 @@ BOOST_AUTO_TEST_CASE( out_of_range_upper_route ) {
   * Test using a Track.
   **/
 BOOST_AUTO_TEST_CASE( out_of_range_upper_track ) {
-    Track track = Track(LogFiles::GPXTracksDir + "M3I6O1T.gpx", true);
+    Track track = Track(LogFiles::GPXTracksDir + "M3I6O.gpx", true);
 
     BOOST_CHECK_THROW( track[5], std::out_of_range );
     BOOST_CHECK_THROW( track[10], std::out_of_range );
@@ -139,7 +139,7 @@ BOOST_AUTO_TEST_CASE( out_of_range_negative_route ) {
   * Test using a Track.
   **/
 BOOST_AUTO_TEST_CASE( out_of_range_negative_track ) {
-    Track track = Track(LogFiles::GPXTracksDir + "M3I6O1T.gpx", true);
+    Track track = Track(LogFiles::GPXTracksDir + "M3I6O.gpx", true);
 
     BOOST_CHECK_THROW( track[-5], std::out_of_range );
     BOOST_CHECK_THROW( track[-10], std::out_of_range );
@@ -164,7 +164,7 @@ BOOST_AUTO_TEST_CASE( out_of_range_endpoints_route ) {
   * Test using a Track.
   **/
 BOOST_AUTO_TEST_CASE( out_of_range_endpoints_track ) {
-    Track track = Track(LogFiles::GPXTracksDir + "M3I6O1T.gpx", true);
+    Track track = Track(LogFiles::GPXTracksDir + "M3I6O.gpx", true);
 
     BOOST_CHECK_NO_THROW( track[0] );
     BOOST_CHECK_NO_THROW( track[2] );
@@ -190,7 +190,7 @@ BOOST_AUTO_TEST_CASE( out_of_range_outer_bounds_route )
   **/
 BOOST_AUTO_TEST_CASE( out_of_range_outer_bounds_track )
 {
-    Track track = Track(LogFiles::GPXTracksDir + "M3I6O1T.gpx", true);
+    Track track = Track(LogFiles::GPXTracksDir + "M3I6O.gpx", true);
 
     BOOST_CHECK_THROW( track[-1], std::out_of_range );
     BOOST_CHECK_THROW( track[3], std::out_of_range );
