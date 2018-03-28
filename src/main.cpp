@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <fstream>
 
@@ -24,6 +25,7 @@ void testRoute(std::string fileName)
 >>>>>>> netHeightGain
 
     cout << "Route name: " << route.name() << endl;
+<<<<<<< HEAD
     cout << "Net Height Gain: " << route.netHeightGain() << endl;
     cout << "Min elevation: " << route.minElevation() << endl;
     cout << "Max elevation: " << route.maxElevation() << endl;
@@ -32,6 +34,11 @@ void testRoute(std::string fileName)
 //    const std::string filePathTrack = LogFiles::GPXTracksDir + fileName + ".gpx";
 //    cout << "Route name: " << track.name() << endl;
 //    cout << "Net Height Gain: " << track.netHeightGain() << endl;
+=======
+    //cout << "Number of positions in route: " << route.netHeightGain() << endl;
+    cout << "Total route length: " << route.totalLength() << endl;
+    cout << "total Height gain: " << route.totalHeightGain() << endl;
+>>>>>>> bbff481ad0a4bdfa8b0f5c5b70a6dfe83307e240
     cout << endl;
 }
 
@@ -43,4 +50,6 @@ int main()
     testRoute("ZigZag");
     //testRoute("positiveElevation");
 }
+
+
 

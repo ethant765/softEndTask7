@@ -7,9 +7,9 @@
 using namespace GPS;
 
 /* 
-
+Documentation:
 For my test file I have chosen to do the Minimum Gradient function.
-This function determines which gradient between each position is the lowesest, to check that this function works I have created 10 different tests below checking the functions against certain routes I have created. To work out the gradient between two positions you first need to work out the distance between these two points this can be done using Pythagarus. After the angle is worked out using Trig, the chosen angle will depends on if the route is downhill or uphill. My test will check that the function answers are correct and will try and catch out errors.
+This function determines which gradient between each position is the lowest, to check that this function works I have created 10 different tests below checking the functions against certain routes I have created. To work out the gradient between two positions you first need to work out the distance between these two points this can be done using Pythagoras. After the angle is worked out using Trigonometry, the chosen angle will depends on if the route is downhill or uphill. My test will check that the function answers are correct and will try and catch out errors. Throughout the tests majority of them are check_close this is because there could be a rounding difference, I have each case to be 1 +/- of the answer I think this is an appropriate amount.
 
 */
 
@@ -30,7 +30,8 @@ BOOST_AUTO_TEST_CASE( routeABCD )
 BOOST_AUTO_TEST_CASE( ConstDownGrad )
 {
    Route route = Route(LogFiles::GPXRoutesDir + "ConstDownGrad.gpx", isFileName);
-   BOOST_CHECK_EQUAL( route.minGradient(), -84.87 );
+   BOOST_CHECK_CLOSE( route.minGradient(), -84.87, 1 );
+
 }
 
 //TEST 3: Const Upwards Gradient
@@ -38,7 +39,8 @@ BOOST_AUTO_TEST_CASE( ConstDownGrad )
 BOOST_AUTO_TEST_CASE( ConstUpGrad )
 {
    Route route = Route(LogFiles::GPXRoutesDir + "ConstUpGrad.gpx", isFileName);
-   BOOST_CHECK_EQUAL( route.minGradient(), 84.87 );
+   BOOST_CHECK_CLOSE( route.minGradient(), 84.87, 1 );
+
 }
 
 //TEST 4: DiagalnalIncline
@@ -46,7 +48,8 @@ BOOST_AUTO_TEST_CASE( ConstUpGrad )
 BOOST_AUTO_TEST_CASE( DiagonalIncline )
 {
    Route route = Route(LogFiles::GPXRoutesDir + "DiagonalIncline.gpx", isFileName);
-   BOOST_CHECK_EQUAL( route.minGradient(), 82.75 );
+   BOOST_CHECK_CLOSE( route.minGradient(), 82.75, 1 );
+
 }
 
 //TEST 5: DiagalnalDecline
@@ -54,7 +57,8 @@ BOOST_AUTO_TEST_CASE( DiagonalIncline )
 BOOST_AUTO_TEST_CASE( DiagonalDecline )
 {
    Route route = Route(LogFiles::GPXRoutesDir + "DiagonalDecline.gpx", isFileName);
-   BOOST_CHECK_EQUAL( route.minGradient(), -82.75 );
+   BOOST_CHECK_CLOSE( route.minGradient(), -82.75, 1 );
+
 }
 
 
@@ -72,7 +76,8 @@ BOOST_AUTO_TEST_CASE( ElevationChangeOnly )
 BOOST_AUTO_TEST_CASE( UnconstDownGrad )
 {
    Route route = Route(LogFiles::GPXRoutesDir + "UnconstantDownGrad.gpx", isFileName);
-   BOOST_CHECK_EQUAL( route.minGradient(), -77.34 );
+   BOOST_CHECK_CLOSE( route.minGradient(), -77.34, 1 );
+
 }
 
 
@@ -81,7 +86,8 @@ BOOST_AUTO_TEST_CASE( UnconstDownGrad )
 BOOST_AUTO_TEST_CASE( UnconstUpGrad )
 {
    Route route = Route(LogFiles::GPXRoutesDir + "UnconstantUpGrad.gpx", isFileName);
-   BOOST_CHECK_EQUAL( route.minGradient(), 79.82 );
+   BOOST_CHECK_CLOSE( route.minGradient(), 79.82, 1 );
+
 }
 
 //The following tests checks that invalid arguments have been put inplace
