@@ -47,16 +47,17 @@ const bool isFileName = true;
 
 // Test to see if correct max elevation is returned from only a positive dataset 
 BOOST_AUTO_TEST_CASE( positive_max_elevation ) {
-    Route route = Route(LogFiles::GPXRoutesDir + "", isFileName);
-    BOOST_CHECK_EQUAL( route.maxElevation(), "");    
+    Route route = Route(LogFiles::GPXRoutesDir + "positive_elevation_n0689529.gpx", isFileName);
+    BOOST_CHECK_CLOSE( route.maxElevation(), 20.000000, 0.001);
 }
 
 // Test to see if correct max elevation is returned from only a negative dataset
 BOOST_AUTO_TEST_CASE( negative_max_elevation ) {
-    Route route = Route(LogFiles::GPXRouteDir + "", isFileName);
-    BOOST_CHECK_EQUAL( route.maxElevation(), "");
+    Route route = Route(LogFiles::GPXRoutesDir + "negative_elevation_n0689529.gpx", isFileName);
+    BOOST_CHECK_CLOSE( route.maxElevation(), -5.000000, 0.001);
 }
 
+/*
 // Test to see if correct max elevation is returned from a dataset containing 
 // both positive and negative elevation values 
 BOOST_AUTO_TEST_CASE( max_elevation_pos_neg_dataset ) {
@@ -114,5 +115,6 @@ BOOST_AUTO_TEST_CASE( max_elevation_desending ) {
     Route route = Route(LogFiles::GPXRouteDir + "", isFileName);
     BOOST_CHECK_EQUAL( route.maxElevation(), "");
 }
-
+*/
 BOOST_AUTO_TEST_SUITE_END()
+
