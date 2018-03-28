@@ -34,25 +34,26 @@ metres Route::netLength() const
     assert(implemented);
 }
 
-metres Route::totalHeightGain() const
-{
-    metres heightGain = 0;
-    if (positions.size() == 0)
+    metres Route::totalHeightGain() const
     {
-        throw std::invalid_argument("No positions in provided route");
-    }
-    if (positions.size() > 1)
-    {
-        for (unsigned int i = 1; i<positions.size(); ++i)
-        {
-            if (positions[i].elevation()-positions[i-1].elevation()>0)
+        metres totalHeight = 0;
+
+        //loop through all of the values in positions. Add the elevation values to the total height gain.
+        for(auto pos : positions){
+            //lowest elevation will be the negative of the earths radius.
+            if(pos.elevation() >= (-1*(Earth::meanRadius)))
             {
-                heightGain += positions[i].elevation()-positions[i-1].elevation();
+            totalHeight += pos.elevation();
             }
+            else
+            {
+                throw std::out_of_range("Elevation value out of range");
+            }
+
         }
+        return totalHeight;
     }
-    return heightGain;
-}
+
 
 metres Route::netHeightGain() const
 {
@@ -161,19 +162,14 @@ degrees Route::maxGradient() const
 {
     const bool implemented = true;
     assert(implemented);
-    //
-    degrees largestGradient = atan((positions[1].elevation() - positions[0].elevation())/distanceBetween(positions[1],positions[0]));
-    //
-    degrees testGradient = atan((positions[1].elevation() - positions[0].elevation())/distanceBetween(positions[1],positions[0]));
+
+    degrees largestGradient = positions[1].elevation() - positions[0].elevation();
 
     for(size_t x = 2; x < positions.size(); x++){
-
-          testGradient = atan((positions[x].elevation() - positions[x-1].elevation())/distanceBetween(positions[x],positions[x-1]));
-
-          if(testGradient > largestGradient){
-             largestGradient = testGradient;
-         }
-     }
+        if((positions[x].elevation() - positions[x-1].elevation()) > largestGradient){
+            largestGradient = positions[x].elevation() - positions[x-1].elevation();
+        }
+    }
     return largestGradient;
 }
 
@@ -181,18 +177,6 @@ degrees Route::minGradient() const
 {
     const bool implemented = false;
     assert(implemented);
-
-    degrees smallestGrad = positions[1].elevation() - positions[0].elevation();
-
-    for(size_t x=2; x<positions.size(); x++)
-    {
-        if((positions[x].elevation() - positions[x-1].elevation()) < smallestGrad)
-        {
-            smallestGrad = positions[x].elevation() - positions[x-1].elevation();
-        }
-    }
-    return smallestGrad;
-
 }
 
 degrees Route::steepestGradient() const
