@@ -147,15 +147,36 @@ degrees Route::maxGradient() const
 {
     const bool implemented = true;
     assert(implemented);
+    //
+    degrees largestGradient = 0;
+    //
+    degrees testGradient = 0;
+     for(size_t x = 1; x < positions.size(); x++){
+        if(positions[x].elevation() > positions[x-1].elevation())
+        {
+            testGradient = atan((positions[x].elevation() - positions[x-1].elevation())/distanceBetween(positions[x],positions[x-1]));
 
-    degrees largestGradient = positions[1].elevation() - positions[0].elevation();
-
-    for(size_t x = 2; x < positions.size(); x++){
-        if((positions[x].elevation() - positions[x-1].elevation()) > largestGradient){
-            largestGradient = positions[x].elevation() - positions[x-1].elevation();
         }
-    }
+        else if (positions[x].elevation() > positions[x-1].elevation())
+        {
+
+            testGradient = atan(distanceBetween(positions[x],positions[x-1])/(positions[x].elevation() - positions[x-1].elevation()));
+
+        }
+        else {
+            testGradient = 0;
+        }
+//        std::cout<<positions[x].elevation()<<" : "<< positions[x-1].elevation()<< " : "<<distanceBetween(positions[x],positions[x-1])<<std::endl;
+//std::cout<<x<<" :  " << testGradient<<" > "<< largestGradient<< "?"<<std::endl;
+         if(testGradient > largestGradient){
+             largestGradient = testGradient;
+         }
+     }
     return largestGradient;
+
+
+
+
 }
 
 degrees Route::minGradient() const
