@@ -58,7 +58,7 @@ metres Route::netHeightGain() const
 {
     std::vector<Position>::const_iterator first, last;
     first = positions.begin();
-    last =  positions.end() - 1;/*
+    last =  positions.end() - 1;
     if (last->elevation() - first->elevation() > 0){
         return last->elevation() - first->elevation();
     }
@@ -186,19 +186,33 @@ degrees Route::maxGradient() const
 
 degrees Route::minGradient() const
 {
-    const bool implemented = false;
+    const bool implemented = true;
     assert(implemented);
 
-    degrees smallestGrad = positions[1].elevation() - positions[0].elevation();
+    degrees minGradient=sqrt(pow( distanceBetween(positions[0], positions[1]),2) + pow(positions[0].elevation() - positions[1].elevation(),2));
+    degrees temp, deltaH,deltaV;
 
-    for(size_t x=2; x<positions.size(); x++)
+    if (positions[0].elevation() > positions[1].elevation())
     {
-        if((positions[x].elevation() - positions[x-1].elevation()) < smallestGrad)
+        minGradient = -minGradient;
+    }
+    for (unsigned int i = 2; i < positions.size(); ++i )
+    {
+        deltaH = distanceBetween(positions[i-1], positions[i]);
+        deltaV = positions[i-1].elevation() - positions[i].elevation();
+        temp= sqrt(pow(deltaH,2) + pow(deltaV,2));
+
+        if(positions[i-1].elevation() < positions[i].elevation())
         {
-            smallestGrad = positions[x].elevation() - positions[x-1].elevation();
+            temp = -temp;
+        }
+
+        if(temp<minGradient)
+        {
+            minGradient=temp;
         }
     }
-    return smallestGrad;
+    return minGradient;
 
 }
 
