@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" xmlns:gpsies="http://www.gpsies.com/GPX/1/0" creator="GPSies http://www.gpsies.com - cycle" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.gpsies.com/GPX/1/0 http://www.gpsies.com/gpsies.xsd">
+  <metadata>
+    <name>cycle</name>
+    <author>
+      <name>liana3</name>
+      <link href="http://www.gpsies.com/mapUser.do?username=liana3">
+        <text>liana3 on GPSies.com</text>
+        <type>GPSiesUserOnWeb</type>
+      </link>
+    </author>
+    <link href="http://www.gpsies.com/map.do?fileId=slfszoslcmfnpkkl">
+      <text>cycle on GPSies.com</text>
+      <type>trackOnWeb</type>
+    </link>
+    <time>2018-03-28T12:19:53Z</time>
+    <extensions>
+      <gpsies:property>one-way trip</gpsies:property>
+      <gpsies:trackLengthMeter>299570.5767665119</gpsies:trackLengthMeter>
+      <gpsies:totalAscentMeter>6221.0</gpsies:totalAscentMeter>
+      <gpsies:totalDescentMeter>6399.0</gpsies:totalDescentMeter>
+      <gpsies:minHeightMeter>3.0</gpsies:minHeightMeter>
+      <gpsies:maxHeightMeter>352.0</gpsies:maxHeightMeter>
+    </extensions>
+  </metadata>
+  <trk>
+    <name>cycle on GPSies.com</name>
+    <link href="http://www.gpsies.com/map.do?fileId=slfszoslcmfnpkkl">
+      <type>trackOnWeb</type>
+    </link>
+    <link href="http://www.gpsies.com/charts/sl/map/slfszoslcmfnpkkl_map.png">
+      <type>elevationChartUrlMap</type>
+    </link>
+    <link href="http://www.gpsies.com/charts/sl/mapThumb/slfszoslcmfnpkkl_mapThumb.png">
+      <type>elevationChartUrlMapThumb</type>
+    </link>
+    <link href="http://www.gpsies.com/charts/sl/tab/slfszoslcmfnpkkl_tab.png">
+      <type>elevationChartUrlTab</type>
+    </link>
+    <trkseg>
+      <trkpt lat="52.50953470" lon="-3.17504882">
+        <ele>181.00000</ele>
+        <time>2010-01-01T00:00:00Z</time>
+      </trkpt>
+      <trkpt lat="52.51287790" lon="-2.26867675">
+        <ele>83.000000</ele>
+        <time>2010-01-01T06:08:01Z</time>
+      </trkpt>
+      <trkpt lat="52.91552720" lon="-2.23571777">
+        <ele>138.00000</ele>
+        <time>2010-01-01T10:36:59Z</time>
+      </trkpt>
+      <trkpt lat="53.02139220" lon="-1.84020996">
+        <ele>332.00000</ele>
+        <time>2010-01-01T13:30:54Z</time>
+      </trkpt>
+      <trkpt lat="53.29148900" lon="-1.80725097">
+        <ele>352.00000</ele>
+        <time>2010-01-01T16:31:35Z</time>
+      </trkpt>
+      <trkpt lat="52.94532790" lon="-1.35681152">
+        <ele>102.00000</ele>
+        <time>2010-01-01T21:24:36Z</time>
+      </trkpt>
+      <trkpt lat="53.49131370" lon="-1.21948242">
+        <ele>63.000000</ele>
+        <time>2010-01-02T03:32:59Z</time>
+      </trkpt>
+      <trkpt lat="53.57620000" lon="-0.88439941">
+        <ele>3.0000000</ele>
+        <time>2010-01-02T05:57:25Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>
+
