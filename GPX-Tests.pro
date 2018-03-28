@@ -29,8 +29,9 @@ SOURCES += \
     src/gpx-tests/maxLongTests_N0669298.cpp \
     src/gpx-tests/n0650950_numPos_Tests.cpp \
     src/gpx-tests/N0680192.cpp \
-    src/gpx-tests/n0671966_mingrad.cpp
-    src/gpx-tests/N0643498_Max_Latitude
+    src/gpx-tests/n0671966_mingrad.cpp \
+    src/gpx-tests/N0643498_Max_Latitude.cpp \
+    src/gpx-tests/totalHeightGain-N0720387.cpp
     
 
 
