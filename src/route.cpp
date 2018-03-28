@@ -59,21 +59,17 @@ metres Route::totalHeightGain() const
      return totalHeight;
 }
 
-//NEED TO CREATE TEST
 metres Route::netHeightGain() const
 {
     std::vector<Position>::const_iterator first, last;
     first = positions.begin();
-    std::cout << "First: " << first->elevation()<< "\n";
-    last =  positions.end() - 1;
-    std::cout << "Last: " << last->elevation() <<  "\n";
+    last =  positions.end() - 1;;
     if (last->elevation() - first->elevation() > 0){
         return last->elevation() - first->elevation();
     }
     else{
         return 0;
     }
-
 }
 
 degrees Route::minLatitude() const
