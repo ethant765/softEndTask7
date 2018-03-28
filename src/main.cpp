@@ -12,6 +12,10 @@ using namespace GPS;
  * P Q R S T
  * U V W X Y
  */
+
+
+//variables have been altered to generate alternate files.
+
 int main(){
 
     std :: ofstream thefile;
