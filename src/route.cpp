@@ -62,7 +62,6 @@ metres Route::netLength() const
             }
 
         }
-        totalHeight = round(totalHeight);
         return totalHeight;
     }
 

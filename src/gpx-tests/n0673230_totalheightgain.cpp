@@ -24,7 +24,7 @@ BOOST_AUTO_TEST_CASE( ABCD_HeightGain )
 BOOST_AUTO_TEST_CASE( North_HeightGain )
 {
    Route route = Route(LogFiles::GPXRoutesDir + "NorthYorkMoors.gpx", isFileName);
-   BOOST_CHECK_EQUAL( route.totalHeightGain(), 285648 );
+   BOOST_CHECK_CLOSE( route.totalHeightGain(), 285648, 0.01 );
 }
 
 //the minimum elevation possible is the same as the radius of the earth. If a value exceeds this it shouldn't be counted and an out_of_range error should be thrown.
@@ -45,7 +45,7 @@ BOOST_AUTO_TEST_CASE( ExtremeValues_HeightGain )
 BOOST_AUTO_TEST_CASE( BelowSeaLevel_HeightGain )
 {
    Route route = Route(LogFiles::GPXRoutesDir + "BelowSeaLevel.gpx", isFileName);
-   BOOST_CHECK_EQUAL( route.totalHeightGain(), -300);
+   BOOST_CHECK_CLOSE( route.totalHeightGain(), -300, 0.01);
 }
 
 
@@ -55,7 +55,7 @@ BOOST_AUTO_TEST_CASE( BelowSeaLevel_HeightGain )
 BOOST_AUTO_TEST_CASE( MountEverest_HeightGain )
 {
    Route route = Route(LogFiles::GPXRoutesDir + "MountEverest.gpx", isFileName);
-   BOOST_CHECK_EQUAL( route.totalHeightGain(), 26524);
+   BOOST_CHECK_CLOSE( route.totalHeightGain(), 26524, 0.01);
 }
 
 
