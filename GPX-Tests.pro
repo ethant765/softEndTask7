@@ -38,7 +38,9 @@ SOURCES += \
     src/gpx-tests/TestMinElev-N0719715.cpp
     src/gpx-tests/TestMinElev-N0719715.cpp \
     src/gpx-tests/n0673230_totalheightgain.cpp \
-    src/gpx-tests/minLatTests_N0720717.cpp 
+    src/gpx-tests/minLatTests_N0720717.cpp \
+    src/gpx-tests/numPositionsTests_n0719388.cpp
+
 
 
 INCLUDEPATH += headers/
