@@ -29,7 +29,7 @@ BOOST_AUTO_TEST_CASE(  typical_flat)//Checks that a flat route still returns 0 a
 {
 Route route = Route(LogFiles::GPXRoutesDir + "N0697611_ACE_CliftonCampus.gpx", isFileName);
 
-BOOST_CHECK_CLOSE(route.maxGradient(), 0,0.1) ;
+BOOST_CHECK_CLOSE(route.maxGradient(), 0,0.15) ;
 
 }
 
@@ -38,7 +38,7 @@ BOOST_AUTO_TEST_CASE( typical_uphill)//Checks that a correct uphill gradient is 
 {
 Route route = Route(LogFiles::GPXRoutesDir + "N0697611_CHM_CliftonCampus.gpx", isFileName);
 
-BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(100,1000)),0.1) ;
+BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(100,1000)),0.15) ;
 
 }
 
@@ -48,7 +48,7 @@ BOOST_AUTO_TEST_CASE(  typical_downhill)//Checks that a correct downhill gradien
 {
 Route route = Route(LogFiles::GPXRoutesDir + "N0697611_MRW_CliftonCampus.gpx", isFileName);
 
-BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(-100,1000)),0.1) ;
+BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(-100,1000)),0.15) ;
 
 }
 
@@ -56,35 +56,35 @@ BOOST_AUTO_TEST_CASE( typical_uturn)//Checks that if two gradients of equal magn
 {
 Route route = Route(LogFiles::GPXRoutesDir + "N0697611_JIGQST_CliftonCampus.gpx", isFileName);
 
-BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(100,1000)),0.1) ;
+BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(100,1000)),0.15) ;
 
 }
 
 
 //
-BOOST_AUTO_TEST_CASE( Flat_near_equator)
-{
+BOOST_AUTO_TEST_CASE( Flat_near_equator)//Checks that 0 is returned for a flat route
+{                                         //this test is repeated at the equator
 Route route = Route(LogFiles::GPXRoutesDir + "N0697611_ACE_Pontianak.gpx", isFileName);
 
-BOOST_CHECK_CLOSE(route.maxGradient(), 0,0.1) ;
+BOOST_CHECK_CLOSE(route.maxGradient(), 0,0.15) ;
 
 }
 
-BOOST_AUTO_TEST_CASE( Equatorial_uphill)
-{
+BOOST_AUTO_TEST_CASE( Equatorial_uphill)//Checks that a correct uphill gradient is calculated
+{                                         //this test is repeated at the equator
 Route route = Route(LogFiles::GPXRoutesDir + "N0697611_CHM_Pontianak.gpx", isFileName);
 
-BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(100,1000)),0.1) ;
+BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(100,1000)),0.15) ;
 
 }
 
 
 
-BOOST_AUTO_TEST_CASE( Equatorial_downhill)
-{
+BOOST_AUTO_TEST_CASE( Equatorial_downhill)//Checks that a correct downhill gradient is calculated
+{                                         //this test is repeated at the equator
 Route route = Route(LogFiles::GPXRoutesDir + "N0697611_MRW_Pontianak.gpx", isFileName);
 
-BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(-100,1000)),0.1) ;
+BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(-100,1000)),0.15) ;
 
 }
 
@@ -92,7 +92,7 @@ BOOST_AUTO_TEST_CASE( Equatorial_uturn)//Checks that if two gradients of equal m
 {                                       //this test repeats this at the equator
 Route route = Route(LogFiles::GPXRoutesDir + "N0697611_JIGQST_Pontianak.gpx", isFileName);
 
-BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(100,1000)),0.1) ;
+BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(100,1000)),0.15) ;
 
 }
 
@@ -105,7 +105,7 @@ BOOST_AUTO_TEST_CASE( EquatorialMeridian_uturn)//Checks that if two gradients of
 {                                               //This test repeats this at the equatorial meridian
 Route route = Route(LogFiles::GPXRoutesDir + "N0697611_JIGQST_EquatorialMeridian.gpx", isFileName);
 
-BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(100,1000)),0.1) ;
+BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(100,1000)),0.15) ;
 
 }
 
@@ -115,7 +115,7 @@ BOOST_AUTO_TEST_CASE( EquatorialAntiMeridian_uturn)//Checks that if two gradient
 {                                                   //this test repeats this at the equatorial anti meridian
 Route route = Route(LogFiles::GPXRoutesDir + "N0697611_JIGQST_EquatorialAntiMeridian.gpx", isFileName);
 
-BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(100,1000)),0.1) ;
+BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(100,1000)),0.15) ;
 
 }
 
@@ -123,70 +123,62 @@ BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(100,1000)),0.1) ;
 
 //
 
-
-BOOST_AUTO_TEST_CASE( NorthPole_uturn)
-{
-Route route = Route(LogFiles::GPXRoutesDir + "N0697611_JIGQST_NorthPole.gpx", isFileName);
-
-BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(100,1000)),0.1) ;
-
-}
-
-BOOST_AUTO_TEST_CASE( NorthPole_uphill)
-{
-Route route = Route(LogFiles::GPXRoutesDir + "N0697611_CHM_NorthPole.gpx", isFileName);
-
-BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(100,1000)),0.1) ;
-
-}
-
-BOOST_AUTO_TEST_CASE( Northpole_flat)
+BOOST_AUTO_TEST_CASE( Northpole_flat)//Tests a flat route near the north pole
 {
 Route route = Route(LogFiles::GPXRoutesDir + "N0697611_ACE_NorthPole.gpx", isFileName);
 
-BOOST_CHECK_CLOSE(route.maxGradient(), 0,0.1) ;
+BOOST_CHECK_CLOSE(route.maxGradient(), 0,0.15) ;
+
+}
+BOOST_AUTO_TEST_CASE( NorthPole_uphill)//Checks the gradient is accurate when going uphill near the northpole
+{
+Route route = Route(LogFiles::GPXRoutesDir + "N0697611_CHM_NorthPole.gpx", isFileName);
+
+BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(100,1000)),0.15) ;
 
 }
 
-BOOST_AUTO_TEST_CASE( NorthPole_downhill)
+
+
+BOOST_AUTO_TEST_CASE( NorthPole_downhill)//Checks the gradient is accurate when going downhill near the northpole
 {
 Route route = Route(LogFiles::GPXRoutesDir + "N0697611_MRW_NorthPole.gpx", isFileName);
 
-BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(-100,1000)),0.1) ;
+BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(-100,1000)),0.15) ;
 
 }
 
 
-BOOST_AUTO_TEST_CASE( Flat_then_up)
+BOOST_AUTO_TEST_CASE( Flat_then_up) //checks that the correct gradient is returned when choosing between 0 and a positive gradient
 {
 Route route = Route(LogFiles::GPXRoutesDir + "N0697611_VWXS_FlatThenUp.gpx", isFileName);
 
-BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(100,1000)),0.1) ;
+BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(100,1000)),0.15) ;
 
 }
 
-BOOST_AUTO_TEST_CASE( Flat_then_down)
+BOOST_AUTO_TEST_CASE( Flat_then_down)//checks that the correct gradient is returned when choosing between 0 and a negative gradient
 {
 Route route = Route(LogFiles::GPXRoutesDir + "N0697611_GHID_FlatThenDown.gpx", isFileName);
 
-BOOST_CHECK_CLOSE(route.maxGradient(), 0,0.1) ;
+BOOST_CHECK_CLOSE(route.maxGradient(), 0,0.15) ;
 
 }
 
-BOOST_AUTO_TEST_CASE( Steep_up)
+BOOST_AUTO_TEST_CASE( Steep_up) //checks that an extreme positive gradient is returned correctly
 {
 Route route = Route(LogFiles::GPXRoutesDir + "N0697611_LM_Steepup.gpx", isFileName);
 
-BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(10000000,100)),0.1) ;
+BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(10000000,100)),0.15) ;
 
 }
 
 
-BOOST_AUTO_TEST_CASE( Steep_down)
+BOOST_AUTO_TEST_CASE( Steep_down)//checks that an extreme negative gradient is returned correctly
 {
 Route route = Route(LogFiles::GPXRoutesDir + "N0697611_MN_Steepdown.gpx", isFileName);
 
-BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(-10000000,100)),0.1) ;
+BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(-10000000,100)),0.15) ;
 
 }
 
