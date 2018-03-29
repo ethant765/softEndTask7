@@ -184,7 +184,7 @@ BOOST_AUTO_TEST_CASE(checkGreaterThan90)
 BOOST_AUTO_TEST_CASE(checkLessThanMinus90)
 {
     const bool isFileName = true;
-    const std::string filePath = LogFiles::GPXRoutesDir + "pnegOutOfBoundsN0682255.gpx";
+    const std::string filePath = LogFiles::GPXRoutesDir + "negOutOfBoundsN0682255.gpx";
 
     Route route = Route(filePath, isFileName);
 
