@@ -1,4 +1,6 @@
 /*
+ * Created by: Joshua Latham. All of this work is my own.
+
         ######## N0641701's Route::netLength() Test File ########
 
 netLength calculates the distance between the first and last points on the Route.
@@ -78,7 +80,7 @@ Test: SmallNumbers
 Description Testing against very small numbers to see if the function
 can handle them.
 
-Test: LargeAmountOfData
+Test: BigData
 Description: Testing the function against a large number of points to see if it will handle it.
 
 */
@@ -95,10 +97,92 @@ BOOST_AUTO_TEST_SUITE( NetLength )
 
 const bool isFileName = true;
 
+//Correct output test. The usual data to expect.
 BOOST_AUTO_TEST_CASE(CorrectOutput)
 {
-    Route route = Route(LogFiles::GPXRoutesDir + "CorrectOutput.gpx", isFileName);
-
+    Route route = Route(LogFiles::GPXRoutesDir + "CorrectOutput_N0641701_MHCBA.gpx", isFileName);
+    BOOST_CHECK_CLOSE(route.netLength(), 2827.47, 0.01);
+}
+//One point. Testing just one point on its own.
+BOOST_AUTO_TEST_CASE(OnePoint)
+{
+    Route route = Route(LogFiles::GPXRoutesDir + "OnePoint_N0641701_M.gpx", isFileName);
+    BOOST_CHECK_EQUAL(route.netLength(), 0);
+}
+//Two Points. Testing two points with different locations.
+BOOST_AUTO_TEST_CASE(TwoPoints)
+{
+    Route route = Route(LogFiles::GPXRoutesDir + "TwoPoints_N0641701_MN.gpx", isFileName);
+    BOOST_CHECK_CLOSE(route.netLength(), 999.111, 0.01);
+}
+//A route that circles back to the beginning resulting in a net length of 0.
+BOOST_AUTO_TEST_CASE(BackToStart)
+{
+    Route route = Route(LogFiles::GPXRoutesDir + "BackToStart_N0641701_MHINSRM.gpx", isFileName);
+    BOOST_CHECK_EQUAL(route.netLength(), 0);
+}
+//Testing two identical points which should give the expected result of 0.
+BOOST_AUTO_TEST_CASE(TwoIdenticalPoints)
+{
+    Route route = Route(LogFiles::GPXRoutesDir + "TwoIdenticalPoints_N0641701_MM.gpx", isFileName);
+    BOOST_CHECK_EQUAL(route.netLength(), 0);
+}
+//Testing a route that doesn't move anywhere but by elevation.
+BOOST_AUTO_TEST_CASE(UpAndDown)
+{
+    Route route = Route(LogFiles::GPXRoutesDir + "UpAndDown_N0641701_MMMMM.gpx", isFileName);
+    BOOST_CHECK_EQUAL(route.netLength(), 0);
 }
 
+//Positive and Negative test to make sure the function can handle them correctly.
 
+//Testing a positive latitude and longitude.
+
+BOOST_AUTO_TEST_CASE(PosLatLong)
+{
+    Route route = Route(LogFiles::GPXRoutesDir + "PosLatLong_N0641701_MIE.gpx", isFileName);
+    BOOST_CHECK_CLOSE(route.netLength(), 28276.2, 0.01);
+}
+
+//Testing Positive latitude but negative longitude
+BOOST_AUTO_TEST_CASE(PosLatNegLong)
+{
+    Route route = Route(LogFiles::GPXRoutesDir + "PosLatNegLong_N0641701_MGA.gpx", isFileName);
+    BOOST_CHECK_CLOSE(route.netLength(), 28276.2, 0.01);
+}
+
+//Testing netagive latitude and negative longitude.
+BOOST_AUTO_TEST_CASE(NegLatNegLong)
+{
+    Route route = Route(LogFiles::GPXRoutesDir + "NegLatNegLong_N0641701_MQU.gpx", isFileName);
+    BOOST_CHECK_CLOSE(route.netLength(), 28276.2, 0.01);
+}
+
+//Testing negative latitude and positive longitude
+BOOST_AUTO_TEST_CASE(NegLatPosLong)
+{
+    Route route = Route(LogFiles::GPXRoutesDir + "NegLatPosLong_N0641701_MSY.gpx", isFileName);
+    BOOST_CHECK_CLOSE(route.netLength(), 28276.2, 0.01);
+}
+
+//Testing whether or not the function can handle large numbers.
+BOOST_AUTO_TEST_CASE(BigNumbers)
+{
+    Route route = Route(LogFiles::GPXRoutesDir + "BigNumbers_N0641701_MHCDE.gpx", isFileName);
+    BOOST_CHECK_CLOSE(route.netLength(), 18398222.331737, 0.01);
+}
+
+//Testing whether or not the function can handle very small numbers.
+BOOST_AUTO_TEST_CASE(SmallNumbers)
+{
+    Route route = Route(LogFiles::GPXRoutesDir + "SmallNumbers_N0641701_MHCDE.gpx", isFileName);
+    BOOST_CHECK_CLOSE(route.netLength(), 222390.160475, 0.01);
+}
+
+//Testing whether or not the function can handle extremely large data sets.
+BOOST_AUTO_TEST_CASE(BigData)
+{
+    Route route = Route(LogFiles::GPXRoutesDir + "BigData_N0641701_MHCBA.gpx", isFileName);
+    BOOST_CHECK_CLOSE(route.netLength(), 2827.47, 0.01);
+}
+}
