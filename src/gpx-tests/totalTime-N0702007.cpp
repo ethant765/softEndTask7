@@ -1,10 +1,10 @@
-#define BOOST_TEST_MODULE totalTime-N0702007
 #include <boost/test/unit_test.hpp>
 
 #include "logs.h"
 #include "route.h"
 #include "track.h"	
 
+const bool isFileName = true;
 using namespace GPS;
 
 BOOST_AUTO_TEST_SUITE( totalTime_N0702007 )
@@ -105,18 +105,19 @@ BOOST_AUTO_TEST_SUITE( totalTime_N0702007 )
 */
 
 
+
 // Tests for correct, ordered values
 BOOST_AUTO_TEST_CASE( totaltime_correct_set1)
 {
    Track track = Track(LogFiles::GPXTracksDir + "TrackDuration10.gpx", isFileName);
    BOOST_CHECK_EQUAL( track.totalTime(), 40 );	
-   
+
 }
-BOOST_AUTO_TEST_CASE( totaltime_correct_set1)
+BOOST_AUTO_TEST_CASE( totaltime_correct_set2)
 {
    Track track = Track(LogFiles::GPXTracksDir + "TrackDuration1.gpx", isFileName);
    BOOST_CHECK_EQUAL( track.totalTime(), 3 );	
-   
+
 }
 
 // This test also covers the 'large quantity of points' point to a reasonable standard
@@ -124,7 +125,7 @@ BOOST_AUTO_TEST_CASE( totaltime_large_quantity)
 {
    Track track = Track(LogFiles::GPXTracksDir + "TrackMultiplePoints.gpx", isFileName);
    BOOST_CHECK_EQUAL( track.totalTime(), 21000 );
-   
+
 }
 
 
@@ -133,7 +134,7 @@ BOOST_AUTO_TEST_CASE( totaltime_earliest_disordered)
 {
    Track track = Track(LogFiles::GPXTracksDir + "N0702007TrackTimeEarliestOffset.gpx", isFileName);
    BOOST_CHECK_EQUAL( track.totalTime(), 40 );	
-   
+
 }
 
 // Test for disordered last value
@@ -179,7 +180,7 @@ BOOST_AUTO_TEST_CASE( totaltime_disordered_lbf)
 BOOST_AUTO_TEST_CASE( totaltime_maxull)
 {
    Track track = Track(LogFiles::GPXTracksDir + "N0702007TrackTimeLargestPossible.gpx", isFileName);
-   BOOST_CHECK_EQUAL( track.totalTime(), 18446744073709551615 );	
+   BOOST_CHECK_EQUAL( track.totalTime(), 18446744073709551615ull );
    
 }
 
