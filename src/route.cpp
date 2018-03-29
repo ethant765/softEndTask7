@@ -164,8 +164,18 @@ degrees Route::maxGradient() const
     }
 
     else {
-        largestGradient =0;
-        testGradient = 0;
+        if (positions[0].elevation() <positions[1].elevation()){
+        largestGradient =90;
+        testGradient = 90;}
+        else if (positions[0].elevation() >positions[1].elevation())
+        {
+            largestGradient =-90;
+            testGradient = -90;
+        }
+        else{
+            largestGradient =0;
+            testGradient = 0;
+        }
 }
     for(size_t x = 2; x < positions.size(); x++){
 
@@ -174,7 +184,19 @@ degrees Route::maxGradient() const
                   radToDeg(atan2((positions[x].elevation() - positions[x-1].elevation()),
                   distanceBetween(positions[x],positions[x-1])));
         }
-        else testGradient = 0;
+        else if (positions[0].elevation() <positions[1].elevation())
+        {
+            testGradient = 90;
+        }
+        else if (positions[0].elevation() >positions[1].elevation())
+        {
+            testGradient = -90;
+        }
+        else
+        {
+            testGradient = 0;
+        }
+
 
         if(testGradient > largestGradient){
              largestGradient = testGradient;
