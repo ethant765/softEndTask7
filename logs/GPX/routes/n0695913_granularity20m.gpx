@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<gpx version="1.1" creator="www.gpxcreator.com" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+
+<metadata>
+<name><![CDATA[n0695913_granularity20m]]></name>
+<link href="http://www.gpxcreator.com"><text>GPX Creator</text></link>
+<time>2018-03-29T14:40:31Z</time>
+<bounds minlat="52.90677000" minlon="-1.18817031" maxlat="52.91182657" maxlon="-1.18125021"></bounds>
+</metadata>
+
+<rte>
+<name><![CDATA[n0695913_granularity20m]]></name>
+<rtept lat="52.91182657" lon="-1.18177593">
+<ele>0.000000</ele>
+</rtept>
+<rtept lat="52.91160982" lon="-1.18125021">
+<ele>0.000000</ele>
+</rtept>
+<rtept lat="52.90905734" lon="-1.18485510">
+<ele>0.000000</ele>
+</rtept>
+<rtept lat="52.90677000" lon="-1.18817031">
+<ele>0.000000</ele>
+</rtept>
+</rte>
+
+</gpx>
