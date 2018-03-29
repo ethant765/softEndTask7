@@ -24,6 +24,13 @@ BOOST_AUTO_TEST_CASE( correct_num_positions_track )
    BOOST_CHECK_EQUAL( track.numPositions(), 11 );
 }
 
+// Check that the number of positions is correct for a route with one positon
+BOOST_AUTO_TEST_CASE( correct_num_positions_route_oneposition )
+{
+   Route route = Route(LogFiles::GPXRoutesDir + "n0695913_oneposition.gpx", numCorrect);
+   BOOST_CHECK_EQUAL( route.numPositions(), 1 );
+}
+
 // Check that the number of positions is correct for a route with a granularity of 10 metres
 BOOST_AUTO_TEST_CASE( correct_num_positions_route_granularity10m )
 {
