@@ -25,7 +25,7 @@ BOOST_AUTO_TEST_CASE( MaxLongHorizontalLine )
 BOOST_AUTO_TEST_CASE( VerySmallChange )
 {
    Route route = Route(LogFiles::GPXRoutesDir + "VerySmallChange-N0680337.gpx", isFileName);
-   BOOST_CHECK_CLOSE( route.maxLongitude(), 10.0000002, 0.00001 );
+   BOOST_CHECK_CLOSE( route.maxLongitude(), 10.0000002, 0.0000001 );
 }
 
 
@@ -50,7 +50,7 @@ BOOST_AUTO_TEST_CASE( MaxPossibleConstantLongitude )
 BOOST_AUTO_TEST_CASE( NegativeMaxLongHorizontalLine )
 {
    Route route = Route(LogFiles::GPXRoutesDir + "NegativeMaxLong-N0680337.gpx", isFileName);
-   BOOST_CHECK_CLOSE( route.maxLongitude(), -51.3975, 0.1);
+   BOOST_CHECK_CLOSE( route.maxLongitude(), -51.3975, 0.01);
 }
 
 
