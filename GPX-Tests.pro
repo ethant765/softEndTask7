@@ -56,7 +56,8 @@ SOURCES += \
     src/gpx-tests/N0692013_minLongitude.cpp \
     #src/gpx-tests/N0630057-MaxLatitudeTest.cpp \
     src/gpx-tests/MaxLong-N0680337.cpp \
-    src/gpx-tests/array-operator.cpp
+    src/gpx-tests/array-operator.cpp \
+    src/gpx-tests/maxGradientTests_N0686602.cpp
 
 INCLUDEPATH += headers/
 
