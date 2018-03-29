@@ -1,6 +1,4 @@
 //Created by N0689061
-#define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE RouteTests
 #include <boost/test/unit_test.hpp>
 
 #include "logs.h"
