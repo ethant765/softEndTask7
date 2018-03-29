@@ -1,6 +1,3 @@
-#define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE RouteMaxElevationTests
-
 #include <boost/test/unit_test.hpp>
 
 #include "logs.h"
@@ -28,42 +25,42 @@ BOOST_AUTO_TEST_SUITE( Route_maxElevation )
 BOOST_AUTO_TEST_CASE( constant_log )
 {
    Route route = Route(LogFiles::GPXRoutesDir + "maxElevation_constant_n0686300.gpx", true);
-   BOOST_CHECK_EQUAL( route.maxElevation(), "58.000000" );
+   BOOST_CHECK_EQUAL( route.maxElevation(), 58.000000 );
 }
 
 // Check that the correct maximum elevation is calculated when using the "decreasing" log file.
 BOOST_AUTO_TEST_CASE( decreasing_log )
 {
    Route route = Route(LogFiles::GPXRoutesDir + "maxElevation_decreasing_n0686300.gpx", true);
-   BOOST_CHECK_EQUAL( route.maxElevation(), "58.000000" );
+   BOOST_CHECK_EQUAL( route.maxElevation(), 58.000000 );
 }
 
 // Check that the correct maximum elevation is calculated when using the "increasing" log file.
 BOOST_AUTO_TEST_CASE( increasing_log )
 {
    Route route = Route(LogFiles::GPXRoutesDir + "maxElevation_increasing_n0686300.gpx", true);
-   BOOST_CHECK_EQUAL( route.maxElevation(), "58.000000" );
+   BOOST_CHECK_EQUAL( route.maxElevation(), 58.000000 );
 }
 
 // Check that the correct maximum elevation is calculated when using the "vshape" log file.
 BOOST_AUTO_TEST_CASE( vshape_log )
 {
    Route route = Route(LogFiles::GPXRoutesDir + "maxElevation_vshape_n0686300.gpx", true);
-   BOOST_CHECK_EQUAL( route.maxElevation(), "58.000000" );
+   BOOST_CHECK_EQUAL( route.maxElevation(), 58.000000 );
 }
 
 // Check that the correct maximum elevation is calculated when using the "nshape" log file.
 BOOST_AUTO_TEST_CASE( nshape_log )
 {
    Route route = Route(LogFiles::GPXRoutesDir + "maxElevation_nshape_n0686300.gpx", true);
-   BOOST_CHECK_EQUAL( route.maxElevation(), "58.000000" );
+   BOOST_CHECK_EQUAL( route.maxElevation(), 58.000000 );
 }
 
 // Check that the correct maximum elevation is calculated when using the "decreasingnegative" log file.
 BOOST_AUTO_TEST_CASE( decreasingnegative_log )
 {
    Route route = Route(LogFiles::GPXRoutesDir + "maxElevation_decreasingnegative_n0686300.gpx", true);
-   BOOST_CHECK_EQUAL( route.maxElevation(), "58.000000" );
+   BOOST_CHECK_EQUAL( route.maxElevation(), 58.000000 );
 }
 
 BOOST_AUTO_TEST_SUITE_END()

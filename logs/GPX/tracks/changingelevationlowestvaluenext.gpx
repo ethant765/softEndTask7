@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
 <gpx version="1.1" creator="NTU" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
     <trk>
-        <name>positive change</name>
+        <name>U1P2K1F2A</name>
         <trkseg>
             <name>U-P</name>
             <trkpt lat="63.0236" lon="-86.102">
-                <ele>-12.000000</ele>
+                <ele>-6.000000</ele>
                 <time>0</time>
             </trkpt>
             <trkpt lat="63.9234" lon="-86.102">
-                <ele>-6.000000</ele>
+                <ele>-170,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000.000000</ele>
                 <time>1</time>
             </trkpt>
             <trkpt lat="64.8232" lon="-86.102">
@@ -37,7 +37,7 @@
                 <time>7</time>
             </trkpt>
             <trkpt lat="70.2222" lon="-86.102">
-                <ele>6.000000</ele>
+                <ele>-6.000000</ele>
                 <time>8</time>
             </trkpt>
             <trkpt lat="71.122" lon="-86.102">
@@ -76,7 +76,7 @@
                 <time>15</time>
             </trkpt>
             <trkpt lat="74.7213" lon="-86.102">
-                <ele>6.000000</ele>
+                <ele>-6.000000</ele>
                 <time>16</time>
             </trkpt>
             <trkpt lat="75.1712" lon="-86.102">
@@ -266,7 +266,7 @@
                 <time>59</time>
             </trkpt>
             <trkpt lat="80.9836" lon="93.898">
-                <ele>-4.000000</ele>
+                <ele>-6.000000</ele>
                 <time>60</time>
             </trkpt>
         </trkseg>
