@@ -60,6 +60,7 @@ SOURCES += \
     #src/gpx-tests/N0630057-MaxLatitudeTest.cpp \
     src/gpx-tests/MaxLong-N0680337.cpp \
     src/gpx-tests/array-operator.cpp \
+    src/gpx-tests/netLengthT0073651.cpp \
     src/gpx-tests/n0695913.cpp \
     #src/gpx-tests/mingradient_n0719479.cpp \
     src/gpx-tests/maxGradientTests_N0686602.cpp
