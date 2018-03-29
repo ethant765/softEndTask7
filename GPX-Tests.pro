@@ -53,22 +53,16 @@ SOURCES += \
     src/gpx-tests/n0703481_maxelevationtests.cpp \
     src/gpx-tests/n0494166MaximumLongitude.cpp \
     src/gpx-tests/n0680788-minElevationTests.cpp \
-<<<<<<< HEAD
     #src/gpx-tests/N0692013_minLongitude().cpp \
     #src/gpx-tests/N0630057-MaxLatitudeTest.cpp
     src/gpx-tests/MaxLong-N0680337.cpp \
     src/gpx-tests/n0720144_mingradient_tests.cpp
-=======
     src/gpx-tests/N0692013_minLongitude.cpp \
     #src/gpx-tests/N0630057-MaxLatitudeTest.cpp \
     src/gpx-tests/MaxLong-N0680337.cpp \
     src/gpx-tests/array-operator.cpp \
-<<<<<<< HEAD
     src/gpx-tests/maxGradientTests_N0686602.cpp
-=======
     src/gpx-tests/mingradient_n0719479.cpp
->>>>>>> ff7b192f65bcfeef6ee0d65f789652f3bb149f6e
->>>>>>> 8483178e54fe1ad6ea288fe734a7a81be63fd0a9
 
 INCLUDEPATH += headers/
 
