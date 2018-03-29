@@ -6,41 +6,7 @@
 //Include using namespace libraries
 using namespace GPS;
 
-//This test suite is here to validate that the files required to
-// perform the further test are present. Once all the file are found the test
-// can be ran.
-BOOST_AUTO_TEST_SUITE(FilePath)
 
-
-const bool fileExist = true;
-
-//This test is the first step. The test files needs to be checked to see if they exist
-//before further test can be performed.
-BOOST_AUTO_TEST_CASE(FindingTest){
-  // Create a new route from the directory path where all the route GPX files are
-  // The file being searched for is the string in the Route();
-  Route route = Route(LogFiles::GPXRoutesDir + "ShortRouteNegativeNumb.gpx", fileExist);
-  BOOST_CHECK_EQUAL(route.getName(), "ShortRouteNegativeNumb");
-
-  Route route = Route(LogFiles::GPXRoutesDir + "LatDecline.gpx", fileExist);
-  BOOST_CHECK_EQUAL(route.getName(), "LateDecline");
-
-
-  Route route = Route(LogFiles::GPXRoutesDir + "MinLatEquatMeridaian.gpx", fileExist);
-  BOOST_CHECK_EQUAL(route.getName(), "MinLatEquatMeridaian");
-
-
-  Route route = Route(LogFiles::GPXRoutesDir + "MinLatNorthPole.gpx", fileExist);
-  BOOST_CHECK_EQUAL(route.getName(), "MinLatNorthPole");
-
-
-  Route route = Route(LogFiles::GPXRoutesDir + "SpikeLat.gpx", fileExist);
-   BOOST_CHECK_EQUAL(route.getName(), "SpikeLat");
-
-}
-
-
-BOOST_AUTO_TEST_SUITE_END()
 //////////////////////////////////////////////////////////
 BOOST_AUTO_TEST_SUITE(minLatitude)
 // The first part of the test is to verify of the implementation of the function
@@ -58,7 +24,7 @@ BOOST_AUTO_TEST_CASE(NegativeLatitude){
     BOOST_CHECK_CLOSE(route.minLatitude(), -90 ,0.1);
 
     //In this file the latitude values fluctuate with its lowest value located in the middle.
-    Route route = Route(LogFiles::GPXRoutesDir + "latDecline.gpx", fileExist);
+    Route route = Route(LogFiles::GPXRoutesDir + "LatDecline.gpx", fileExist);
     BOOST_CHECK_CLOSE(route.minLatitude(), -89.11 , 0.1);
 
 }
@@ -88,6 +54,6 @@ BOOST_AUTO_TEST_CASE(PositiveLatitudes){
 //The lowest value will be located at the first point, but this test is just checking how
 //well the function handles the different types of routes.
 BOOST_AUTO_TEST_CASE(risingLatitudes){
-  Route route = Route(LogFiles::GPXRoutesDir + "latDecline.gpx", fileExist);
+  Route route = Route(LogFiles::GPXRoutesDir + "LatRising.gpx", fileExist);
   BOOST_CHECK_CLOSE(route.minLatitude(),52.8225, 0.1)
 }
