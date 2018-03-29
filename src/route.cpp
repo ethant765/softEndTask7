@@ -9,7 +9,7 @@
 #include "geometry.h"
 #include "earth.h"
 #include "route.h"
-
+#include "position.h"
 using namespace GPS;
 
 std::string Route::name() const
@@ -30,17 +30,18 @@ metres Route::totalLength() const
 
 metres Route::netLength() const
 {
-    const bool implemented = false;
+    const bool implemented = true;
     assert(implemented);
+
+
+
+    metres distance = distanceBetween(positions[0],positions.back());
+    return distance;
 }
 
 metres Route::totalHeightGain() const
 {
     metres heightGain = 0;
-    if (positions.size() == 0)
-    {
-        throw std::invalid_argument("No positions in provided route");
-    }
     if (positions.size() > 1)
     {
         for (unsigned int i = 1; i<positions.size(); ++i)
@@ -151,6 +152,10 @@ metres Route::minElevation() const
 
 metres Route::maxElevation() const // N0669298
 {
+    if (positions.size() == 0)
+    {
+        throw std::invalid_argument("No positions in provided route");
+    }    
     degrees maxElev = positions[0].elevation();
     for(auto pos : positions){
         if(pos.elevation() > maxElev)
@@ -224,8 +229,7 @@ degrees Route::steepestGradient() const
 
 Position Route::operator[](unsigned int idx) const
 {
-    const bool implemented = false;
-    assert(implemented);
+    return positions.at(idx);
 }
 
 Position Route::findPosition(const std::string & soughtName) const

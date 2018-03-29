@@ -1,6 +1,4 @@
 //Created by N0689061
-#define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE RouteTests
 #include <boost/test/unit_test.hpp>
 
 #include "logs.h"
@@ -31,7 +29,7 @@ Alternating_Elevations
 
 */
 
-BOOST_AUTO_TEST_SUITE( Net_Height_Gain )
+BOOST_AUTO_TEST_SUITE( Net_Height_Gain_Z )
 
 const bool isFileName = true;
 
