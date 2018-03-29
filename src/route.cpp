@@ -91,6 +91,8 @@ degrees Route::minLatitude() const
             minLat = positions[i].latitude();
         }
     }
+    if (minLat < -90)
+        throw std::out_of_range ("out of range");
     return minLat;
 }
 

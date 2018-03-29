@@ -24,13 +24,13 @@ BOOST_AUTO_TEST_SUITE( InsideLatRange )
 
 // Testing with positive latitudes
 BOOST_AUTO_TEST_CASE(positiveLat){
-   Route route = Route(LogFiles::GPXRoutesDir + "N0720717_positveMinLat.gpx", isFileName);
+   Route route = Route(LogFiles::GPXRoutesDir + "N0720717_positiveMinLat.gpx", isFileName);
    BOOST_CHECK_GT( route.minLatitude(), 0);
 }
 
 // Test for the correct minimum latitude in a file with only positive ones
 BOOST_AUTO_TEST_CASE(espPositiveLat){
-   Route route = Route(LogFiles::GPXRoutesDir + "N0720717_positveMinLat.gpx", isFileName);
+   Route route = Route(LogFiles::GPXRoutesDir + "N0720717_positiveMinLat.gpx", isFileName);
    BOOST_CHECK_CLOSE( route.minLatitude(), 46.42201554775238, .001);
 }
 
