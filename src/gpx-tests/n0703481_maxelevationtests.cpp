@@ -49,7 +49,7 @@ BOOST_AUTO_TEST_CASE( OnePosition )
 BOOST_AUTO_TEST_CASE( NoPositions )
 {
    Route route = Route(LogFiles::GPXRoutesDir + "n0703481_no_pos.gpx", isFileName);
-   BOOST_CHECK_EQUAL( route.maxElevation(), throw std::invalid_argument );
+   BOOST_CHECK_THROW( route.maxElevation(), std::invalid_argument );
 }
 
 
