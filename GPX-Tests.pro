@@ -22,7 +22,7 @@ SOURCES += \
     src/track.cpp \
     src/xmlparser.cpp \
     src/gpx-tests/name.cpp \
-    src/gpx-tests/totalLength-t0068955.cpp
+    src/gpx-tests/totalLength-t0068955.cpp \
     src/gpx-tests.cpp \
     #src/gpx-tests/netHeightGain_n0689061.cpp \
     src/gpx-tests/name.cpp \
