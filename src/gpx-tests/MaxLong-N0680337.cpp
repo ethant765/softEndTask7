@@ -21,11 +21,11 @@ BOOST_AUTO_TEST_CASE( MaxLongHorizontalLine )
 
 
 // Test if very small changes are detected
-//BOOST_AUTO_TEST_CASE( VerySmallChange )
-//{
- //  Route route = Route(LogFiles::GPXRoutesDir + "VerySmallChange-N0680337.gpx", isFileName);
-  // BOOST_CHECK_EQUAL( route.maxLongitude(), 10.0000002 );
-//}
+BOOST_AUTO_TEST_CASE( VerySmallChange )
+{
+   Route route = Route(LogFiles::GPXRoutesDir + "VerySmallChange-N0680337.gpx", isFileName);
+   BOOST_CHECK_EQUAL( route.maxLongitude(), 10.0000002 );
+}
 
 
 // Test that the function works with only one longitude value
