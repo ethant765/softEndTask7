@@ -49,13 +49,13 @@ BOOST_AUTO_TEST_CASE( correctnesstests_elevation_up )
  */
 BOOST_AUTO_TEST_CASE( largest_value_initial )
 {
-    BOOST_CHECK_EQUAL( Track(LogFiles::GPXTracksDir + "changingelevationmaxvalueinit.gpx", isFileName).maxRateOfDescent(), -11000);
+    BOOST_CHECK_EQUAL( Track(LogFiles::GPXTracksDir + "changingelevationmaxvalueinit.gpx", isFileName).maxRateOfDescent(), -21942);
 }
 /* In this test case the track will have the next value be a large value double
  */
 BOOST_AUTO_TEST_CASE( largest_value_next )
 {
-  BOOST_CHECK_EQUAL(Track(LogFiles::GPXTracksDir + "changingelevationtakeawaymaxvalue.gpx", isFileName).maxRateOfDescent(), 0);
+  BOOST_CHECK_EQUAL(Track(LogFiles::GPXTracksDir + "changingelevationtakeawaymaxvalue.gpx", isFileName).maxRateOfDescent(), -1388);
 }
 //In this test case the initial value will be a verry low value double
 BOOST_AUTO_TEST_CASE( lowest_value_initial )
@@ -65,18 +65,18 @@ BOOST_AUTO_TEST_CASE( lowest_value_initial )
 //In this test case the next value will be a very low value double
 BOOST_AUTO_TEST_CASE( lowest_value_next )
 {
-  BOOST_CHECK_EQUAL(Track(LogFiles::GPXTracksDir + "changingelevationlowestvaluenext.gpx", isFileName).maxRateOfDescent(), 0);
+  BOOST_CHECK_EQUAL(Track(LogFiles::GPXTracksDir + "changingelevationlowestvaluenext.gpx", isFileName).maxRateOfDescent(), -23330);
 }
 //In this test case the first value will be a high value double and the next value will be a low value double
 BOOST_AUTO_TEST_CASE( highest_init_value_lowest_next_value )
 {
-  BOOST_CHECK_EQUAL(Track(LogFiles::GPXTracksDir + "changingelevationnextlowestvalue.gpx", isFileName).maxRateOfDescent(), -23330);
+  BOOST_CHECK_EQUAL(Track(LogFiles::GPXTracksDir + "changingelevationhighestvaluetolowest.gpx", isFileName).maxRateOfDescent(), -23330);
 }
 //In this test case the first value will be a low value double and the next value will be a high value double
 BOOST_AUTO_TEST_CASE( lowest_init_value_lowest_next_value )
 {
   //returns zero
-  BOOST_CHECK_EQUAL(Track(LogFiles::GPXTracksDir + "changingelevationnextlowestvalue.gpx", isFileName).maxRateOfDescent(), 0);
+  BOOST_CHECK_EQUAL(Track(LogFiles::GPXTracksDir + "changingelevationlowestvaluetohighest.gpx", isFileName).maxRateOfDescent(), 0);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
