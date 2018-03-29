@@ -113,10 +113,10 @@ BOOST_AUTO_TEST_CASE( pythagorean ) {
 // where all routes have equal length
 // Ex: length of AB + length of RS ?= length of XY + length of OJ
 BOOST_AUTO_TEST_CASE( routes_addition) {
-    Route ab_route = Route(LogFiles::GPXRoutesDir + "ab.gpx", isFileName);
-    Route rs_route = Route(LogFiles::GPXRoutesDir + "rs.gpx", isFileName);
-    Route xy_route = Route(LogFiles::GPXRoutesDir + "xy.gpx", isFileName);
-    Route oj_route = Route(LogFiles::GPXRoutesDir + "oj.gpx", isFileName);
+    Route ab_route = Route(LogFiles::GPXRoutesDir + "AB.gpx", isFileName);
+    Route rs_route = Route(LogFiles::GPXRoutesDir + "RS.gpx", isFileName);
+    Route xy_route = Route(LogFiles::GPXRoutesDir + "XY.gpx", isFileName);
+    Route oj_route = Route(LogFiles::GPXRoutesDir + "OJ.gpx", isFileName);
     BOOST_CHECK_CLOSE(ab_route.totalLength() + rs_route.totalLength(),
                       xy_route.totalLength() + oj_route.totalLength(),
                       2);
