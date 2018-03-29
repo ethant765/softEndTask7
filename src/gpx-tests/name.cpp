@@ -18,8 +18,8 @@ BOOST_AUTO_TEST_CASE( name_present_route )
 }
 
 // Check that the name is correct for a GPX track containing a <name> element within <trk>.
-BOOST_AUTO_TEST_CASE( name_present_track )
-{
+
+BOOST_AUTO_TEST_CASE( name_present_track ){
    Track track = Track(LogFiles::GPXTracksDir + "A1B3C.gpx", isFileName);
    BOOST_CHECK_EQUAL( track.name(), "A1B3C" );
 }

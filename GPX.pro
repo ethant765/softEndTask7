@@ -11,7 +11,7 @@ HEADERS += \
     headers/route.h \
     headers/track.h \
     headers/types.h \
-    headers/xmlparser.h
+    headers/xmlparser.h \
 
 SOURCES += \
     src/earth.cpp \
