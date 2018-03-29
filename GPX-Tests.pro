@@ -21,8 +21,7 @@ SOURCES += \
     src/route.cpp \
     src/track.cpp \
     src/xmlparser.cpp \
-    src/gpx-tests/name.cpp \
-    src/gpx-tests/totalLength-t0068955.cpp
+    src/gpx-tests/totalLength-t0068955.cpp \
     src/gpx-tests.cpp \
     #src/gpx-tests/netHeightGain_n0689061.cpp \
     src/gpx-tests/name.cpp \
@@ -52,7 +51,7 @@ SOURCES += \
     src/gpx-tests/n0703481_maxelevationtests.cpp \
     src/gpx-tests/n0680788-minElevationTests.cpp \
     #src/gpx-tests/N0692013_minLongitude().cpp \
-    #src/gpx-tests/N0630057-MaxLatitudeTest.cpp
+    #src/gpx-tests/N0630057-MaxLatitudeTest.cpp \
     src/gpx-tests/MaxLong-N0680337.cpp
 
 INCLUDEPATH += headers/
