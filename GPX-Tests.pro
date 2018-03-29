@@ -45,7 +45,7 @@ SOURCES += \
     #src/gpx-tests/TestMinElev-N0719715.cpp \
     src/gpx-tests/TotalTime-N0688008-Tests.cpp \
     src/gpx-tests/n0673230_totalheightgain.cpp \
-    #src/gpx-tests/minLatTests_N0720717.cpp \
+    src/gpx-tests/minLatTests_N0720717.cpp \
     #src/gpx-tests/numPositionsTests_n0719388.cpp \
     src/gpx-tests/maxElevation-n0686300.cpp \
     #src/gpx-tests/totalTime-N0702007.cpp \
