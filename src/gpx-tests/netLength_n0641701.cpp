@@ -185,4 +185,4 @@ BOOST_AUTO_TEST_CASE(BigData)
     Route route = Route(LogFiles::GPXRoutesDir + "BigData_N0641701_MHCBA.gpx", isFileName);
     BOOST_CHECK_CLOSE(route.netLength(), 2827.47, 0.01);
 }
-}
+BOOST_AUTO_TEST_SUITE_END()
