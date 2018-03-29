@@ -48,7 +48,7 @@ SOURCES += \
     #src/gpx-tests/minLatTests_N0720717.cpp \
     #src/gpx-tests/numPositionsTests_n0719388.cpp \
     src/gpx-tests/maxElevation-n0686300.cpp \
-    src/gpx-tests/totalTime-N0702007.cpp \
+    #src/gpx-tests/totalTime-N0702007.cpp \
     src/gpx-tests/netLength_n0641701.cpp \
     src/gpx-tests/n0703481_maxelevationtests.cpp \
     src/gpx-tests/n0494166MaximumLongitude.cpp \
@@ -60,6 +60,7 @@ SOURCES += \
     #src/gpx-tests/N0630057-MaxLatitudeTest.cpp \
     src/gpx-tests/MaxLong-N0680337.cpp \
     src/gpx-tests/array-operator.cpp \
+    src/gpx-tests/n0695913.cpp \
     #src/gpx-tests/mingradient_n0719479.cpp \
     src/gpx-tests/maxGradientTests_N0686602.cpp
 

@@ -19,8 +19,10 @@ std::string Route::name() const
 
 unsigned int Route::numPositions() const
 {
-    const bool implemented = false;
+    const bool implemented = true;
     assert(implemented);
+    
+    return positions.size();
 }
 
 metres Route::totalLength() const
