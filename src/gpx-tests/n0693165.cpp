@@ -43,27 +43,17 @@ BOOST_AUTO_TEST_CASE( correctnesstests_elevation_up )
  */
 BOOST_AUTO_TEST_CASE( largest_value_initial )
 {
-<<<<<<< HEAD
     BOOST_CHECK_EQUAL( Track(LogFiles::GPXTracksDir + "changingelevationmaxvalueinit.gpx", isFileName).maxRateOfDescent(), -21942);
-=======
-    //Track track = Track(LogFiles::GPXTracksDir + "changingelevationmaxvalue.gpx", isFileName);
-    //changingelevationmaxvalue
->>>>>>> 158dc54641e8c2295613f19a8d5b15b258b7e850
 }
 /* In this test case the track will have an initial value of the lowest value double
  */
 BOOST_AUTO_TEST_CASE( largest_value_subtract )
 {
-<<<<<<< HEAD
   BOOST_CHECK_EQUAL(Track(LogFiles::GPXTracksDir + "changingelevationtakeawaymaxvalue.gpx", isFileName).maxRateOfDescent(), -1388);
-=======
-    //BOOST_CHECK_THROW(Track(LogFiles::GPXTracksDir + "changingelevationtakeawaymaxvalue.gpx", isFileName).maxRateOfDescent(), "potential underflow");
->>>>>>> 158dc54641e8c2295613f19a8d5b15b258b7e850
 }
 
 BOOST_AUTO_TEST_CASE( lowest_value_initial )
 {
-<<<<<<< HEAD
   BOOST_CHECK_EQUAL( Track(LogFiles::GPXTracksDir + "changingelevationlowestvalinit.gpx", isFileName).maxRateOfDescent(), 0);
 }
 //In this test case the next value will be a very low value double
@@ -75,19 +65,12 @@ BOOST_AUTO_TEST_CASE( lowest_value_next )
 BOOST_AUTO_TEST_CASE( highest_init_value_lowest_next_value )
 {
   BOOST_CHECK_EQUAL(Track(LogFiles::GPXTracksDir + "changingelevationhighestvaluetolowest.gpx", isFileName).maxRateOfDescent(), -23330);
-=======
-
->>>>>>> 158dc54641e8c2295613f19a8d5b15b258b7e850
 }
 
 BOOST_AUTO_TEST_CASE( lowest_value_subtract )
 {
-<<<<<<< HEAD
   //returns zero
   BOOST_CHECK_EQUAL(Track(LogFiles::GPXTracksDir + "changingelevationlowestvaluetohighest.gpx", isFileName).maxRateOfDescent(), 0);
-=======
-
->>>>>>> 158dc54641e8c2295613f19a8d5b15b258b7e850
 }
 
 BOOST_AUTO_TEST_SUITE_END()
