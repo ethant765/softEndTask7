@@ -29,7 +29,7 @@ Alternating_Elevations
 
 */
 
-BOOST_AUTO_TEST_SUITE( Net_Height_Gain )
+BOOST_AUTO_TEST_SUITE( Net_Height_Gain_Z )
 
 const bool isFileName = true;
 
