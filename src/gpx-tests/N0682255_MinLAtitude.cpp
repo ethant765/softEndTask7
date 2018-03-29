@@ -1,5 +1,4 @@
-#define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE GPXTests
+
 #include <boost/test/unit_test.hpp>
 
 #include <stdexcept>
@@ -50,7 +49,7 @@ Test 5 is placed at the end to encourage correct code before handling exceptions
     using tolerance as 0.1 as test data is widely spead +- ~10 however if there is manipulation of data
     maybe in a for loop that uses ++ then using 0.1 will distinguish between the values.
 */
-BOOST_AUTO_TEST_SUITE(MinimumLatitudeTests)
+
 
 /*
  The check single value test case holds the smallest route possible of one position.
@@ -58,7 +57,7 @@ BOOST_AUTO_TEST_SUITE(MinimumLatitudeTests)
  This is to catch functions that either manipulate the data, or return the wrong value.
  For the test data: the longditude is 1 and elevation 2 to distinguish between them if they are returned.
 */
-BOOST_AUTO_TEST_CASE(CheckSingleValue)
+BOOST_AUTO_TEST_CASE(checkSingleValue)
 {
     const bool isFileName = true;
     const std::string filePath = LogFiles::GPXRoutesDir + "singleValueN0682255.gpx";
@@ -76,7 +75,7 @@ BOOST_AUTO_TEST_CASE(CheckSingleValue)
  */
 BOOST_AUTO_TEST_SUITE(DataSetPatterns)
 
-BOOST_AUTO_TEST_CASE(CheckAscending)
+BOOST_AUTO_TEST_CASE(checkAscending)
 {
     const bool isFileName = true;
     const std::string filePath = LogFiles::GPXRoutesDir + "posAscendN0682255.gpx";
@@ -87,7 +86,7 @@ BOOST_AUTO_TEST_CASE(CheckAscending)
 
 }
 
-BOOST_AUTO_TEST_CASE(CheckDescending)
+BOOST_AUTO_TEST_CASE(checkDescending)
 {
     const bool isFileName = true;
     const std::string filePath = LogFiles::GPXRoutesDir + "posDescendN0682255.gpx";
@@ -98,7 +97,7 @@ BOOST_AUTO_TEST_CASE(CheckDescending)
 
 }
 
-BOOST_AUTO_TEST_CASE(CheckPosativeStaggered)
+BOOST_AUTO_TEST_CASE(checkPosativeStaggered)
 {
     const bool isFileName = true;
     const std::string filePath = LogFiles::GPXRoutesDir + "posStaggeredN0682255.gpx";
@@ -115,7 +114,7 @@ BOOST_AUTO_TEST_SUITE_END()
     This test suit tests if the function can handle positive , negative and a mixture of the both.
  */
 BOOST_AUTO_TEST_SUITE(ValueHandling)
-BOOST_AUTO_TEST_CASE(CheckPositive)
+BOOST_AUTO_TEST_CASE(checkPositive)
 {
     const bool isFileName = true;
     const std::string filePath = LogFiles::GPXRoutesDir + "posStaggeredN0682255.gpx";
@@ -126,7 +125,7 @@ BOOST_AUTO_TEST_CASE(CheckPositive)
 
 }
 
-BOOST_AUTO_TEST_CASE(CheckDescending)
+BOOST_AUTO_TEST_CASE(checkNegative)
 {
     const bool isFileName = true;
     const std::string filePath = LogFiles::GPXRoutesDir + "negStaggeredN0682255.gpx";
@@ -137,7 +136,7 @@ BOOST_AUTO_TEST_CASE(CheckDescending)
 
 }
 
-BOOST_AUTO_TEST_CASE(CheckPosativeStaggered)
+BOOST_AUTO_TEST_CASE(checkPosativeandNegative)
 {
     const bool isFileName = true;
     const std::string filePath = LogFiles::GPXRoutesDir + "posNegStaggeredN0682255.gpx";
@@ -154,7 +153,7 @@ BOOST_AUTO_TEST_SUITE_END()
     This test case uses large data sets. It also uses values with very similar numbers
 so the tolerance has to be of greater precision. Otherwise the test may be passed.
  */
-BOOST_AUTO_TEST_CASE(CheckLargeData)
+BOOST_AUTO_TEST_CASE(checkLargeData)
 {
     const bool isFileName = true;
     const std::string filePath = LogFiles::GPXRoutesDir + "NorthYorkMoors.gpx";
@@ -193,7 +192,6 @@ BOOST_AUTO_TEST_CASE(checkLessThanMinus90)
 }
 BOOST_AUTO_TEST_SUITE_END()
 
-BOOST_AUTO_TEST_SUITE_END()
 
 
-//add test for accuracy
+
