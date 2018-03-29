@@ -12,140 +12,184 @@ BOOST_AUTO_TEST_SUITE( Route_maxGradient_N0697611 )
 const bool isFileName = true;
 
 
-BOOST_AUTO_TEST_CASE( elev_zero_throughout )
+BOOST_AUTO_TEST_CASE( elev_zero_throughout )//checks that the output is 0 if all elevations are 0
 {
    Route route = Route(LogFiles::GPXRoutesDir + "ABCD.gpx", isFileName);
    BOOST_CHECK_EQUAL( route.maxGradient(), 0 );
 }
 
-//BOOST_AUTO_TEST_CASE( NorthYorkMoors)
-//{
-
-
-//Route route = Route(LogFiles::GPXRoutesDir + "NorthYorkMoors.gpx", isFileName);
-//BOOST_CHECK_EQUAL( route.maxGradient(), 0 );
-//}
-
-
-//BOOST_AUTO_TEST_CASE( Route30Positions)
-//{
-
-
-//Route route = Route(LogFiles::GPXRoutesDir + "Route30Positions.gpx", isFileName);
-//BOOST_CHECK_EQUAL( route.maxGradient(), 0 );
-//}
-
-
-
-//BOOST_AUTO_TEST_CASE( N0697611_modified_ABBM)
-//{
-
-
-//Route route = Route(LogFiles::GPXRoutesDir + "N0697611_modified_ABBM.gpx", isFileName);
-//BOOST_CHECK_EQUAL( route.maxGradient(), 0 );
-//}
-
-
-//BOOST_AUTO_TEST_CASE( N0697611_OnlyDownhill)
-//{
-
-
-//Route route = Route(LogFiles::GPXRoutesDir + "N0697611_OnlyDownhill.gpx", isFileName);
-//BOOST_CHECK_EQUAL( route.maxGradient(), 0 );
-//}
-
-BOOST_AUTO_TEST_CASE( N0697611_CHMR)
+BOOST_AUTO_TEST_CASE( One_Point )//checks that the output is 0 when there is only 1 position
 {
-
-
-Route route = Route(LogFiles::GPXRoutesDir + "N0697611_CHMR.gpx", isFileName);
-BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(20,1000)),0.1) ;
+   Route route = Route(LogFiles::GPXRoutesDir + "N0697611_M_OnePoint.gpx", isFileName);
+   BOOST_CHECK_EQUAL( route.maxGradient(), 0 );
 }
 
-BOOST_AUTO_TEST_CASE( N0697611_MRSXY)
+
+BOOST_AUTO_TEST_CASE(  typical_flat)//Checks that a flat route still returns 0 at an elevation other than 0
 {
+Route route = Route(LogFiles::GPXRoutesDir + "N0697611_ACE_CliftonCampus.gpx", isFileName);
 
-
-Route route = Route(LogFiles::GPXRoutesDir + "N0697611_MRSXY.gpx", isFileName);
-BOOST_CHECK_EQUAL( route.maxGradient(), 0 );
-}
-
-BOOST_AUTO_TEST_CASE( N0697611_MSY_DownhillOnly)
-{
-
-
-Route route = Route(LogFiles::GPXRoutesDir + "N0697611_MSY_DownhillOnly.gpx", isFileName);
-BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(-20,1414)),0.1) ;
-}
-
-BOOST_AUTO_TEST_CASE( N0697611_MRW_DownhillOnly)
-{
-
-
-Route route = Route(LogFiles::GPXRoutesDir + "N0697611_MRW_DownhillOnly.gpx", isFileName);
-BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(-20,1000)),0.1) ;
-}
-
-BOOST_AUTO_TEST_CASE( N0697611_MR_Equator_DownhillOnly)
-{
-
-
-Route route = Route(LogFiles::GPXRoutesDir + "N0697611_MR_Equator_DownhillOnly.gpx", isFileName);
-BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(-20,1000)),0.1) ;
-}
-
-BOOST_AUTO_TEST_CASE( N0697611_MN_Equator_DownhillOnly)
-{
-
-
-Route route = Route(LogFiles::GPXRoutesDir + "N0697611_MN_Equator_DownhillOnly.gpx", isFileName);
-BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(-20,1000)),0.1) ;
+BOOST_CHECK_CLOSE(route.maxGradient(), 0,0.1) ;
 
 }
 
-BOOST_AUTO_TEST_CASE( N0697611_HMR_NorthPole)
+
+BOOST_AUTO_TEST_CASE( typical_uphill)//Checks that a correct uphill gradient is calculated
 {
+Route route = Route(LogFiles::GPXRoutesDir + "N0697611_CHM_CliftonCampus.gpx", isFileName);
 
-
-Route route = Route(LogFiles::GPXRoutesDir + "N0697611_HMR_NorthPole.gpx", isFileName);
-BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(20,100)),0.1) ;
-
-}
-
-BOOST_AUTO_TEST_CASE( N0697611_MR_NorthPole)
-{
-
-
-Route route = Route(LogFiles::GPXRoutesDir + "N0697611_MR_NorthPole.gpx", isFileName);
-BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(-20,100)),0.1) ;
-
-}
-
-BOOST_AUTO_TEST_CASE( N0697611_HR_NorthPole)
-{
-
-
-Route route = Route(LogFiles::GPXRoutesDir + "N0697611_HR_NorthPole.gpx", isFileName);
-BOOST_CHECK_EQUAL(route.maxGradient(), 0) ;
+BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(100,1000)),0.1) ;
 
 }
 
 
 
-BOOST_AUTO_TEST_CASE( N0697611_MRX_Pontianak)
+BOOST_AUTO_TEST_CASE(  typical_downhill)//Checks that a correct downhill gradient is calculated
 {
+Route route = Route(LogFiles::GPXRoutesDir + "N0697611_MRW_CliftonCampus.gpx", isFileName);
 
-
-Route route = Route(LogFiles::GPXRoutesDir + "N0697611_MRX_Pontianak.gpx", isFileName);
-BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(-20,100)),0.1) ;
+BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(-100,1000)),0.1) ;
 
 }
-BOOST_AUTO_TEST_CASE( N0697611_KLMN_Pontianak)
+
+BOOST_AUTO_TEST_CASE( typical_uturn)//Checks that if two gradients of equal magnitude, but one positive and one negative, the positive one is the one returned
 {
+Route route = Route(LogFiles::GPXRoutesDir + "N0697611_JIGQST_CliftonCampus.gpx", isFileName);
 
-
-Route route = Route(LogFiles::GPXRoutesDir + "N0697611_KLMN_Pontianak.gpx", isFileName);
-BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(1000000,100)),0.1) ;
+BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(100,1000)),0.1) ;
 
 }
+
+
+//
+BOOST_AUTO_TEST_CASE( Flat_near_equator)
+{
+Route route = Route(LogFiles::GPXRoutesDir + "N0697611_ACE_Pontianak.gpx", isFileName);
+
+BOOST_CHECK_CLOSE(route.maxGradient(), 0,0.1) ;
+
+}
+
+BOOST_AUTO_TEST_CASE( Equatorial_uphill)
+{
+Route route = Route(LogFiles::GPXRoutesDir + "N0697611_CHM_Pontianak.gpx", isFileName);
+
+BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(100,1000)),0.1) ;
+
+}
+
+
+
+BOOST_AUTO_TEST_CASE( Equatorial_downhill)
+{
+Route route = Route(LogFiles::GPXRoutesDir + "N0697611_MRW_Pontianak.gpx", isFileName);
+
+BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(-100,1000)),0.1) ;
+
+}
+
+BOOST_AUTO_TEST_CASE( Equatorial_uturn)//Checks that if two gradients of equal magnitude, but one positive and one negative, the positive one is the one returned
+{                                       //this test repeats this at the equator
+Route route = Route(LogFiles::GPXRoutesDir + "N0697611_JIGQST_Pontianak.gpx", isFileName);
+
+BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(100,1000)),0.1) ;
+
+}
+
+
+
+//
+
+
+BOOST_AUTO_TEST_CASE( EquatorialMeridian_uturn)//Checks that if two gradients of equal magnitude, but one positive and one negative, the positive one is the one returned
+{                                               //This test repeats this at the equatorial meridian
+Route route = Route(LogFiles::GPXRoutesDir + "N0697611_JIGQST_EquatorialMeridian.gpx", isFileName);
+
+BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(100,1000)),0.1) ;
+
+}
+
+//
+
+BOOST_AUTO_TEST_CASE( EquatorialAntiMeridian_uturn)//Checks that if two gradients of equal magnitude, but one positive and one negative, the positive one is the one returned
+{                                                   //this test repeats this at the equatorial anti meridian
+Route route = Route(LogFiles::GPXRoutesDir + "N0697611_JIGQST_EquatorialAntiMeridian.gpx", isFileName);
+
+BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(100,1000)),0.1) ;
+
+}
+
+
+
+//
+
+
+BOOST_AUTO_TEST_CASE( NorthPole_uturn)
+{
+Route route = Route(LogFiles::GPXRoutesDir + "N0697611_JIGQST_NorthPole.gpx", isFileName);
+
+BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(100,1000)),0.1) ;
+
+}
+
+BOOST_AUTO_TEST_CASE( NorthPole_uphill)
+{
+Route route = Route(LogFiles::GPXRoutesDir + "N0697611_CHM_NorthPole.gpx", isFileName);
+
+BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(100,1000)),0.1) ;
+
+}
+
+BOOST_AUTO_TEST_CASE( Northpole_flat)
+{
+Route route = Route(LogFiles::GPXRoutesDir + "N0697611_ACE_NorthPole.gpx", isFileName);
+
+BOOST_CHECK_CLOSE(route.maxGradient(), 0,0.1) ;
+
+}
+
+BOOST_AUTO_TEST_CASE( NorthPole_downhill)
+{
+Route route = Route(LogFiles::GPXRoutesDir + "N0697611_MRW_NorthPole.gpx", isFileName);
+
+BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(-100,1000)),0.1) ;
+
+}
+
+
+BOOST_AUTO_TEST_CASE( Flat_then_up)
+{
+Route route = Route(LogFiles::GPXRoutesDir + "N0697611_VWXS_FlatThenUp.gpx", isFileName);
+
+BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(100,1000)),0.1) ;
+
+}
+
+BOOST_AUTO_TEST_CASE( Flat_then_down)
+{
+Route route = Route(LogFiles::GPXRoutesDir + "N0697611_GHID_FlatThenDown.gpx", isFileName);
+
+BOOST_CHECK_CLOSE(route.maxGradient(), 0,0.1) ;
+
+}
+
+BOOST_AUTO_TEST_CASE( Steep_up)
+{
+Route route = Route(LogFiles::GPXRoutesDir + "N0697611_LM_Steepup.gpx", isFileName);
+
+BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(10000000,100)),0.1) ;
+
+}
+
+
+BOOST_AUTO_TEST_CASE( Steep_down)
+{
+Route route = Route(LogFiles::GPXRoutesDir + "N0697611_MN_Steepdown.gpx", isFileName);
+
+BOOST_CHECK_CLOSE(route.maxGradient(), radToDeg(atan2(-10000000,100)),0.1) ;
+
+}
+
+
+
 BOOST_AUTO_TEST_SUITE_END()
