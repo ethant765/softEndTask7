@@ -63,7 +63,8 @@ SOURCES += \
     src/gpx-tests/netLengthT0073651.cpp \
     src/gpx-tests/n0695913.cpp \
     #src/gpx-tests/mingradient_n0719479.cpp \
-    src/gpx-tests/maxGradientTests_N0686602.cpp
+    src/gpx-tests/maxGradientTests_N0686602.cpp \
+    src/gpx-tests/averageSpeed(N0695426).cpp
 
 INCLUDEPATH += headers/
 
