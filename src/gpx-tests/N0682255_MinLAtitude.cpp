@@ -49,6 +49,7 @@ Test 5 is placed at the end to encourage correct code before handling exceptions
     using tolerance as 0.1 as test data is widely spead +- ~10 however if there is manipulation of data
     maybe in a for loop that uses ++ then using 0.1 will distinguish between the values.
 */
+BOOST_AUTO_TEST_SUITE(n0682255)
 
 
 /*
@@ -191,7 +192,7 @@ BOOST_AUTO_TEST_CASE(checkLessThanMinus90)
 
 }
 BOOST_AUTO_TEST_SUITE_END()
-
+BOOST_AUTO_TEST_SUITE_END()
 
 
 
