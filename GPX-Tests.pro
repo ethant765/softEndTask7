@@ -21,7 +21,6 @@ SOURCES += \
     src/route.cpp \
     src/track.cpp \
     src/xmlparser.cpp \
-
     src/gpx-tests/n0693955-totalheightgaintests.cpp \
     src/gpx-tests/name.cpp \
     src/gpx-tests/totalLength-t0068955.cpp
