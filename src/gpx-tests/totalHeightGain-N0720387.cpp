@@ -68,5 +68,49 @@ BOOST_AUTO_TEST_CASE( inclineDecline )
    BOOST_CHECK_EQUAL( route.totalHeightGain(), 100 );
 }
 
+/*
+Test case checks that lots of big inclines and declines following eachother, going over
+and under the sea level is correctly calculated.
+*/
+BOOST_AUTO_TEST_CASE( changesLotsAcrossSea )
+{
+   Route route = Route(LogFiles::GPXRoutesDir + "N0720387-changesAcrossSeaLevel.gpx", isFileName);
+   BOOST_CHECK_EQUAL( route.totalHeightGain(), 60000 );
+}
+
+/*
+Test case checks that a log file with one position functions correctly and does not attempt
+to access a second element of the vector, causing memory access violation. The route with
+one point does not gain height and thus total height gained should be 0.
+*/
+BOOST_AUTO_TEST_CASE( onePosition )
+{
+   Route route = Route(LogFiles::GPXRoutesDir + "N0720387-onePosition.gpx", isFileName);
+   BOOST_CHECK_EQUAL( route.totalHeightGain(), 0 );
+}
+
+/*
+Test case checks that a log file with huge increases in elevation are stored correctly,
+although this may be an unrealistic log file, it assures that long routes can store
+their total effectively.
+*/
+BOOST_AUTO_TEST_CASE( largeIncrease )
+{
+   Route route = Route(LogFiles::GPXRoutesDir + "N0720387-largeIncrease.gpx", isFileName);
+   BOOST_CHECK_EQUAL( route.totalHeightGain(), 26000000000 );
+}
+
+/*
+Test case checks that a log file with tiny increases in elevation are correctly picked up
+and tracked, although this may be too precise of a precision compared to a real life
+instrument that creates GPX log files, this test proves that the function can handle tiny
+increases and is not limited by data types.
+*/
+BOOST_AUTO_TEST_CASE( smallIncrease )
+{
+   Route route = Route(LogFiles::GPXRoutesDir + "N0720387-smallIncrease.gpx", isFileName);
+   BOOST_CHECK_CLOSE( route.totalHeightGain(), 0.00026, 0.0000000001 );
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 

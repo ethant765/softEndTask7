@@ -107,7 +107,7 @@ BOOST_AUTO_TEST_CASE( AcrossMaxLongitudeWithNoLoopBackwards )
 BOOST_AUTO_TEST_CASE( SmallLongChanges )
 {
    Route route = Route(LogFiles::GPXRoutesDir + "LongitudeChangeOf0000001.gpx", isFileName);
-   BOOST_CHECK_EQUAL( route.maxLongitude(), 1.0000004);
+   BOOST_CHECK_EQUAL( route.maxLongitude(), -1.0000000);
 }
 
 // A test case to test that the right Longitude is being returned from a GPX file where the gridworld represents a straight vertical line

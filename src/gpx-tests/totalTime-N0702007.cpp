@@ -4,11 +4,10 @@
 #include "route.h"
 #include "track.h"	
 
+const bool isFileName = true;
 using namespace GPS;
 
-BOOST_AUTO_TEST_SUITE( Route_name )
-
-const bool isFileName = true;
+BOOST_AUTO_TEST_SUITE( totalTime_N0702007 )
 
 /*
 	Function: Total Time
@@ -106,38 +105,44 @@ const bool isFileName = true;
 */
 
 
+
 // Tests for correct, ordered values
 BOOST_AUTO_TEST_CASE( totaltime_correct_set1)
 {
-   Route route = Route(LogFiles::GPXTracksDir + "TrackDuration10.gpx", isFileName);
-   BOOST_CHECK_EQUAL( route.name(), 40 );	
+   Track track = Track(LogFiles::GPXTracksDir + "TrackDuration10.gpx", isFileName);
+   BOOST_CHECK_EQUAL( track.totalTime(), 40 );	
+
 }
-BOOST_AUTO_TEST_CASE( totaltime_correct_set1)
+BOOST_AUTO_TEST_CASE( totaltime_correct_set2)
 {
-   Route route = Route(LogFiles::GPXTracksDir + "TrackDuration1.gpx", isFileName);
-   BOOST_CHECK_EQUAL( route.name(), 3 );	
+   Track track = Track(LogFiles::GPXTracksDir + "TrackDuration1.gpx", isFileName);
+   BOOST_CHECK_EQUAL( track.totalTime(), 3 );	
+
 }
 
 // This test also covers the 'large quantity of points' point to a reasonable standard
 BOOST_AUTO_TEST_CASE( totaltime_large_quantity)
 {
-   Route route = Route(LogFiles::GPXTracksDir + "TrackMultiplePoints.gpx", isFileName);
-   BOOST_CHECK_EQUAL( route.name(), 21000 );	
+   Track track = Track(LogFiles::GPXTracksDir + "TrackMultiplePoints.gpx", isFileName);
+   BOOST_CHECK_EQUAL( track.totalTime(), 21000 );
+
 }
 
 
 // Test for disordered first value
 BOOST_AUTO_TEST_CASE( totaltime_earliest_disordered)
 {
-   Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeEarliestOffset.gpx", isFileName);
-   BOOST_CHECK_EQUAL( route.name(), 40 );	
+   Track track = Track(LogFiles::GPXTracksDir + "N0702007TrackTimeEarliestOffset.gpx", isFileName);
+   BOOST_CHECK_EQUAL( track.totalTime(), 40 );	
+
 }
 
 // Test for disordered last value
 BOOST_AUTO_TEST_CASE( totaltime_latest_disordered)
 {
-   Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeLatestOffset.gpx", isFileName);
-   BOOST_CHECK_EQUAL( route.name(), 40 );	
+   Track track = Track(LogFiles::GPXTracksDir + "N0702007TrackTimeLatestOffset.gpx", isFileName);
+   BOOST_CHECK_EQUAL( track.totalTime(), 40 );	
+   
 }
 
 
@@ -146,8 +151,9 @@ BOOST_AUTO_TEST_CASE( totaltime_latest_disordered)
 // Test for time going backwards
 BOOST_AUTO_TEST_CASE( totaltime_backwards)
 {
-   Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeBackwards.gpx", isFileName);
-   BOOST_CHECK_EQUAL( route.name(), 60 );	
+   Track track = Track(LogFiles::GPXTracksDir + "N0702007TrackTimeBackwards.gpx", isFileName);
+   BOOST_CHECK_EQUAL( track.totalTime(), 60 );	
+   
 }
 
 
@@ -155,51 +161,59 @@ BOOST_AUTO_TEST_CASE( totaltime_backwards)
 // Test for disordered first & last values, first before last
 BOOST_AUTO_TEST_CASE( totaltime_disordered_fbl)
 {
-   Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeFirstBeforeLast.gpx", isFileName);
-   BOOST_CHECK_EQUAL( route.name(), 60 );	
+   Track track = Track(LogFiles::GPXTracksDir + "N0702007TrackTimeFirstBeforeLast.gpx", isFileName);
+   BOOST_CHECK_EQUAL( track.totalTime(), 60 );	
+   
 }
 
 
 // Test for disordered first & last values, last before first
 BOOST_AUTO_TEST_CASE( totaltime_disordered_lbf)
 {
-   Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeLastBeforeFirst.gpx", isFileName);
-   BOOST_CHECK_EQUAL( route.name(), 60 );	
+   Track track = Track(LogFiles::GPXTracksDir + "N0702007TrackTimeLastBeforeFirst.gpx", isFileName);
+   BOOST_CHECK_EQUAL( track.totalTime(), 60 );	
+   
 }
 
 
 // Test for largest integer
 BOOST_AUTO_TEST_CASE( totaltime_maxull)
 {
-   Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeLargestPossible.gpx", isFileName);
-   BOOST_CHECK_EQUAL( route.name(), 18446744073709551615 );	
+   Track track = Track(LogFiles::GPXTracksDir + "N0702007TrackTimeLargestPossible.gpx", isFileName);
+   BOOST_CHECK_EQUAL( track.totalTime(), 18446744073709551615ull );
+   
 }
 
 // Tests for duplicate values
 BOOST_AUTO_TEST_CASE( totaltime_start_duplicate)
 {
-   Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeSameValuesStart.gpx", isFileName);
-   BOOST_CHECK_EQUAL( route.name(), 40 );
+   Track track = Track(LogFiles::GPXTracksDir + "N0702007TrackTimeSameValuesStart.gpx", isFileName);
+   BOOST_CHECK_EQUAL( track.totalTime(), 40 );
+   
 }
 BOOST_AUTO_TEST_CASE( totaltime_end_duplicate)
 {
-   Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeSameValuesEnd.gpx", isFileName);
-   BOOST_CHECK_EQUAL( route.name(), 40 );
+   Track track = Track(LogFiles::GPXTracksDir + "N0702007TrackTimeSameValuesEnd.gpx", isFileName);
+   BOOST_CHECK_EQUAL( track.totalTime(), 40 );
+   
 }
 BOOST_AUTO_TEST_CASE( totaltime_startend_duplicate)
 {
-   Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeSameValuesStartEnd.gpx", isFileName);
-   BOOST_CHECK_EQUAL( route.name(), 40 );
+   Track track = Track(LogFiles::GPXTracksDir + "N0702007TrackTimeSameValuesStartEnd.gpx", isFileName);
+   BOOST_CHECK_EQUAL( track.totalTime(), 40 );
+   
 }
 BOOST_AUTO_TEST_CASE( totaltime_startend_duplicate_disordered)
 {
-   Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeSameValuesStartEndDisordered.gpx", isFileName);
-   BOOST_CHECK_EQUAL( route.name(), 40 );
+   Track track = Track(LogFiles::GPXTracksDir + "N0702007TrackTimeSameValuesStartEndDisordered.gpx", isFileName);
+   BOOST_CHECK_EQUAL( track.totalTime(), 40 );
+   
 }
 BOOST_AUTO_TEST_CASE( totaltime_startend_duplicate_disordered_lbf)
 {
-   Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeSameValuesStartEndDisorderedEndBeforeStart.gpx", isFileName);
-   BOOST_CHECK_EQUAL( route.name(), 40 );
+   Track track = Track(LogFiles::GPXTracksDir + "N0702007TrackTimeSameValuesStartEndDisorderedEndBeforeStart.gpx", isFileName);
+   BOOST_CHECK_EQUAL( track.totalTime(), 40 );
+   
 }
 
 
@@ -208,13 +222,15 @@ BOOST_AUTO_TEST_CASE( totaltime_startend_duplicate_disordered_lbf)
 // Tests for same start & end
 BOOST_AUTO_TEST_CASE( totaltime_same_startend)
 {
-   Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeSameStartEnd.gpx", isFileName);
-   BOOST_CHECK_EQUAL( route.name(), 0 );
+   Track track = Track(LogFiles::GPXTracksDir + "N0702007TrackTimeSameStartEnd.gpx", isFileName);
+   BOOST_CHECK_EQUAL( track.totalTime(), 0 );
+   
 }
 BOOST_AUTO_TEST_CASE( totaltime_same_startend_nonzero)
 {
-   Route route = Route(LogFiles::GPXTracksDir + "N0702007TrackTimeSameStartEndNonzero.gpx", isFileName);
-   BOOST_CHECK_EQUAL( route.name(), 0 );
+   Track track = Track(LogFiles::GPXTracksDir + "N0702007TrackTimeSameStartEndNonzero.gpx", isFileName);
+   BOOST_CHECK_EQUAL( track.totalTime(), 0 );
+   
 }
 
 

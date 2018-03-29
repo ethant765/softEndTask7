@@ -100,3 +100,4 @@ BOOST_AUTO_TEST_CASE( small_data_check )
 }
 
 BOOST_AUTO_TEST_SUITE_END()
+

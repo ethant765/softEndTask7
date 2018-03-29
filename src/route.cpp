@@ -9,7 +9,7 @@
 #include "geometry.h"
 #include "earth.h"
 #include "route.h"
-
+#include "position.h"
 using namespace GPS;
 
 std::string Route::name() const
@@ -19,8 +19,10 @@ std::string Route::name() const
 
 unsigned int Route::numPositions() const
 {
-    const bool implemented = false;
+    const bool implemented = true;
     assert(implemented);
+    
+    return positions.size();
 }
 
 metres Route::totalLength() const
@@ -30,20 +32,42 @@ metres Route::totalLength() const
 
 metres Route::netLength() const
 {
-    const bool implemented = false;
+    const bool implemented = true;
     assert(implemented);
+
+
+
+    metres distance = distanceBetween(positions[0],positions.back());
+    return distance;
 }
 
 metres Route::totalHeightGain() const
 {
-    const bool implemented = false;
-    assert(implemented);
+    metres heightGain = 0;
+    if (positions.size() > 1)
+    {
+        for (unsigned int i = 1; i<positions.size(); ++i)
+        {
+            if (positions[i].elevation()-positions[i-1].elevation()>0)
+            {
+                heightGain += positions[i].elevation()-positions[i-1].elevation();
+            }
+        }
+    }
+    return heightGain;
 }
 
 metres Route::netHeightGain() const
 {
-    const bool implemented = false;
-    assert(implemented);
+    std::vector<Position>::const_iterator first, last;
+    first = positions.begin();
+    last =  positions.end() - 1;
+    if (last->elevation() - first->elevation() > 0){
+        return last->elevation() - first->elevation();
+    }
+    else{
+        return 0;
+    }
 }
 
 degrees Route::minLatitude() const
@@ -67,6 +91,8 @@ degrees Route::minLatitude() const
             minLat = positions[i].latitude();
         }
     }
+    if (minLat < -90)
+        throw std::out_of_range ("out of range");
     return minLat;
 }
 
@@ -91,8 +117,9 @@ degrees Route::maxLatitude() const
 
 degrees Route::minLongitude() const
 {
-    const bool implemented = false;
+     const bool implemented = false;
     assert(implemented);
+
 }
 
 degrees Route::maxLongitude() const
@@ -120,27 +147,26 @@ degrees Route::maxLongitude() const
 
 metres Route::minElevation() const
 {
-    const bool implemented = false;
-    assert(implemented);
+    degrees minElev = positions[0].elevation();
+    for(auto pos : positions){
+        if(pos.elevation() < minElev)
+            minElev = pos.elevation();
+    }
+    return minElev;
 }
 
 metres Route::maxElevation() const // N0669298
 {
-    const bool implemented = true;
-    assert(implemented);
-
-
-    int MaxIndex = 0;
-    for (int i = 0; i < positions.size() ; i++)
+    if (positions.size() == 0)
     {
-
-        if (positions[i].elevation() > positions[MaxIndex].elevation()) {
-            MaxIndex = i;
-        }
-
+        throw std::invalid_argument("No positions in provided route");
+    }    
+    degrees maxElev = positions[0].elevation();
+    for(auto pos : positions){
+        if(pos.elevation() > maxElev)
+            maxElev = pos.elevation();
     }
-
-    return positions[MaxIndex].elevation();
+    return maxElev;
 }
 
 degrees Route::maxGradient() const
@@ -209,19 +235,49 @@ degrees Route::maxGradient() const
 
 degrees Route::minGradient() const
 {
-    const bool implemented = false;
+    const bool implemented = true;
     assert(implemented);
 
-    degrees smallestGrad = positions[1].elevation() - positions[0].elevation();
-
-    for(size_t x=2; x<positions.size(); x++)
+    if (positions.size()<2)
     {
-        if((positions[x].elevation() - positions[x-1].elevation()) < smallestGrad)
+        throw std::invalid_argument("Gradient cannot be worked out when using only one point");
+    }
+
+    degrees minGradient;
+    degrees temp, deltaH,deltaV;
+
+    deltaH = distanceBetween(positions[0], positions[1]);
+    deltaV = positions[0].elevation() - positions[1].elevation();
+
+    minGradient=sqrt(pow(deltaH,2) + pow(deltaV,2));
+    if(deltaV==0)
+    {
+        minGradient=0;
+    }
+    if (positions[0].elevation() > positions[1].elevation())
+    {
+        minGradient = -minGradient;
+    }
+    for (unsigned int i = 2; i < positions.size(); ++i )
+    {
+        deltaH = distanceBetween(positions[i-1], positions[i]);
+        deltaV = positions[i-1].elevation() - positions[i].elevation();
+        temp= sqrt(pow(deltaH,2) + pow(deltaV,2));
+        if(deltaV==0)
         {
-            smallestGrad = positions[x].elevation() - positions[x-1].elevation();
+            temp=0;
+        }
+        if(positions[i-1].elevation() > positions[i].elevation())
+        {
+            temp = -temp;
+        }
+
+        if(temp<minGradient)
+        {
+            minGradient=temp;
         }
     }
-    return smallestGrad;
+    return minGradient;
 
 }
 
@@ -233,8 +289,7 @@ degrees Route::steepestGradient() const
 
 Position Route::operator[](unsigned int idx) const
 {
-    const bool implemented = false;
-    assert(implemented);
+    return positions.at(idx);
 }
 
 Position Route::findPosition(const std::string & soughtName) const
