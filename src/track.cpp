@@ -89,16 +89,27 @@
     }
 
 
-
+    //N0687265
     speed Track::maxRateOfAscent() const
-
     {
-
-        const bool implemented = false;
-
+        const bool implemented = true;
         assert(implemented);
 
+        seconds time;
+        metres elevation;
+        speed rate, topRate = 0;
+        for(unsigned long int i = 1; i < positions.size(); ++i){
+            time = arrived[i] - departed[i-1];
+            elevation = positions[i].elevation() - positions[i-1].elevation();
+            rate = elevation / time;
+            if(rate > topRate){
+                topRate = rate;
+            }
+        }
+
+        return topRate;
     }
+
 
 
 
