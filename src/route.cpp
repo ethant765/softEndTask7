@@ -179,10 +179,7 @@ degrees Route::maxGradient() const
 
     degrees largestGradient;
     degrees testGradient;
-    std::cout<<" New:\n "<< distanceBetween(positions[0],positions[1]) <<std::endl;
-    std::cout<<positions[1].elevation() <<" : "<< positions[0].elevation() << " : d:"<<distanceBetween(positions[1],positions[0])<<std::endl;
-    std::cout<<radToDeg(atan2((positions[1].elevation() - positions[0].elevation()),distanceBetween(positions[1],positions[0])))<<std::endl;
-
+ 
     if (distanceBetween(positions[0],positions[1])>0) {
         largestGradient =radToDeg(atan2((positions[1].elevation() - positions[0].elevation()),distanceBetween(positions[1],positions[0])));
         testGradient = largestGradient;
@@ -227,8 +224,7 @@ degrees Route::maxGradient() const
         if(testGradient > largestGradient){
              largestGradient = testGradient;
         }
-        std::cout<<positions[x].elevation() <<" : "<< positions[x-1].elevation() << " : d:"<<distanceBetween(positions[x],positions[x-1])<<std::endl;
-        std::cout<<testGradient<<" > "<<largestGradient<<std::endl;
+        
      }
     return largestGradient;
 }
