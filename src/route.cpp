@@ -41,24 +41,6 @@ metres Route::netLength() const
 
 metres Route::totalHeightGain() const
 {
-<<<<<<< HEAD
-    const bool implemented = true;
-    assert(implemented);
-
-    metres totalHeight = 0;
-
-    for(unsigned int i = 1; i < positions.size(); i++)
-    {
-        metres temp = positions[i].elevation() - positions[i-1].elevation();
-
-        if(temp > 0)
-        {
-           totalHeight += temp;
-        }
-
-    }
-    return totalHeight;
-=======
     metres heightGain = 0;
     if (positions.size() > 1)
     {
@@ -71,7 +53,6 @@ metres Route::totalHeightGain() const
         }
     }
     return heightGain;
->>>>>>> 2baea8d5f4d2242c51d39fe2287a030d07e6ee59
 }
 
 metres Route::netHeightGain() const
@@ -89,15 +70,45 @@ metres Route::netHeightGain() const
 
 degrees Route::minLatitude() const
 {
-    const bool implemented = false;
+    const bool implemented = true;
     assert(implemented);
+//    degrees minLat = positions[0].latitude();
+//    for(unsigned int i = 1; i < positions.length(); i++)
+//    {
+//        if(positions[i].latitude() < minLat)
+//        {
+//            minLat = positions[i].latitude();
+//        }
+//    }
+//    return minLat;
+    degrees minLat = positions[0].latitude();
+    for(unsigned int i = 1; i < positions.size(); i++)
+    {
+        if(positions[i].latitude() < minLat)
+        {
+            minLat = positions[i].latitude();
+        }
+    }
+    return minLat;
 }
 
 degrees Route::maxLatitude() const
 {
-    const bool implemented = false;
+    const bool implemented = true;
 
     assert(implemented);
+
+    int Maximum = 0;
+    for (int i = 0; i < positions.size() ; i++)
+    {
+
+        if (positions[i].latitude() > positions[Maximum].latitude()) {
+            Maximum = i;
+        }
+
+    }
+
+    return positions[Maximum].latitude();
 }
 
 degrees Route::minLongitude() const
@@ -108,10 +119,25 @@ degrees Route::minLongitude() const
 
 degrees Route::maxLongitude() const
 {
-    const bool implemented = false;
+    const bool implemented = true;
 
     assert(implemented);
 
+    int MaximumIndex = 0;
+    for (unsigned int i = 0; i < positions.size() ; i++)
+    {
+
+        if ((positions[i].longitude() > 180) || (positions[i].longitude() < -180)){
+            throw std::out_of_range("Not in bounds of long");
+        }
+
+        if (positions[i].longitude() > positions[MaximumIndex].longitude()) {
+            MaximumIndex = i;
+        }
+
+    }
+
+    return positions[MaximumIndex].longitude();
 }
 
 metres Route::minElevation() const
@@ -124,12 +150,8 @@ metres Route::minElevation() const
     return minElev;
 }
 
-metres Route::maxElevation() const
+metres Route::maxElevation() const // N0669298
 {
-<<<<<<< HEAD
-    const bool implemented = false;
-    assert(implemented);
-=======
     if (positions.size() == 0)
     {
         throw std::invalid_argument("No positions in provided route");
@@ -140,15 +162,12 @@ metres Route::maxElevation() const
             maxElev = pos.elevation();
     }
     return maxElev;
->>>>>>> 2baea8d5f4d2242c51d39fe2287a030d07e6ee59
 }
 
 degrees Route::maxGradient() const
 {
-    const bool implemented = false;
+    const bool implemented = true;
     assert(implemented);
-<<<<<<< HEAD
-=======
     //
     degrees largestGradient = atan((positions[1].elevation() - positions[0].elevation())/distanceBetween(positions[1],positions[0]));
     //
@@ -163,7 +182,6 @@ degrees Route::maxGradient() const
          }
      }
     return largestGradient;
->>>>>>> 2baea8d5f4d2242c51d39fe2287a030d07e6ee59
 }
 
 degrees Route::minGradient() const
