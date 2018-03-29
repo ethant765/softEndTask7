@@ -229,7 +229,7 @@ degrees Route::steepestGradient() const
 
 Position Route::operator[](unsigned int idx) const
 {
-    return positions[idx];
+    return positions.at(idx);
 }
 
 Position Route::findPosition(const std::string & soughtName) const
