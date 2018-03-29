@@ -90,7 +90,7 @@ BOOST_AUTO_TEST_CASE( interval_not_multiple_of_duration_odd )
  */
 BOOST_AUTO_TEST_CASE( interval_factor_of_duration_and_less_than_half_of_duration )
 {
-    Track track = Track(LogFiles::GPXTracksDir + "TrackIntervalEven&lessthanhalf.gpx", isFileName);
+    Track track = Track(LogFiles::GPXTracksDir + "TrackIntervalEvenlessthanhalf.gpx", isFileName);
     BOOST_CHECK_EQUAL(track.travellingTime(), 100);
 }
 
