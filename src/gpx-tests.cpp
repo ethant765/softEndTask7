@@ -35,7 +35,7 @@ BOOST_AUTO_TEST_CASE(correct_answer)
 
 }
 BOOST_AUTO_TEST_SUITE_END()
-
+/*
 BOOST_AUTO_TEST_SUITE( Route_name )
 
 const bool isFileName = true;
@@ -46,6 +46,7 @@ BOOST_AUTO_TEST_CASE( name_present_route )
    Route route = Route(LogFiles::GPXRoutesDir + "ABCD.gpx", isFileName);
    BOOST_CHECK_EQUAL( route.name(), "ABCD" );
 }
+
 
 //Check that the name is correct for a GPX track containing a <name> element //within <trk>.
 BOOST_AUTO_TEST_CASE( name_present_track )
@@ -62,3 +63,4 @@ BOOST_AUTO_TEST_CASE( name_absent )
 }
 
 BOOST_AUTO_TEST_SUITE_END()
+*/
