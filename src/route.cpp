@@ -91,7 +91,7 @@ degrees Route::minLatitude() const
             minLat = positions[i].latitude();
         }
     }
-    if (minLat < -90)
+    if (minLat < -90 || minLat > 90)
         throw std::out_of_range ("out of range");
     return minLat;
 }
@@ -174,17 +174,57 @@ degrees Route::maxGradient() const
     const bool implemented = true;
     assert(implemented);
     //
-    degrees largestGradient = atan((positions[1].elevation() - positions[0].elevation())/distanceBetween(positions[1],positions[0]));
-    //
-    degrees testGradient = atan((positions[1].elevation() - positions[0].elevation())/distanceBetween(positions[1],positions[0]));
+    if (positions.size()<2) return 0;
 
+
+    degrees largestGradient;
+    degrees testGradient;
+ 
+    if (distanceBetween(positions[0],positions[1])>0) {
+        largestGradient =radToDeg(atan2((positions[1].elevation() - positions[0].elevation()),distanceBetween(positions[1],positions[0])));
+        testGradient = largestGradient;
+
+    }
+
+    else {
+        if (positions[0].elevation() <positions[1].elevation()){
+        largestGradient =90;
+        testGradient = 90;}
+        else if (positions[0].elevation() >positions[1].elevation())
+        {
+            largestGradient =-90;
+            testGradient = -90;
+        }
+        else{
+            largestGradient =0;
+            testGradient = 0;
+        }
+}
     for(size_t x = 2; x < positions.size(); x++){
 
-          testGradient = atan((positions[x].elevation() - positions[x-1].elevation())/distanceBetween(positions[x],positions[x-1]));
+        if (distanceBetween(positions[x],positions[x-1])>0){
+          testGradient =
+                  radToDeg(atan2((positions[x].elevation() - positions[x-1].elevation()),
+                  distanceBetween(positions[x],positions[x-1])));
+        }
+        else if (positions[0].elevation() <positions[1].elevation())
+        {
+            testGradient = 90;
+        }
+        else if (positions[0].elevation() >positions[1].elevation())
+        {
+            testGradient = -90;
+        }
+        else
+        {
+            testGradient = 0;
+        }
 
-          if(testGradient > largestGradient){
+
+        if(testGradient > largestGradient){
              largestGradient = testGradient;
-         }
+        }
+        
      }
     return largestGradient;
 }
