@@ -51,6 +51,7 @@ SOURCES += \
     #src/gpx-tests/totalTime-N0702007.cpp \
     src/gpx-tests/netLength_n0641701.cpp \
     src/gpx-tests/n0703481_maxelevationtests.cpp \
+    src/gpx-tests/n0494166MaximumLongitude.cpp \
     src/gpx-tests/n0680788-minElevationTests.cpp \
     #src/gpx-tests/N0692013_minLongitude().cpp \
     #src/gpx-tests/N0630057-MaxLatitudeTest.cpp \
