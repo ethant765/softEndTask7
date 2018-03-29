@@ -9,7 +9,7 @@
 #include "geometry.h"
 #include "earth.h"
 #include "route.h"
-
+#include "position.h"
 using namespace GPS;
 
 std::string Route::name() const
@@ -30,8 +30,13 @@ metres Route::totalLength() const
 
 metres Route::netLength() const
 {
-    const bool implemented = false;
+    const bool implemented = true;
     assert(implemented);
+
+
+
+    metres distance = distanceBetween(positions[0],positions.back());
+    return distance;
 }
 
 metres Route::totalHeightGain() const
