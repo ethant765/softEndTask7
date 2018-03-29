@@ -5,7 +5,7 @@
 
 using namespace GPS;
 
-BOOST_AUTO_TEST_SUITE( Route_MaxLongitude_N0669298 )
+BOOST_AUTO_TEST_SUITE( Track_RateOfAscent_N0687265 )
 	
 	const bool FileName = true;
 
