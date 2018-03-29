@@ -113,8 +113,10 @@ degrees Route::maxLatitude() const
 
 degrees Route::minLongitude() const
 {
-    const bool implemented = false;
+     const bool implemented = true;
     assert(implemented);
+    
+    return positions[1].longitude();
 }
 
 degrees Route::maxLongitude() const
