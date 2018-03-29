@@ -22,7 +22,8 @@ SOURCES += \
     src/route.cpp \
     src/track.cpp \
     src/xmlparser.cpp \
-    src/gpx-tests/name.cpp
+    src/gpx-tests/name.cpp \
+    src/gpx-tests/totalLength-t0068955.cpp
 
 
 INCLUDEPATH += headers/
@@ -30,3 +31,16 @@ INCLUDEPATH += headers/
 TARGET = $$_PRO_FILE_PWD_/execs/gpx-tests
 
 LIBS += -lboost_unit_test_framework
+
+macx {
+
+QMAKE_CFLAGS += -std=c++11 -stdlib=libc++
+
+QMAKE_CXXFLAGS += -std=c++11 -stdlib=libc++
+
+LIBS += -L"/usr/local/Cellar/boost/1.66.0/lib" -lboost_random
+
+INCLUDEPATH += "/usr/local/Cellar/boost/1.66.0/include"
+
+
+}
