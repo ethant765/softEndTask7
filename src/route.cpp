@@ -196,9 +196,17 @@ degrees Route::minGradient() const
         throw std::invalid_argument("Gradient cannot be worked out when using only one point");
     }
 
-    degrees minGradient=sqrt(pow( distanceBetween(positions[0], positions[1]),2) + pow(positions[0].elevation() - positions[1].elevation(),2));
+    degrees minGradient;
     degrees temp, deltaH,deltaV;
 
+    deltaH = distanceBetween(positions[0], positions[1]);
+    deltaV = positions[0].elevation() - positions[1].elevation();
+
+    minGradient=sqrt(pow(deltaH,2) + pow(deltaV,2));
+    if(deltaV==0)
+    {
+        minGradient=0;
+    }
     if (positions[0].elevation() > positions[1].elevation())
     {
         minGradient = -minGradient;
@@ -208,7 +216,10 @@ degrees Route::minGradient() const
         deltaH = distanceBetween(positions[i-1], positions[i]);
         deltaV = positions[i-1].elevation() - positions[i].elevation();
         temp= sqrt(pow(deltaH,2) + pow(deltaV,2));
-
+        if(deltaV==0)
+        {
+            temp=0;
+        }
         if(positions[i-1].elevation() > positions[i].elevation())
         {
             temp = -temp;
