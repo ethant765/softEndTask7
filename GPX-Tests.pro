@@ -45,8 +45,8 @@ SOURCES += \
     src/gpx-tests/maxElevation-n0686300.cpp \
     src/gpx-tests/totalTime-N0702007.cpp \
     src/gpx-tests/netLength_n0641701.cpp \
-
-
+    src/gpx-tests/n0703481_maxelevationtests.cpp \
+    src/gpx-tests/n0680788-minElevationTests.cpp
 
 INCLUDEPATH += headers/
 
