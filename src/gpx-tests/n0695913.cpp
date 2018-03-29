@@ -6,7 +6,7 @@
 
 using namespace GPS;
 
-BOOST_AUTO_TEST_SUITE( num_positions )
+BOOST_AUTO_TEST_SUITE( n0695913_num_positions )
 
 const bool numCorrect = true;
 
