@@ -38,6 +38,8 @@ SOURCES += \
     src/gpx-tests/minElevation_N0699610.cpp \
     #src/gpx-tests/N0682255_MinLAtitude.cpp \
     src/gpx-tests/TestMinElev-N0719715.cpp \
+    src/gpx-tests/N0682255_MinLAtitude.cpp \
+    #src/gpx-tests/TestMinElev-N0719715.cpp \
     src/gpx-tests/TotalTime-N0688008-Tests.cpp \
     src/gpx-tests/n0673230_totalheightgain.cpp \
     #src/gpx-tests/minLatTests_N0720717.cpp \
@@ -47,9 +49,9 @@ SOURCES += \
     src/gpx-tests/netLength_n0641701.cpp \
     src/gpx-tests/n0703481_maxelevationtests.cpp \
     src/gpx-tests/n0680788-minElevationTests.cpp \
-    src/gpx-tests/MaxLong-N0680337.cpp
     #src/gpx-tests/N0692013_minLongitude().cpp \
     #src/gpx-tests/N0630057-MaxLatitudeTest.cpp
+    src/gpx-tests/MaxLong-N0680337.cpp
 
 INCLUDEPATH += headers/
 
