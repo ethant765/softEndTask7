@@ -27,7 +27,7 @@ SOURCES += \
     src/gpx-tests.cpp \
     src/gpx-tests/netHeightGain_n0689061.cpp \
     src/gpx-tests/name.cpp \
-    src/gpx-tests/travellingTime-N069066.cpp \
+    src/gpx-tests/travellingTime-N0696066.cpp \
     src/gpx-tests/maxlattestsn0690641.cpp \
     src/gpx-tests/maxLongTests_N0669298.cpp \
     #src/gpx-tests/minLongitude_N0671080.cpp \
