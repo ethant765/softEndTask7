@@ -4,6 +4,7 @@
 #include "geometry.h"
 #include "logs.h"
 #include "route.h"
+#include <cmath>
 
 using namespace GPS;
 
