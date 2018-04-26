@@ -19,6 +19,8 @@ namespace GPS
             bool isFileName, // Is the first parameter a file name or a string containing GPX data?
             metres granularity = 20); // The minimum distance between successive route points.
 
+      std::string readFile(std::string file, std::ostringstream& oss);//function created to read from the file provided by the constructor
+
       // Returns a report of the construction process; useful for debugging purposes.
       std::string buildReport() const;
 

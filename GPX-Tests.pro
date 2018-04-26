@@ -65,7 +65,8 @@ SOURCES += \
     #src/gpx-tests/mingradient_n0719479.cpp \
     #src/gpx-tests/averageSpeed(N0695426).cpp\
     #src/gpx-tests/maxGradientTests_N0686602.cpp \
-    src/gpx-tests/maxGradient-N0697611.cpp
+    src/gpx-tests/maxGradient-N0697611.cpp \
+    src/gpx-tests/route-constructor-tests.cpp
     #src/gpx-tests/N0689085_findPosition.cpp \
     #src/gpx-tests/N0719058_netHeightGain.cpp
 
