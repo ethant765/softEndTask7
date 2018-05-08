@@ -113,23 +113,23 @@ Route::Route(std::string sourceFile, bool isFileName, metres granularity)
     report = reportStream.str();
 }
 
-std::string Route::readFile(std::string file, std::ostringstream& oss){
+std::string Route::readFile(std::string file, std::ostringstream& streamReference){
     using std::ifstream;
     using std::string;
     using std::ostringstream;
     using std::endl;
 
-    ostringstream oss2;
-    string temp;
+    ostringstream fileContent;
 
     ifstream fs(file);
     if (! fs.good()) throw std::invalid_argument("Error opening source file '" + file + "'.");
-    oss << "Source file '" << file << "' opened okay." << endl;
+    streamReference << "Source file '" << file << "' opened okay." << endl;
     while (fs.good()) {
+        string temp = "";
         getline(fs, temp);
-        oss2 << temp << endl;
+        fileContent << temp << endl;
     }
-    return oss2.str();
+    return fileContent.str();
 }
 
 std::string Route::name() const
