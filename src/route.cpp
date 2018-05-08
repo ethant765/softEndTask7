@@ -59,7 +59,7 @@ Route::Route(std::string sourceFile, bool isFileName, metres granularity)
 
     //if ele exists add it with lat and lon, otherwise just add lat and lon
     string tempElementRteptContent = getElementContent(tempElementRtept);
-    reportStream << "Position added: " << addPosition(tempElementRtept) << endl;
+    reportStream << "Position added: " << firstPosition(tempElementRtept) << endl;
     numOfPositions++;
 
 
@@ -68,32 +68,17 @@ Route::Route(std::string sourceFile, bool isFileName, metres granularity)
         positionNames.push_back(posName);
     }
 
-    Position prevPos = positions.back(), nextPos = positions.back();
+
+
     while (elementExists(RTEsource, "rtept")) {
         string rtept = getAndEraseElement(RTEsource, "rtept");
-        if (! attributeExists(rtept,"lat")) throw domain_error("No 'lat' attribute.");
-        if (! attributeExists(rtept,"lon")) throw domain_error("No 'lon' attribute.");
-        string lat = getElementAttribute(rtept, "lat");
-        string lon = getElementAttribute(rtept, "lon");
-        string rteptContent = getElementContent(rtept);
-        if (elementExists(rteptContent, "ele")) {
-            string ele = getElementContent(getElement(rteptContent, "ele"));
-            nextPos = Position(lat,lon,ele);
-        } else nextPos = Position(lat,lon);
-        if (areSameLocation(nextPos, prevPos)) reportStream << "Position ignored: " << nextPos.toString() << endl;
-        else {
-            string name = "";
-            if (elementExists(rteptContent,"name")) {
-                string reteptContentName = getElement(rteptContent,"name");
-                name = getElementContent(reteptContentName);
-            } else name = ""; // Fixed bug by adding this.
-            positions.push_back(nextPos);
-            positionNames.push_back(name);
-            reportStream << "Position added: " << nextPos.toString() << endl;
-            ++numOfPositions;
-            prevPos = nextPos;
-        }
+        std::pair<bool, std::string> pos = addPosition(rtept);
+
+        reportStream << pos.second;
+
+        if (pos.first) numOfPositions++;
     }
+
     reportStream << numOfPositions << " positions added." << endl;
     routeLength = 0;
     for (unsigned int i = 1; i < numOfPositions; ++i ) {
@@ -123,7 +108,7 @@ std::string Route::readFile(std::string file, std::ostringstream& streamReferenc
     return fileContent.str();
 }
 
-string Route::addPosition(std::string node){
+string Route::firstPosition(std::string node){
     //get lat and lon
     string lat = XML::Parser::getElementAttribute(node, "lat");
     string lon = XML::Parser::getElementAttribute(node, "lon");
@@ -143,6 +128,30 @@ string Route::addPosition(std::string node){
         return startPos.toString();
     }
 
+}
+
+std::pair<bool, std::string> Route::addPosition(std::string node){
+    Position prevPos = positions.back(), nextPos = positions.back();
+
+    string lat = XML::Parser::getElementAttribute(node, "lat");
+    string lon = XML::Parser::getElementAttribute(node, "lon");
+    string nodeContent = XML::Parser::getElementContent(node);
+    if (XML::Parser::elementExists(nodeContent, "ele")) {
+        string ele = XML::Parser::getElementContent(XML::Parser::getElement(nodeContent, "ele"));
+        nextPos = Position(lat,lon,ele);
+    } else nextPos = Position(lat,lon);
+    if (areSameLocation(nextPos, prevPos)) return std::pair<bool, std::string>{false, "Position ignored: " + nextPos.toString() + "\n"};
+    else {
+        string name = "";
+        if (XML::Parser::elementExists(nodeContent,"name")) {
+            string reteptContentName = XML::Parser::getElement(nodeContent,"name");
+            name = XML::Parser::getElementContent(reteptContentName);
+        } else name = ""; // Fixed bug by adding this.
+        positions.push_back(nextPos);
+        positionNames.push_back(name);
+        return std::pair<bool, std::string>{true, "Position added: " + nextPos.toString() + "\n"};
+        prevPos = nextPos;
+    }
 }
 
 std::string Route::name() const

@@ -112,9 +112,14 @@ namespace GPS
       bool areSameLocation(const Position &, const Position &) const;
 
   private:
-      std::string readFile(std::string file, std::ostringstream& oss);//function created to read from the file provided by the constructor
+      //function created to read from the file provided by the constructor
+      std::string readFile(std::string file, std::ostringstream& oss);
 
-      string addPosition(std::string node);
+      //set first position
+      std::string firstPosition(std::string node);
+
+      //add new position
+      std::pair<bool, std::string> addPosition(std::string node);
   };
 }
 
