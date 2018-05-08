@@ -29,88 +29,89 @@ Route::Route(std::string sourceFile, bool isFileName, metres granularity)
     using XML::Parser::getElementContent;
     using XML::Parser::getElementAttribute;
 
-    string lat, lon, ele, name, temp, temp2, source;
+    string lat = "";
+    string lon = "";
+    string ele = "";
+    string name = "";
+    string source = "";
     metres deltaH = 0.0, deltaV = 0.0;
-    ostringstream oss;
-    unsigned int num = 0;
+    ostringstream reportStream;
+    unsigned int numOfPositions = 0;
     this->granularity = granularity;
 
     if (isFileName){
-        source = readFile(sourceFile, oss);
+        source = readFile(sourceFile, reportStream);
     }
 
     if (! elementExists(source,"gpx")) throw domain_error("No 'gpx' element.");
-    temp = getElement(source, "gpx");
-    source = getElementContent(temp);
+    string tempElementGpx = getElement(source, "gpx");
+    source = getElementContent(tempElementGpx);
     if (! elementExists(source,"rte")) throw domain_error("No 'rte' element.");
-    temp = getElement(source, "rte");
-    source = getElementContent(temp);
+    string tempElementRte = getElement(source, "rte");
+    source = getElementContent(tempElementRte);
     if (elementExists(source, "name")) {
-        temp = getAndEraseElement(source, "name");
-        routeName = getElementContent(temp);
-        oss << "Route name is: " << routeName << endl;
+        tempElementRte = getAndEraseElement(source, "name");
+        routeName = getElementContent(tempElementRte);
+        reportStream << "Route name is: " << routeName << endl;
     }
 
 
     if (! elementExists(source,"rtept")) throw domain_error("No 'rtept' element.");
-    temp = getAndEraseElement(source, "rtept");
-    if (! attributeExists(temp,"lat")) throw domain_error("No 'lat' attribute.");
-    if (! attributeExists(temp,"lon")) throw domain_error("No 'lon' attribute.");
-    lat = getElementAttribute(temp, "lat");
-    lon = getElementAttribute(temp, "lon");
-    temp = getElementContent(temp);
-    if (elementExists(temp, "ele")) {
-        temp2 = getElement(temp, "ele");
-        ele = getElementContent(temp2);
+    string tempElementRtept = getAndEraseElement(source, "rtept");
+    if (! attributeExists(tempElementRtept,"lat")) throw domain_error("No 'lat' attribute.");
+    if (! attributeExists(tempElementRtept,"lon")) throw domain_error("No 'lon' attribute.");
+    lat = getElementAttribute(tempElementRtept, "lat");
+    lon = getElementAttribute(tempElementRtept, "lon");
+    string tempElementRteptContent = getElementContent(tempElementRtept);
+    if (elementExists(tempElementRteptContent, "ele")) {
+        ele = getElementContent(getElement(tempElementRteptContent, "ele"));
         Position startPos = Position(lat,lon,ele);
         positions.push_back(startPos);
-        oss << "Position added: " << startPos.toString() << endl;
-        ++num;
+        reportStream << "Position added: " << startPos.toString() << endl;
+        ++numOfPositions;
     } else {
         Position startPos = Position(lat,lon);
         positions.push_back(startPos);
-        oss << "Position added: " << startPos.toString() << endl;
-        ++num;
+        reportStream << "Position added: " << startPos.toString() << endl;
+        ++numOfPositions;
     }
-    if (elementExists(temp,"name")) {
-        temp2 = getElement(temp,"name");
-        name = getElementContent(temp2);
+    if (elementExists(tempElementRteptContent,"name")) {
+        name = getElementContent(getElement(tempElementRteptContent,"name"));
     }
     positionNames.push_back(name);
     Position prevPos = positions.back(), nextPos = positions.back();
     while (elementExists(source, "rtept")) {
-        temp = getAndEraseElement(source, "rtept");
-        if (! attributeExists(temp,"lat")) throw domain_error("No 'lat' attribute.");
-        if (! attributeExists(temp,"lon")) throw domain_error("No 'lon' attribute.");
-        lat = getElementAttribute(temp, "lat");
-        lon = getElementAttribute(temp, "lon");
-        temp = getElementContent(temp);
-        if (elementExists(temp, "ele")) {
-            temp2 = getElement(temp, "ele");
-            ele = getElementContent(temp2);
+        string rtept = getAndEraseElement(source, "rtept");
+        if (! attributeExists(rtept,"lat")) throw domain_error("No 'lat' attribute.");
+        if (! attributeExists(rtept,"lon")) throw domain_error("No 'lon' attribute.");
+        lat = getElementAttribute(rtept, "lat");
+        lon = getElementAttribute(rtept, "lon");
+        string rteptContent = getElementContent(rtept);
+        if (elementExists(rteptContent, "ele")) {
+            ele = getElementContent(getElement(rteptContent, "ele"));
             nextPos = Position(lat,lon,ele);
         } else nextPos = Position(lat,lon);
-        if (areSameLocation(nextPos, prevPos)) oss << "Position ignored: " << nextPos.toString() << endl;
+        if (areSameLocation(nextPos, prevPos)) reportStream << "Position ignored: " << nextPos.toString() << endl;
         else {
-            if (elementExists(temp,"name")) {
-                temp2 = getElement(temp,"name");
-                name = getElementContent(temp2);
+            if (elementExists(rteptContent,"name")) {
+                string reteptContentName = getElement(rteptContent,"name");
+                name = getElementContent(reteptContentName);
             } else name = ""; // Fixed bug by adding this.
             positions.push_back(nextPos);
             positionNames.push_back(name);
-            oss << "Position added: " << nextPos.toString() << endl;
-            ++num;
+            reportStream << "Position added: " << nextPos.toString() << endl;
+            ++numOfPositions;
             prevPos = nextPos;
         }
     }
-    oss << num << " positions added." << endl;
+    reportStream << numOfPositions << " positions added." << endl;
     routeLength = 0;
-    for (unsigned int i = 1; i < num; ++i ) {
+    for (unsigned int i = 1; i < numOfPositions; ++i ) {
         deltaH = distanceBetween(positions[i-1], positions[i]);
         deltaV = positions[i-1].elevation() - positions[i].elevation();
         routeLength += sqrt(pow(deltaH,2) + pow(deltaV,2));
     }
-    report = oss.str();
+    report = reportStream.str();
 }
 
 std::string Route::readFile(std::string file, std::ostringstream& oss){
