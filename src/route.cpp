@@ -29,8 +29,6 @@ Route::Route(std::string sourceFile, bool isFileName, metres granularity)
     using XML::Parser::getElementContent;
     using XML::Parser::getElementAttribute;
 
-    string lat = "";
-    string lon = "";
     string ele = "";
     string name = "";
     string source = "";
@@ -60,8 +58,9 @@ Route::Route(std::string sourceFile, bool isFileName, metres granularity)
     string tempElementRtept = getAndEraseElement(source, "rtept");
     if (! attributeExists(tempElementRtept,"lat")) throw domain_error("No 'lat' attribute.");
     if (! attributeExists(tempElementRtept,"lon")) throw domain_error("No 'lon' attribute.");
-    lat = getElementAttribute(tempElementRtept, "lat");
-    lon = getElementAttribute(tempElementRtept, "lon");
+
+    string lat = getElementAttribute(tempElementRtept, "lat");
+    string lon = getElementAttribute(tempElementRtept, "lon");
     string tempElementRteptContent = getElementContent(tempElementRtept);
     if (elementExists(tempElementRteptContent, "ele")) {
         ele = getElementContent(getElement(tempElementRteptContent, "ele"));
@@ -84,8 +83,8 @@ Route::Route(std::string sourceFile, bool isFileName, metres granularity)
         string rtept = getAndEraseElement(source, "rtept");
         if (! attributeExists(rtept,"lat")) throw domain_error("No 'lat' attribute.");
         if (! attributeExists(rtept,"lon")) throw domain_error("No 'lon' attribute.");
-        lat = getElementAttribute(rtept, "lat");
-        lon = getElementAttribute(rtept, "lon");
+        string lat = getElementAttribute(rtept, "lat");
+        string lon = getElementAttribute(rtept, "lon");
         string rteptContent = getElementContent(rtept);
         if (elementExists(rteptContent, "ele")) {
             ele = getElementContent(getElement(rteptContent, "ele"));
