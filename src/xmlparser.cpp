@@ -75,7 +75,7 @@ namespace XML
 
   string getAndEraseElement(string & source, const string & elementName)
   {
-      //chcek that element exists
+      //check that element exists
       if (! elementExists(source, elementName)) throw std::domain_error("No " + elementName + " element.");
 
       assert( elementExists(source,elementName) );

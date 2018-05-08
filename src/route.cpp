@@ -31,14 +31,14 @@ Route::Route(std::string sourceFile, bool isFileName, metres granularity)
         source = readFile(sourceFile, reportStream);
     }
 
-    // Load gpx element if it exists
+    // Load 'gpx' element, if it exists
     string tempElementGpx = getElement(source, "gpx");
     string GPXsource = getElementContent(tempElementGpx);
 
-    // Load rte element if it exists
+    // Load 'rte' element, if it exists
     string tempElementRte = getElement(GPXsource, "rte");
 
-    // Load route name if it exists
+    // Load route name, if it exists
     string RTEsource = getElementContent(tempElementRte);
     if (elementExists(RTEsource, "name")) {
         routeName = getElementContent(getAndEraseElement(RTEsource, "name"));
@@ -46,22 +46,22 @@ Route::Route(std::string sourceFile, bool isFileName, metres granularity)
     }
 
 
-    //getting the lat and lon, remove rtept element
+    //getting the lat and lon, remove 'rtept' element
     string tempElementRtept = getAndEraseElement(RTEsource, "rtept");
 
-    //if ele exists add it with lat and lon, otherwise just add lat and lon
+    //if 'ele' exists, add it with lat and lon, otherwise just add lat and lon
     string tempElementRteptContent = getElementContent(tempElementRtept);
     reportStream << "Position added: " << firstPosition(tempElementRtept) << std::endl;
     numOfPositions++;
 
-
+    //if 'name' exists, add it
     if (elementExists(tempElementRteptContent,"name")) {
         string posName = getElementContent(getElement(tempElementRteptContent,"name"));
         positionNames.push_back(posName);
     }
 
 
-
+    // Add each position to route positions
     while (elementExists(RTEsource, "rtept")) {
         string rtept = getAndEraseElement(RTEsource, "rtept");
         std::pair<bool, std::string> pos = addPosition(rtept);
@@ -103,7 +103,7 @@ string Route::firstPosition(std::string node){
     //get content of node
     string tempElementRteptContent = XML::Parser::getElementContent(node);
 
-    //if ele exists add it with lat and lon, otherwise just add lat and lon
+    //if 'ele' exists, add it with lat and lon, otherwise just add lat and lon
     if (XML::Parser::elementExists(tempElementRteptContent, "ele")) {
         std::string ele = XML::Parser::getElementContent(XML::Parser::getElement(tempElementRteptContent, "ele"));
         Position startPos = Position(lat,lon,ele);
@@ -123,10 +123,12 @@ std::pair<bool, std::string> Route::addPosition(std::string node){
     string lat = XML::Parser::getElementAttribute(node, "lat");
     string lon = XML::Parser::getElementAttribute(node, "lon");
     string nodeContent = XML::Parser::getElementContent(node);
+    //if 'ele' exists, add it with lat and lon, otherwise just add lat and lon
     if (XML::Parser::elementExists(nodeContent, "ele")) {
         string ele = XML::Parser::getElementContent(XML::Parser::getElement(nodeContent, "ele"));
         nextPos = Position(lat,lon,ele);
     } else nextPos = Position(lat,lon);
+    //is they are the same, ignore them, else - add them
     if (areSameLocation(nextPos, prevPos)) return std::pair<bool, std::string>{false, "Position ignored: " + nextPos.toString() + "\n"};
     else {
         string name = "";
@@ -142,9 +144,11 @@ std::pair<bool, std::string> Route::addPosition(std::string node){
 }
 metres Route::calculateLength(unsigned int numOfPositions) {
     metres tempLength = 0;
+    //for each position get distance and elevation between
     for (unsigned int i = 1; i < numOfPositions; ++i ) {
         metres deltaH = distanceBetween(positions[i-1], positions[i]);
         metres deltaV = positions[i-1].elevation() - positions[i].elevation();
+        //calculate the length
         tempLength += sqrt(pow(deltaH,2) + pow(deltaV,2));
     }
     return tempLength;
