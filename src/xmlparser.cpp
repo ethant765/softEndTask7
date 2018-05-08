@@ -1,5 +1,6 @@
 #include <cassert>
 #include <utility>
+#include <stdexcept>
 
 #include "xmlparser.h"
 
@@ -65,6 +66,8 @@ namespace XML
 
   string getElement(const string & source, const string & elementName)
   {
+      if (! elementExists(source,elementName)) throw std::domain_error("No "+ elementName + " element.");
+
       assert( elementExists(source,elementName) );
       std::pair<size_t,size_t> p = findElement(source, elementName);
       return source.substr(p.first, p.second);
@@ -72,6 +75,9 @@ namespace XML
 
   string getAndEraseElement(string & source, const string & elementName)
   {
+      //chcek that element exists
+      if (! elementExists(source, elementName)) throw std::domain_error("No " + elementName + " element.");
+
       assert( elementExists(source,elementName) );
       std::pair<size_t,size_t> p = findElement(source, elementName);
       string element = source.substr(p.first, p.second);
@@ -130,6 +136,8 @@ namespace XML
 
   string getElementAttribute(const string & element, const string & attributeName)
   {
+      if (! attributeExists(element,attributeName)) throw std::domain_error("No "+ attributeName + " attribute.");
+
       assert( attributeExists(element,attributeName) );
 
       size_t attributesBegin = element.find(" ");

@@ -41,23 +41,22 @@ Route::Route(std::string sourceFile, bool isFileName, metres granularity)
         source = readFile(sourceFile, reportStream);
     }
 
-    if (! elementExists(source,"gpx")) throw domain_error("No 'gpx' element.");
+    // Load gpx element if it exists
     string tempElementGpx = getElement(source, "gpx");
     source = getElementContent(tempElementGpx);
-    if (! elementExists(source,"rte")) throw domain_error("No 'rte' element.");
+
+    // Load rte element if it exists
     string tempElementRte = getElement(source, "rte");
+
+    // Load route name if it exists
     source = getElementContent(tempElementRte);
     if (elementExists(source, "name")) {
-        tempElementRte = getAndEraseElement(source, "name");
-        routeName = getElementContent(tempElementRte);
+        routeName = getElementContent(getAndEraseElement(source, "name"));
         reportStream << "Route name is: " << routeName << endl;
     }
 
 
-    if (! elementExists(source,"rtept")) throw domain_error("No 'rtept' element.");
     string tempElementRtept = getAndEraseElement(source, "rtept");
-    if (! attributeExists(tempElementRtept,"lat")) throw domain_error("No 'lat' attribute.");
-    if (! attributeExists(tempElementRtept,"lon")) throw domain_error("No 'lon' attribute.");
 
     string lat = getElementAttribute(tempElementRtept, "lat");
     string lon = getElementAttribute(tempElementRtept, "lon");
