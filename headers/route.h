@@ -120,6 +120,9 @@ namespace GPS
 
       //add new position
       std::pair<bool, std::string> addPosition(std::string node);
+
+      // Calculate the length of the route
+      metres calculateLength(unsigned int numOfPositions);
   };
 }
 

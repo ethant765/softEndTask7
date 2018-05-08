@@ -15,24 +15,16 @@ using namespace GPS;
 //route constructor
 Route::Route(std::string sourceFile, bool isFileName, metres granularity)
 {
-    using std::invalid_argument;
-    using std::domain_error;
-    using std::endl;
     using std::string;
-    using std::ostringstream;
-    using std::ifstream;
 
     using XML::Parser::elementExists;
     using XML::Parser::getElement;
     using XML::Parser::getAndEraseElement;
-    using XML::Parser::attributeExists;
     using XML::Parser::getElementContent;
-    using XML::Parser::getElementAttribute;
 
     unsigned int numOfPositions = 0;
     string source = "";
-    metres deltaH = 0.0, deltaV = 0.0;
-    ostringstream reportStream;
+    std::ostringstream reportStream;
     this->granularity = granularity;
 
     if (isFileName){
@@ -50,7 +42,7 @@ Route::Route(std::string sourceFile, bool isFileName, metres granularity)
     string RTEsource = getElementContent(tempElementRte);
     if (elementExists(RTEsource, "name")) {
         routeName = getElementContent(getAndEraseElement(RTEsource, "name"));
-        reportStream << "Route name is: " << routeName << endl;
+        reportStream << "Route name is: " << routeName << std::endl;
     }
 
 
@@ -59,7 +51,7 @@ Route::Route(std::string sourceFile, bool isFileName, metres granularity)
 
     //if ele exists add it with lat and lon, otherwise just add lat and lon
     string tempElementRteptContent = getElementContent(tempElementRtept);
-    reportStream << "Position added: " << firstPosition(tempElementRtept) << endl;
+    reportStream << "Position added: " << firstPosition(tempElementRtept) << std::endl;
     numOfPositions++;
 
 
@@ -79,13 +71,8 @@ Route::Route(std::string sourceFile, bool isFileName, metres granularity)
         if (pos.first) numOfPositions++;
     }
 
-    reportStream << numOfPositions << " positions added." << endl;
-    routeLength = 0;
-    for (unsigned int i = 1; i < numOfPositions; ++i ) {
-        deltaH = distanceBetween(positions[i-1], positions[i]);
-        deltaV = positions[i-1].elevation() - positions[i].elevation();
-        routeLength += sqrt(pow(deltaH,2) + pow(deltaV,2));
-    }
+    reportStream << numOfPositions << " positions added." << std::endl;
+    routeLength = calculateLength(numOfPositions);
     report = reportStream.str();
 }
 
@@ -152,6 +139,15 @@ std::pair<bool, std::string> Route::addPosition(std::string node){
         return std::pair<bool, std::string>{true, "Position added: " + nextPos.toString() + "\n"};
         prevPos = nextPos;
     }
+}
+metres Route::calculateLength(unsigned int numOfPositions) {
+    metres tempLength = 0;
+    for (unsigned int i = 1; i < numOfPositions; ++i ) {
+        metres deltaH = distanceBetween(positions[i-1], positions[i]);
+        metres deltaV = positions[i-1].elevation() - positions[i].elevation();
+        tempLength += sqrt(pow(deltaH,2) + pow(deltaV,2));
+    }
+    return tempLength;
 }
 
 std::string Route::name() const
