@@ -29,10 +29,10 @@ Route::Route(std::string sourceFile, bool isFileName, metres granularity)
     using XML::Parser::getElementContent;
     using XML::Parser::getElementAttribute;
 
+    unsigned int numOfPositions = 0;
     string source = "";
     metres deltaH = 0.0, deltaV = 0.0;
     ostringstream reportStream;
-    unsigned int numOfPositions = 0;
     this->granularity = granularity;
 
     if (isFileName){
@@ -54,23 +54,15 @@ Route::Route(std::string sourceFile, bool isFileName, metres granularity)
     }
 
 
+    //getting the lat and lon, remove rtept element
     string tempElementRtept = getAndEraseElement(RTEsource, "rtept");
 
-    string lat = getElementAttribute(tempElementRtept, "lat");
-    string lon = getElementAttribute(tempElementRtept, "lon");
+    //if ele exists add it with lat and lon, otherwise just add lat and lon
     string tempElementRteptContent = getElementContent(tempElementRtept);
-    if (elementExists(tempElementRteptContent, "ele")) {
-        string ele = getElementContent(getElement(tempElementRteptContent, "ele"));
-        Position startPos = Position(lat,lon,ele);
-        positions.push_back(startPos);
-        reportStream << "Position added: " << startPos.toString() << endl;
-        ++numOfPositions;
-    } else {
-        Position startPos = Position(lat,lon);
-        positions.push_back(startPos);
-        reportStream << "Position added: " << startPos.toString() << endl;
-        ++numOfPositions;
-    }
+    reportStream << "Position added: " << addPosition(tempElementRtept) << endl;
+    numOfPositions++;
+
+
     if (elementExists(tempElementRteptContent,"name")) {
         string posName = getElementContent(getElement(tempElementRteptContent,"name"));
         positionNames.push_back(posName);
@@ -129,6 +121,28 @@ std::string Route::readFile(std::string file, std::ostringstream& streamReferenc
         fileContent << temp << endl;
     }
     return fileContent.str();
+}
+
+string Route::addPosition(std::string node){
+    //get lat and lon
+    string lat = XML::Parser::getElementAttribute(node, "lat");
+    string lon = XML::Parser::getElementAttribute(node, "lon");
+
+    //get content of node
+    string tempElementRteptContent = XML::Parser::getElementContent(node);
+
+    //if ele exists add it with lat and lon, otherwise just add lat and lon
+    if (XML::Parser::elementExists(tempElementRteptContent, "ele")) {
+        std::string ele = XML::Parser::getElementContent(XML::Parser::getElement(tempElementRteptContent, "ele"));
+        Position startPos = Position(lat,lon,ele);
+        positions.push_back(startPos);
+        return startPos.toString();
+    } else {
+        Position startPos = Position(lat,lon);
+        positions.push_back(startPos);
+        return startPos.toString();
+    }
+
 }
 
 std::string Route::name() const
