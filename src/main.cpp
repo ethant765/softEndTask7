@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <sstream>
 
 
 #include "logs.h"
@@ -24,7 +25,6 @@ void testRoute(std::string fileName)
 
 
     Route route = Route(filePath, isFileName);
-    Route route = Route(filePath,isFileName);
 
 
     cout << "Route name: " << route.name() << endl;
@@ -42,10 +42,26 @@ void testRoute(std::string fileName)
     cout << endl;
 }
 
+void testBuildReport(std::string filename) {
+    const std::string filepath = LogFiles::GPXRoutesDir + filename + ".gpx";
+    const bool isfilename = true;
+
+    Route route = Route(filepath, isfilename);
+
+    std::fstream file("output.txt");
+    std::string holder = route.buildReport();
+    std::stringstream output;
+    output << holder;
+    file << holder;
+    file.close();
+}
+
 
 
 int main()
 {
 	    testRoute("NorthYorkMoors");
 	    testRoute("ABCD");
+
+        testBuildReport("NorthYorkMoors");
 }

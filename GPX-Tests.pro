@@ -66,7 +66,8 @@ SOURCES += \
     #src/gpx-tests/averageSpeed(N0695426).cpp\
     #src/gpx-tests/maxGradientTests_N0686602.cpp \
     src/gpx-tests/maxGradient-N0697611.cpp \
-    src/gpx-tests/route-constructor-tests.cpp
+    src/gpx-tests/route-constructor-tests.cpp \
+    src/gpx-tests/route-buildReport-tests.cpp
     #src/gpx-tests/N0689085_findPosition.cpp \
     #src/gpx-tests/N0719058_netHeightGain.cpp
 
@@ -88,3 +89,6 @@ INCLUDEPATH += "/usr/local/Cellar/boost/1.66.0/include"
 
 
 }
+
+DISTFILES += \
+    src/gpx-tests/route-buildReport-output.txt
