@@ -29,8 +29,6 @@ Route::Route(std::string sourceFile, bool isFileName, metres granularity)
     using XML::Parser::getElementContent;
     using XML::Parser::getElementAttribute;
 
-    string ele = "";
-    string name = "";
     string source = "";
     metres deltaH = 0.0, deltaV = 0.0;
     ostringstream reportStream;
@@ -43,26 +41,26 @@ Route::Route(std::string sourceFile, bool isFileName, metres granularity)
 
     // Load gpx element if it exists
     string tempElementGpx = getElement(source, "gpx");
-    source = getElementContent(tempElementGpx);
+    string GPXsource = getElementContent(tempElementGpx);
 
     // Load rte element if it exists
-    string tempElementRte = getElement(source, "rte");
+    string tempElementRte = getElement(GPXsource, "rte");
 
     // Load route name if it exists
-    source = getElementContent(tempElementRte);
-    if (elementExists(source, "name")) {
-        routeName = getElementContent(getAndEraseElement(source, "name"));
+    string RTEsource = getElementContent(tempElementRte);
+    if (elementExists(RTEsource, "name")) {
+        routeName = getElementContent(getAndEraseElement(RTEsource, "name"));
         reportStream << "Route name is: " << routeName << endl;
     }
 
 
-    string tempElementRtept = getAndEraseElement(source, "rtept");
+    string tempElementRtept = getAndEraseElement(RTEsource, "rtept");
 
     string lat = getElementAttribute(tempElementRtept, "lat");
     string lon = getElementAttribute(tempElementRtept, "lon");
     string tempElementRteptContent = getElementContent(tempElementRtept);
     if (elementExists(tempElementRteptContent, "ele")) {
-        ele = getElementContent(getElement(tempElementRteptContent, "ele"));
+        string ele = getElementContent(getElement(tempElementRteptContent, "ele"));
         Position startPos = Position(lat,lon,ele);
         positions.push_back(startPos);
         reportStream << "Position added: " << startPos.toString() << endl;
@@ -74,23 +72,25 @@ Route::Route(std::string sourceFile, bool isFileName, metres granularity)
         ++numOfPositions;
     }
     if (elementExists(tempElementRteptContent,"name")) {
-        name = getElementContent(getElement(tempElementRteptContent,"name"));
+        string posName = getElementContent(getElement(tempElementRteptContent,"name"));
+        positionNames.push_back(posName);
     }
-    positionNames.push_back(name);
+
     Position prevPos = positions.back(), nextPos = positions.back();
-    while (elementExists(source, "rtept")) {
-        string rtept = getAndEraseElement(source, "rtept");
+    while (elementExists(RTEsource, "rtept")) {
+        string rtept = getAndEraseElement(RTEsource, "rtept");
         if (! attributeExists(rtept,"lat")) throw domain_error("No 'lat' attribute.");
         if (! attributeExists(rtept,"lon")) throw domain_error("No 'lon' attribute.");
         string lat = getElementAttribute(rtept, "lat");
         string lon = getElementAttribute(rtept, "lon");
         string rteptContent = getElementContent(rtept);
         if (elementExists(rteptContent, "ele")) {
-            ele = getElementContent(getElement(rteptContent, "ele"));
+            string ele = getElementContent(getElement(rteptContent, "ele"));
             nextPos = Position(lat,lon,ele);
         } else nextPos = Position(lat,lon);
         if (areSameLocation(nextPos, prevPos)) reportStream << "Position ignored: " << nextPos.toString() << endl;
         else {
+            string name = "";
             if (elementExists(rteptContent,"name")) {
                 string reteptContentName = getElement(rteptContent,"name");
                 name = getElementContent(reteptContentName);
