@@ -167,40 +167,11 @@
 
         unsigned int numOfPositions = 0;
 
-        string trkptTemp = getAndEraseElement(mergedTrkSource, "trkpt");
+        string tempElement = getAndEraseElement(mergedTrkSource, "trkpt");
+        reportStream << "Position added: " << firstPosition(tempElement) << std::endl;
+        numOfPositions++;
 
-
-        string lat = getElementAttribute(trkptTemp, "lat");
-
-        string lon = getElementAttribute(trkptTemp, "lon");
-
-        string trkptElementTemp = getElementContent(trkptTemp);
-
-        if (elementExists(trkptElementTemp, "ele")) {
-
-            string tempEle = getElement(trkptElementTemp, "ele");
-
-            string ele = getElementContent(tempEle);
-
-            Position startPos = Position(lat,lon,ele);
-
-            positions.push_back(startPos);
-
-            reportStream << "Start position added: " << startPos.toString() << std::endl;
-
-            ++numOfPositions;
-
-        } else {
-
-            Position startPos = Position(lat,lon);
-
-            positions.push_back(startPos);
-
-            reportStream << "Start position added: " << startPos.toString() << std::endl;
-
-            ++numOfPositions;
-
-        }
+        std::string trkptElementTemp = getElementContent(tempElement);
 
         string trkptElementName = "";
 
@@ -372,4 +343,33 @@
             mergedTrkSegs += trkseg;
         }
         return mergedTrkSegs;
+    }
+
+    std::string Track::firstPosition(std::string node)
+    {
+        std::string lat = XML::Parser::getElementAttribute(node, "lat");
+
+        std::string lon = XML::Parser::getElementAttribute(node, "lon");
+
+        std::string nodeContent = XML::Parser::getElementContent(node);
+
+        if (XML::Parser::elementExists(nodeContent, "ele")) {
+
+            std::string ele = XML::Parser::getElementContent(XML::Parser::getElement(nodeContent, "ele"));
+
+            Position startPos = Position(lat,lon,ele);
+
+            positions.push_back(startPos);
+
+            return "Start position added: " + startPos.toString() + "\n";
+
+        } else {
+
+            Position startPos = Position(lat,lon);
+
+            positions.push_back(startPos);
+
+            return "Start position added: " + startPos.toString() + "\n";
+
+        }
     }

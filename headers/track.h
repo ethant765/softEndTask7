@@ -65,6 +65,7 @@ namespace GPS
       //function created to read from the file provided by the constructor
       std::string readFile(std::string file, std::ostringstream& reportStream);
       std::string getTrackSegs(std::string TRKsource);
+      std::string firstPosition(std::string node);
   };
 }
 
