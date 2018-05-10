@@ -67,6 +67,7 @@ namespace GPS
       std::string getTrackSegs(std::string TRKsource);
       std::string firstPosition(std::string node);
       std::pair<bool, std::string> addPosition(std::string node);
+      metres getLength();
   };
 }
 

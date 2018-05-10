@@ -165,11 +165,9 @@
 
         if (! mergedTrkSegs.empty()) mergedTrkSource = mergedTrkSegs;
 
-        unsigned int numOfPositions = 0;
 
         string tempElement = getAndEraseElement(mergedTrkSource, "trkpt");
         reportStream << "Position added: " << firstPosition(tempElement) << std::endl;
-        numOfPositions++;
 
         std::string tempElementContent = getElementContent(tempElement);
 
@@ -191,22 +189,13 @@
 
             reportStream << pos.second;
 
-            if (pos.first) numOfPositions++;
         }
 
-        reportStream << numOfPositions << " positions added." << std::endl;
+        reportStream << positions.size()-1 << " positions added." << std::endl;
 
-        routeLength = 0;
+        routeLength = getLength();
 
-        for (unsigned int i = 1; i < numOfPositions; ++i ) {
 
-            metres deltaH = distanceBetween(positions[i-1], positions[i]);
-
-            metres deltaV = positions[i-1].elevation() - positions[i].elevation();
-
-            routeLength += sqrt(pow(deltaH,2) + pow(deltaV,2));
-
-        }
 
         report = reportStream.str();
 
@@ -379,4 +368,19 @@
         }
 
         return std::pair<bool, string>{added, report};
+    }
+
+    metres Track::getLength()
+    {
+        metres length = 0.0;
+        for (unsigned int i = 1; i < positions.size(); ++i ) {
+
+            metres deltaH = distanceBetween(positions[i-1], positions[i]);
+
+            metres deltaV = positions[i-1].elevation() - positions[i].elevation();
+
+            length += sqrt(pow(deltaH,2) + pow(deltaV,2));
+
+        }
+        return length;
     }
