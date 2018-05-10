@@ -133,13 +133,15 @@
 
         using namespace XML::Parser;
 
+        //using std::string;
+
         string mergedTrkSegs,trkseg,lat,lon,ele,name,time,temp,temp2;
 
         metres deltaH,deltaV;
 
         seconds startTime, currentTime, timeElapsed;
 
-        ostringstream oss,oss2;
+        std::ostringstream oss,oss2;
 
         unsigned int num;
 
@@ -147,9 +149,9 @@
 
         if (isFileName) {
 
-            ifstream fs(source);
+            std::ifstream fs(source);
 
-            if (! fs.good()) throw invalid_argument("Error opening source file '" + source + "'.");
+            if (! fs.good()) throw std::invalid_argument("Error opening source file '" + source + "'.");
 
             oss << "Source file '" << source << "' opened okay." << endl;
 
@@ -165,13 +167,9 @@
 
         }
 
-        if (! elementExists(source,"gpx")) throw domain_error("No 'gpx' element.");
-
         temp = getElement(source, "gpx");
 
         source = getElementContent(temp);
-
-        if (! elementExists(source,"trk")) throw domain_error("No 'trk' element.");
 
         temp = getElement(source, "trk");
 
@@ -203,13 +201,8 @@
 
         num = 0;
 
-        if (! elementExists(source,"trkpt")) throw domain_error("No 'trkpt' element.");
-
         temp = getAndEraseElement(source, "trkpt");
 
-        if (! attributeExists(temp,"lat")) throw domain_error("No 'lat' attribute.");
-
-        if (! attributeExists(temp,"lon")) throw domain_error("No 'lon' attribute.");
 
         lat = getElementAttribute(temp, "lat");
 
@@ -257,8 +250,6 @@
 
         departed.push_back(0);
 
-        if (! elementExists(temp,"time")) throw domain_error("No 'time' element.");
-
         temp2 = getElement(temp,"time");
 
         time = getElementContent(temp2);
@@ -270,10 +261,6 @@
         while (elementExists(source, "trkpt")) {
 
             temp = getAndEraseElement(source, "trkpt");
-
-            if (! attributeExists(temp,"lat")) throw domain_error("No 'lat' attribute.");
-
-            if (! attributeExists(temp,"lon")) throw domain_error("No 'lon' attribute.");
 
             lat = getElementAttribute(temp, "lat");
 
@@ -290,8 +277,6 @@
                 nextPos = Position(lat,lon,ele);
 
             } else nextPos = Position(lat,lon);
-
-            if (! elementExists(temp,"time")) throw domain_error("No 'time' element.");
 
             temp2 = getElement(temp,"time");
 

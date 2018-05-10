@@ -87,6 +87,7 @@ namespace XML
 
   string getElementContent(const string & element)
   {
+
       assert(element.front() == '<');
       assert(element.back()  == '>');
 
