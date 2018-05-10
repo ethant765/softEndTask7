@@ -115,11 +115,11 @@ namespace GPS
       //function created to read from the file provided by the constructor
       std::string readFile(std::string file, std::ostringstream& oss);
 
-      //set first position
+      //set first position and return its name
       std::string firstPosition(std::string node);
 
-      //add new position
-      std::pair<bool, std::string> addPosition(std::string node);
+      //add new position and return its name
+      std::string addPosition(std::string node);
 
       // Calculate the length of the route
       metres calculateLength();

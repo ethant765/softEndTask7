@@ -64,10 +64,18 @@ namespace GPS
     private:
       //function created to read from the file provided by the constructor
       std::string readFile(std::string file, std::ostringstream& reportStream);
+
+      //return segments without their names
       std::string getTrackSegs(std::string TRKsource);
+
+      //set first position and return its name
       std::string firstPosition(std::string node);
-      std::pair<bool, std::string> addPosition(std::string node);
-      metres getLength();
+
+      //add new position and return its name
+      std::string addPosition(std::string node);
+
+      // Calculate the length of the track
+      metres calculateLength();
   };
 }
 

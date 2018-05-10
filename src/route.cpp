@@ -62,9 +62,8 @@ Route::Route(std::string sourceFile, bool isFileName, metres granularity)
     // Add each position to route positions
     while (elementExists(RTEsource, "rtept")) {
         string rtept = getAndEraseElement(RTEsource, "rtept");
-        std::pair<bool, std::string> pos = addPosition(rtept);
 
-        reportStream << pos.second;
+        reportStream << addPosition(rtept);
 
     }
 
@@ -84,6 +83,8 @@ std::string Route::readFile(std::string file, std::ostringstream& streamReferenc
     ifstream fs(file);
     if (! fs.good()) throw std::invalid_argument("Error opening source file '" + file + "'.");
     streamReference << "Source file '" << file << "' opened okay." << endl;
+
+    //adding line by line
     while (fs.good()) {
         string temp = "";
         getline(fs, temp);
@@ -114,7 +115,7 @@ string Route::firstPosition(std::string node){
 
 }
 
-std::pair<bool, std::string> Route::addPosition(std::string node){
+std::string Route::addPosition(std::string node){
     Position prevPos = positions.back(), nextPos = positions.back();
 
     string lat = XML::Parser::getElementAttribute(node, "lat");
@@ -125,8 +126,8 @@ std::pair<bool, std::string> Route::addPosition(std::string node){
         string ele = XML::Parser::getElementContent(XML::Parser::getElement(nodeContent, "ele"));
         nextPos = Position(lat,lon,ele);
     } else nextPos = Position(lat,lon);
-    //is they are the same, ignore them, else - add them
-    if (areSameLocation(nextPos, prevPos)) return std::pair<bool, std::string>{false, "Position ignored: " + nextPos.toString() + "\n"};
+    //if they are the same, ignore them, else - add them
+    if (areSameLocation(nextPos, prevPos)) return "Position ignored: " + nextPos.toString() + "\n";
     else {
         string name = "";
         if (XML::Parser::elementExists(nodeContent,"name")) {
@@ -135,7 +136,7 @@ std::pair<bool, std::string> Route::addPosition(std::string node){
         } else name = ""; // Fixed bug by adding this.
         positions.push_back(nextPos);
         positionNames.push_back(name);
-        return std::pair<bool, std::string>{true, "Position added: " + nextPos.toString() + "\n"};
+        return "Position added: " + nextPos.toString() + "\n";
         prevPos = nextPos;
     }
 }
