@@ -64,6 +64,7 @@ namespace GPS
     private:
       //function created to read from the file provided by the constructor
       std::string readFile(std::string file, std::ostringstream& reportStream);
+      std::string getTrackSegs(std::string TRKsource);
   };
 }
 

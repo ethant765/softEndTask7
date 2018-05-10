@@ -146,13 +146,8 @@
             source = readFile(sourceFile, reportStream);
         }
 
-        string GPXtemp = getElement(source, "gpx");
-
-        string GPXsource = getElementContent(GPXtemp);
-
-        string TRKtemp = getElement(GPXsource, "trk");
-
-        string TRKsource = getElementContent(TRKtemp);
+        string GPXsource = getElementContent(getElement(source, "gpx"));
+        string TRKsource = getElementContent(getElement(GPXsource, "trk"));
 
         if (elementExists(TRKsource, "name")) {
 
@@ -164,19 +159,7 @@
 
         }
 
-        string mergedTrkSegs = "";
-
-        while (elementExists(TRKsource, "trkseg")) {
-
-            string trksegTemp = getAndEraseElement(TRKsource, "trkseg");
-
-            string trkseg = getElementContent(trksegTemp);
-
-            getAndEraseElement(trkseg, "name");
-
-            mergedTrkSegs += trkseg;
-
-        }
+        string mergedTrkSegs = getTrackSegs(TRKsource);
 
         string mergedTrkSource = "";
 
@@ -375,4 +358,18 @@
         }
 
         return fileStream.str();
+    }
+
+    std::string Track::getTrackSegs(std::string TRKsource)
+    {
+        std::string mergedTrkSegs = "";
+        while (XML::Parser::elementExists(TRKsource, "trkseg")) {
+            std::string nextElement = XML::Parser::getAndEraseElement(TRKsource, "trkseg");
+            std::string trkseg = XML::Parser::getElementContent(nextElement);
+
+            XML::Parser::getAndEraseElement(trkseg, "name");
+
+            mergedTrkSegs += trkseg;
+        }
+        return mergedTrkSegs;
     }
