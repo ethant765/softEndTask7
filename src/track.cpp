@@ -361,7 +361,7 @@
 
             positions.push_back(startPos);
 
-            return "Start position added: " + startPos.toString() + "\n";
+            return startPos.toString();
 
         } else {
 
@@ -369,7 +369,7 @@
 
             positions.push_back(startPos);
 
-            return "Start position added: " + startPos.toString() + "\n";
+            return startPos.toString();
 
         }
     }
