@@ -126,14 +126,15 @@
 
 
     Track::Track(std::string source, bool isFileName, metres granularity)
-
     {
+        using std::string;
+        using std::ostringstream;
 
-        using namespace std;
-
-        using namespace XML::Parser;
-
-        //using std::string;
+        using XML::Parser::getElementContent;
+        using XML::Parser::getElement;
+        using XML::Parser::elementExists;
+        using XML::Parser::getAndEraseElement;
+        using XML::Parser::getElementAttribute;
 
         string mergedTrkSegs,trkseg,lat,lon,ele,name,time,temp,temp2;
 
@@ -141,7 +142,7 @@
 
         seconds startTime, currentTime, timeElapsed;
 
-        std::ostringstream oss,oss2;
+        ostringstream oss,oss2;
 
         unsigned int num;
 
@@ -153,13 +154,13 @@
 
             if (! fs.good()) throw std::invalid_argument("Error opening source file '" + source + "'.");
 
-            oss << "Source file '" << source << "' opened okay." << endl;
+            oss << "Source file '" << source << "' opened okay." << std::endl;
 
             while (fs.good()) {
 
                 getline(fs, temp);
 
-                oss2 << temp << endl;
+                oss2 << temp << std::endl;
 
             }
 
@@ -181,7 +182,7 @@
 
             routeName = getElementContent(temp);
 
-            oss << "Track name is: " << routeName << endl;
+            oss << "Track name is: " << routeName << std::endl;
 
         }
 
@@ -220,7 +221,7 @@
 
             positions.push_back(startPos);
 
-            oss << "Start position added: " << startPos.toString() << endl;
+            oss << "Start position added: " << startPos.toString() << std::endl;
 
             ++num;
 
@@ -230,7 +231,7 @@
 
             positions.push_back(startPos);
 
-            oss << "Start position added: " << startPos.toString() << endl;
+            oss << "Start position added: " << startPos.toString() << std::endl;
 
             ++num;
 
@@ -290,7 +291,7 @@
 
                 departed.back() = currentTime - startTime;
 
-                oss << "Position ignored: " << nextPos.toString() << endl;
+                oss << "Position ignored: " << nextPos.toString() << std::endl;
 
             } else {
 
@@ -312,9 +313,9 @@
 
                 departed.push_back(timeElapsed);
 
-                oss << "Position added: " << nextPos.toString() << endl;
+                oss << "Position added: " << nextPos.toString() << std::endl;
 
-                oss << " at time: " << to_string(timeElapsed) << endl;
+                oss << " at time: " << std::to_string(timeElapsed) << std::endl;
 
                 ++num;
 
@@ -324,7 +325,7 @@
 
         }
 
-        oss << num << " positions added." << endl;
+        oss << num << " positions added." << std::endl;
 
         routeLength = 0;
 
