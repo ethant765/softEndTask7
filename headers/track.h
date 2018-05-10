@@ -60,6 +60,10 @@ namespace GPS
       std::vector<seconds> departed;
 
       static seconds stringToTime(const std::string &);
+
+    private:
+      //function created to read from the file provided by the constructor
+      std::string readFile(std::string file, std::ostringstream& reportStream);
   };
 }
 

@@ -143,28 +143,7 @@
         string source = "";
 
         if (isFileName) {
-
-            std::ifstream fs(sourceFile);
-
-            if (! fs.good()) throw std::invalid_argument("Error opening source file '" + sourceFile + "'.");
-
-            reportStream << "Source file '" << sourceFile << "' opened okay." << std::endl;
-
-
-            ostringstream fileStream;
-
-            while (fs.good()) {
-
-                string lineHolder = "";
-
-                getline(fs, lineHolder);
-
-                fileStream << lineHolder << std::endl;
-
-            }
-
-            source = fileStream.str();
-
+            source = readFile(sourceFile, reportStream);
         }
 
         string GPXtemp = getElement(source, "gpx");
@@ -374,3 +353,26 @@
 
     }
 
+    std::string Track::readFile(std::string file, std::ostringstream& reportStream)
+    {
+        std::ifstream fs(file);
+
+        if (! fs.good()) throw std::invalid_argument("Error opening source file '" + file + "'.");
+
+        reportStream << "Source file '" << file << "' opened okay." << std::endl;
+
+
+        std::ostringstream fileStream;
+
+        while (fs.good()) {
+
+            string lineHolder = "";
+
+            getline(fs, lineHolder);
+
+            fileStream << lineHolder << std::endl;
+
+        }
+
+        return fileStream.str();
+    }
