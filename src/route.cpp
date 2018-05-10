@@ -22,7 +22,6 @@ Route::Route(std::string sourceFile, bool isFileName, metres granularity)
     using XML::Parser::getAndEraseElement;
     using XML::Parser::getElementContent;
 
-    unsigned int numOfPositions = 0;
     string source = "";
     std::ostringstream reportStream;
     this->granularity = granularity;
@@ -52,7 +51,6 @@ Route::Route(std::string sourceFile, bool isFileName, metres granularity)
     //if 'ele' exists, add it with lat and lon, otherwise just add lat and lon
     string tempElementRteptContent = getElementContent(tempElementRtept);
     reportStream << "Position added: " << firstPosition(tempElementRtept) << std::endl;
-    numOfPositions++;
 
     //if 'name' exists, add it
     if (elementExists(tempElementRteptContent,"name")) {
@@ -68,11 +66,10 @@ Route::Route(std::string sourceFile, bool isFileName, metres granularity)
 
         reportStream << pos.second;
 
-        if (pos.first) numOfPositions++;
     }
 
-    reportStream << numOfPositions << " positions added." << std::endl;
-    routeLength = calculateLength(numOfPositions);
+    reportStream << positions.size()-1 << " positions added." << std::endl;
+    routeLength = calculateLength();
     report = reportStream.str();
 }
 
@@ -142,10 +139,10 @@ std::pair<bool, std::string> Route::addPosition(std::string node){
         prevPos = nextPos;
     }
 }
-metres Route::calculateLength(unsigned int numOfPositions) {
+metres Route::calculateLength() {
     metres tempLength = 0;
     //for each position get distance and elevation between
-    for (unsigned int i = 1; i < numOfPositions; ++i ) {
+    for (unsigned int i = 1; i < positions.size(); ++i ) {
         metres deltaH = distanceBetween(positions[i-1], positions[i]);
         metres deltaV = positions[i-1].elevation() - positions[i].elevation();
         //calculate the length
