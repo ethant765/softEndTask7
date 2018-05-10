@@ -66,6 +66,7 @@ namespace GPS
       std::string readFile(std::string file, std::ostringstream& reportStream);
       std::string getTrackSegs(std::string TRKsource);
       std::string firstPosition(std::string node);
+      std::pair<bool, std::string> addPosition(std::string node);
   };
 }
 

@@ -171,17 +171,11 @@
         reportStream << "Position added: " << firstPosition(tempElement) << std::endl;
         numOfPositions++;
 
-        std::string trkptElementTemp = getElementContent(tempElement);
+        std::string tempElementContent = getElementContent(tempElement);
 
         string trkptElementName = "";
 
-        if (elementExists(trkptElementTemp,"name")) {
-
-            string tempName = getElement(trkptElementTemp,"name");
-
-            trkptElementName = getElementContent(tempName);
-
-        }
+        if (elementExists(tempElementContent,"name")) trkptElementName = getElementContent(getElement(tempElementContent,"name"));
 
         positionNames.push_back(trkptElementName);
 
@@ -189,82 +183,15 @@
 
         departed.push_back(0);
 
-        string tempTime = getElement(trkptElementTemp,"time");
-
-        string trkptTime = getElementContent(tempTime);
-
-        seconds startTime = stringToTime(trkptTime);
-
-        seconds currentTime = stringToTime(trkptTime);
-
-        Position prevPos = positions.back(), nextPos = positions.back();
-
         while (elementExists(mergedTrkSource, "trkpt")) {
 
             string temp = getAndEraseElement(mergedTrkSource, "trkpt");
 
-            string tempLat = getElementAttribute(temp, "lat");
+            std::pair<bool, std::string> pos = addPosition(temp);
 
-            string tempLon = getElementAttribute(temp, "lon");
+            reportStream << pos.second;
 
-            string tempContent = getElementContent(temp);
-
-            if (elementExists(tempContent, "ele")) {
-
-                string tempContentEle = getElement(tempContent, "ele");
-
-                string tempEle = getElementContent(tempContentEle);
-
-                nextPos = Position(tempLat,tempLon,tempEle);
-
-            } else nextPos = Position(tempLat,tempLon);
-
-            string tempContentTime = getElement(tempContent,"time");
-
-            string strContentTime = getElementContent(tempContentTime);
-
-            seconds contentTime = stringToTime(strContentTime);
-
-            if (areSameLocation(nextPos, prevPos)) {
-
-                // If we're still at the same location, then we haven't departed yet.
-
-                departed.back() = contentTime - startTime;
-
-                reportStream << "Position ignored: " << nextPos.toString() << std::endl;
-
-            } else {
-
-                string name = "";
-
-                if (elementExists(tempContent,"name")) {
-
-                    string tempContentName = getElement(tempContent,"name");
-
-                    name = getElementContent(tempContentName);
-
-                } else name = ""; // Fixed bug by adding this.
-
-                positions.push_back(nextPos);
-
-                positionNames.push_back(name);
-
-                seconds timeElapsed = currentTime - startTime;
-
-                arrived.push_back(timeElapsed);
-
-                departed.push_back(timeElapsed);
-
-                reportStream << "Position added: " << nextPos.toString() << std::endl;
-
-                reportStream << " at time: " << std::to_string(timeElapsed) << std::endl;
-
-                ++numOfPositions;
-
-                prevPos = nextPos;
-
-            }
-
+            if (pos.first) numOfPositions++;
         }
 
         reportStream << numOfPositions << " positions added." << std::endl;
@@ -372,4 +299,84 @@
             return startPos.toString();
 
         }
+    }
+
+    std::pair<bool, std::string> Track::addPosition(std::string node)
+    {
+        using std::string;
+
+        bool added;
+        string report = "";
+
+        string trkptTime = XML::Parser::getElementContent(XML::Parser::getElement(node,"time"));
+
+        seconds startTime = stringToTime(trkptTime);
+
+        seconds currentTime = stringToTime(trkptTime);
+
+        Position prevPos = positions.back(), nextPos = positions.back();
+
+        string tempLat = XML::Parser::getElementAttribute(node, "lat");
+
+        string tempLon = XML::Parser::getElementAttribute(node, "lon");
+
+        string tempContent = XML::Parser::getElementContent(node);
+
+        if (XML::Parser::elementExists(tempContent, "ele")) {
+
+            string tempContentEle = XML::Parser::getElement(tempContent, "ele");
+
+            string tempEle = XML::Parser::getElementContent(tempContentEle);
+
+            nextPos = Position(tempLat,tempLon,tempEle);
+
+        } else nextPos = Position(tempLat,tempLon);
+
+        string tempContentTime = XML::Parser::getElement(tempContent,"time");
+
+        string strContentTime = XML::Parser::getElementContent(tempContentTime);
+
+        seconds contentTime = stringToTime(strContentTime);
+
+        if (areSameLocation(nextPos, prevPos)) {
+
+            // If we're still at the same location, then we haven't departed yet.
+
+            departed.back() = contentTime - startTime;
+
+            added = false;
+            report = "Position ignored: " + nextPos.toString() + "\n";
+
+        } else {
+
+            string name = "";
+
+            if (XML::Parser::elementExists(tempContent,"name")) {
+
+                string tempContentName = XML::Parser::getElement(tempContent,"name");
+
+                name = XML::Parser::getElementContent(tempContentName);
+
+            } else name = ""; // Fixed bug by adding this.
+
+            positions.push_back(nextPos);
+
+            positionNames.push_back(name);
+
+            seconds timeElapsed = currentTime - startTime;
+
+            arrived.push_back(timeElapsed);
+
+            departed.push_back(timeElapsed);
+
+            report = "Position added: " + nextPos.toString() + "\n" + \
+                    " at time: " + std::to_string(timeElapsed) + "\n";
+
+            added = true;
+
+            prevPos = nextPos;
+
+        }
+
+        return std::pair<bool, string>{added, report};
     }
