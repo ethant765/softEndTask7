@@ -125,7 +125,7 @@
 
 
 
-    Track::Track(std::string source, bool isFileName, metres granularity)
+    Track::Track(std::string sourceFile, bool isFileName, metres granularity)
     {
         using std::string;
         using std::ostringstream;
@@ -136,61 +136,62 @@
         using XML::Parser::getAndEraseElement;
         using XML::Parser::getElementAttribute;
 
-        string mergedTrkSegs,trkseg,lat,lon,ele,name,time,temp,temp2;
-
-        metres deltaH,deltaV;
-
-        seconds startTime, currentTime, timeElapsed;
-
-        ostringstream oss,oss2;
-
-        unsigned int num;
+        ostringstream reportStream;
 
         this->granularity = granularity;
 
+        string source = "";
+
         if (isFileName) {
 
-            std::ifstream fs(source);
+            std::ifstream fs(sourceFile);
 
-            if (! fs.good()) throw std::invalid_argument("Error opening source file '" + source + "'.");
+            if (! fs.good()) throw std::invalid_argument("Error opening source file '" + sourceFile + "'.");
 
-            oss << "Source file '" << source << "' opened okay." << std::endl;
+            reportStream << "Source file '" << sourceFile << "' opened okay." << std::endl;
+
+
+            ostringstream fileStream;
 
             while (fs.good()) {
 
-                getline(fs, temp);
+                string lineHolder = "";
 
-                oss2 << temp << std::endl;
+                getline(fs, lineHolder);
+
+                fileStream << lineHolder << std::endl;
 
             }
 
-            source = oss2.str();
+            source = fileStream.str();
 
         }
 
-        temp = getElement(source, "gpx");
+        string GPXtemp = getElement(source, "gpx");
 
-        source = getElementContent(temp);
+        string GPXsource = getElementContent(GPXtemp);
 
-        temp = getElement(source, "trk");
+        string TRKtemp = getElement(GPXsource, "trk");
 
-        source = getElementContent(temp);
+        string TRKsource = getElementContent(TRKtemp);
 
-        if (elementExists(source, "name")) {
+        if (elementExists(TRKsource, "name")) {
 
-            temp = getAndEraseElement(source, "name");
+            string nameTemp = getAndEraseElement(TRKsource, "name");
 
-            routeName = getElementContent(temp);
+            routeName = getElementContent(nameTemp);
 
-            oss << "Track name is: " << routeName << std::endl;
+            reportStream << "Track name is: " << routeName << std::endl;
 
         }
 
-        while (elementExists(source, "trkseg")) {
+        string mergedTrkSegs = "";
 
-            temp = getAndEraseElement(source, "trkseg");
+        while (elementExists(TRKsource, "trkseg")) {
 
-            trkseg = getElementContent(temp);
+            string trksegTemp = getAndEraseElement(TRKsource, "trkseg");
+
+            string trkseg = getElementContent(trksegTemp);
 
             getAndEraseElement(trkseg, "name");
 
@@ -198,32 +199,34 @@
 
         }
 
-        if (! mergedTrkSegs.empty()) source = mergedTrkSegs;
+        string mergedTrkSource = "";
 
-        num = 0;
+        if (! mergedTrkSegs.empty()) mergedTrkSource = mergedTrkSegs;
 
-        temp = getAndEraseElement(source, "trkpt");
+        unsigned int numOfPositions = 0;
+
+        string trkptTemp = getAndEraseElement(mergedTrkSource, "trkpt");
 
 
-        lat = getElementAttribute(temp, "lat");
+        string lat = getElementAttribute(trkptTemp, "lat");
 
-        lon = getElementAttribute(temp, "lon");
+        string lon = getElementAttribute(trkptTemp, "lon");
 
-        temp = getElementContent(temp);
+        string trkptElementTemp = getElementContent(trkptTemp);
 
-        if (elementExists(temp, "ele")) {
+        if (elementExists(trkptElementTemp, "ele")) {
 
-            temp2 = getElement(temp, "ele");
+            string tempEle = getElement(trkptElementTemp, "ele");
 
-            ele = getElementContent(temp2);
+            string ele = getElementContent(tempEle);
 
             Position startPos = Position(lat,lon,ele);
 
             positions.push_back(startPos);
 
-            oss << "Start position added: " << startPos.toString() << std::endl;
+            reportStream << "Start position added: " << startPos.toString() << std::endl;
 
-            ++num;
+            ++numOfPositions;
 
         } else {
 
@@ -231,75 +234,81 @@
 
             positions.push_back(startPos);
 
-            oss << "Start position added: " << startPos.toString() << std::endl;
+            reportStream << "Start position added: " << startPos.toString() << std::endl;
 
-            ++num;
-
-        }
-
-        if (elementExists(temp,"name")) {
-
-            temp2 = getElement(temp,"name");
-
-            name = getElementContent(temp2);
+            ++numOfPositions;
 
         }
 
-        positionNames.push_back(name);
+        string trkptElementName = "";
+
+        if (elementExists(trkptElementTemp,"name")) {
+
+            string tempName = getElement(trkptElementTemp,"name");
+
+            trkptElementName = getElementContent(tempName);
+
+        }
+
+        positionNames.push_back(trkptElementName);
 
         arrived.push_back(0);
 
         departed.push_back(0);
 
-        temp2 = getElement(temp,"time");
+        string tempTime = getElement(trkptElementTemp,"time");
 
-        time = getElementContent(temp2);
+        string trkptTime = getElementContent(tempTime);
 
-        startTime = currentTime = stringToTime(time);
+        seconds startTime = stringToTime(trkptTime);
+
+        seconds currentTime = stringToTime(trkptTime);
 
         Position prevPos = positions.back(), nextPos = positions.back();
 
-        while (elementExists(source, "trkpt")) {
+        while (elementExists(mergedTrkSource, "trkpt")) {
 
-            temp = getAndEraseElement(source, "trkpt");
+            string temp = getAndEraseElement(mergedTrkSource, "trkpt");
 
-            lat = getElementAttribute(temp, "lat");
+            string tempLat = getElementAttribute(temp, "lat");
 
-            lon = getElementAttribute(temp, "lon");
+            string tempLon = getElementAttribute(temp, "lon");
 
-            temp = getElementContent(temp);
+            string tempContent = getElementContent(temp);
 
-            if (elementExists(temp, "ele")) {
+            if (elementExists(tempContent, "ele")) {
 
-                temp2 = getElement(temp, "ele");
+                string tempContentEle = getElement(tempContent, "ele");
 
-                ele = getElementContent(temp2);
+                string tempEle = getElementContent(tempContentEle);
 
-                nextPos = Position(lat,lon,ele);
+                nextPos = Position(tempLat,tempLon,tempEle);
 
-            } else nextPos = Position(lat,lon);
+            } else nextPos = Position(tempLat,tempLon);
 
-            temp2 = getElement(temp,"time");
+            string tempContentTime = getElement(tempContent,"time");
 
-            time = getElementContent(temp2);
+            string strContentTime = getElementContent(tempContentTime);
 
-            currentTime = stringToTime(time);
+            seconds contentTime = stringToTime(strContentTime);
 
             if (areSameLocation(nextPos, prevPos)) {
 
                 // If we're still at the same location, then we haven't departed yet.
 
-                departed.back() = currentTime - startTime;
+                departed.back() = contentTime - startTime;
 
-                oss << "Position ignored: " << nextPos.toString() << std::endl;
+                reportStream << "Position ignored: " << nextPos.toString() << std::endl;
 
             } else {
 
-                if (elementExists(temp,"name")) {
+                string name = "";
 
-                    temp2 = getElement(temp,"name");
+                if (elementExists(tempContent,"name")) {
 
-                    name = getElementContent(temp2);
+                    string tempContentName = getElement(tempContent,"name");
+
+                    name = getElementContent(tempContentName);
 
                 } else name = ""; // Fixed bug by adding this.
 
@@ -307,17 +316,17 @@
 
                 positionNames.push_back(name);
 
-                timeElapsed = currentTime - startTime;
+                seconds timeElapsed = currentTime - startTime;
 
                 arrived.push_back(timeElapsed);
 
                 departed.push_back(timeElapsed);
 
-                oss << "Position added: " << nextPos.toString() << std::endl;
+                reportStream << "Position added: " << nextPos.toString() << std::endl;
 
-                oss << " at time: " << std::to_string(timeElapsed) << std::endl;
+                reportStream << " at time: " << std::to_string(timeElapsed) << std::endl;
 
-                ++num;
+                ++numOfPositions;
 
                 prevPos = nextPos;
 
@@ -325,21 +334,21 @@
 
         }
 
-        oss << num << " positions added." << std::endl;
+        reportStream << numOfPositions << " positions added." << std::endl;
 
         routeLength = 0;
 
-        for (unsigned int i = 1; i < num; ++i ) {
+        for (unsigned int i = 1; i < numOfPositions; ++i ) {
 
-            deltaH = distanceBetween(positions[i-1], positions[i]);
+            metres deltaH = distanceBetween(positions[i-1], positions[i]);
 
-            deltaV = positions[i-1].elevation() - positions[i].elevation();
+            metres deltaV = positions[i-1].elevation() - positions[i].elevation();
 
             routeLength += sqrt(pow(deltaH,2) + pow(deltaV,2));
 
         }
 
-        report = oss.str();
+        report = reportStream.str();
 
     }
 
